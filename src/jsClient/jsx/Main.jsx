@@ -6,8 +6,18 @@ const DOM = require('react-dom');
 
 require("../style/Main.less");
 
+let Game = require("../js/Game.js");
+new Game().Loop()
+
 
 const Main = React.createClass({
+
+    getInitialState: function() {
+        return { };
+    },
+
+    componentDidMount: function() {
+    },
 
     render: function() {
         return (

@@ -8,20 +8,39 @@ const TopMenu = require("./TopMenu.jsx");
 const Main = require("./Main.jsx");
 const RightMenu = require("./RightMenu.jsx");
 const BottomMenu = require("./BottomMenu.jsx");
+
+let Game = require("../js/Game.js");
+let G = new Game();
+let loops = 0;
 // var PropTypes = React.PropTypes;
 
 require("../style/Entry.less")
 
 const Entry = React.createClass({
 
+    getInitialState: function() {
+        return { };
+    },
+
+    componentDidMount: function() {
+        setInterval(() => {
+            G.Loop();
+            this.setState({})
+            // ++loops === 3 && this.setState({});
+            // loops === 3 && (loops = 0)
+        }, 2000);
+    },
+
+    upd: function() { this.setState({}) },
+
     render: function() {
         return (
-            <div>
-                <TopMenu />
-                <LeftMenu />
-                <Main />
-                <RightMenu />
-                <BottomMenu />
+            <div id="component-entry">
+                <TopMenu G={G} triggerUpdate={this.upd}/>
+                <LeftMenu G={G} triggerUpdate={this.upd}/>
+                <Main G={G} triggerUpdate={this.upd}/>
+                <RightMenu G={G} triggerUpdate={this.upd}/>
+                <BottomMenu G={G} triggerUpdate={this.upd}/>
             </div>
         );
     }

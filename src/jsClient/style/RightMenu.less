@@ -1,6 +1,70 @@
+@import "Globals.less";
+
 #component-rightmenu {
     height: 100%;
-    width: 15%;
+    width: 19.8%;
     display: inline-block;
-    background-color: green;
+    background-color: #272727;
+    vertical-align: top;
+    padding-left: 4px;
+    #rightMenu {
+        #structure { display: block; }
+        #training { display: none; }
+        .structureRow {
+            font-size: @mainFont - 4px;
+            display: inline-block;
+            margin-top: 10px;
+            .structureName {
+                display: inline-block;
+                width: 38%;
+                height: 20px;
+                padding: 2px;
+            }
+            .structureLevel {
+                width: 35px;
+                display: inline-block;
+            }
+            .structureUpgrade {
+                display: inline-block;
+            }
+            .structureCostBox {
+                display: inline-block;
+                width: 100%;
+                font-size: @mainFont - 6px;
+                .structureCost {
+                    width: 83%;
+                    display: inline-block;
+                    vertical-align: top;
+                    > div {
+                        width: 46%;
+                        display: inline-block;
+                        margin-left:  8px;
+                        > span {
+                            display: inline-block;
+                            width: 54%;
+                            &:first-of-type { width: 38%; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #rightmenuBar {
+        margin-left: -4px;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        .selected {
+            background-color: #bbbbbb;
+        }
+        .rightmenuTab {
+            display: inline-block;
+            width: 50%;
+            text-align: center;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }

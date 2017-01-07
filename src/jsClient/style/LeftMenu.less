@@ -1,6 +1,49 @@
+@import "Globals.less";
+
 #component-leftmenu {
     height: 100%;
-    width: 15%;
+    width: 19.5%;
     display: inline-block;
-    background-color: green;
+    background-color: #272727;
+    vertical-align: top;
+    padding-left: 4px;
+    .itemRow {
+        font-size: @mainFont - 3px;
+        display: inline-block;
+        width: 50%;
+        margin-top: 8px;
+        .itemName {
+            vertical-align: middle;
+            text-align: left;
+            display: inline-block;
+            width: 35%;
+        }
+        .itemAmount {
+            vertical-align: middle;
+            display: inline-block;
+            width: 50%;
+        }
+        .itemTick {
+            span:first-of-type {
+                font-size: 12px;
+            }
+            span:not(:first-of-type) {
+                // font-size: 15px;
+                margin-left: 5px;
+                color: #3aff3a;
+            }
+        }
+    }
+    .statRow {
+        font-size: @mainFont - 4px;
+        margin-top: 5px;
+        .statName {
+            display: inline-block;
+            width: 30%;
+        }
+        .statAmount {
+            display: inline-block;
+            width: 40%;
+        }
+    }
 }

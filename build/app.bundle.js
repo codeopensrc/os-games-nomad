@@ -50,19 +50,42 @@
 	var DOM = __webpack_require__(35);
 
 	var LeftMenu = __webpack_require__(175);
-	var TopMenu = __webpack_require__(176);
-	var Main = __webpack_require__(191);
-	var RightMenu = __webpack_require__(177);
-	var BottomMenu = __webpack_require__(178);
+	var TopMenu = __webpack_require__(181);
+	var Main = __webpack_require__(184);
+	var RightMenu = __webpack_require__(187);
+	var BottomMenu = __webpack_require__(190);
+
+	var Game = __webpack_require__(176);
+	var G = new Game();
+	var loops = 0;
 	// var PropTypes = React.PropTypes;
 
-	__webpack_require__(189);
+	__webpack_require__(193);
 
 	var Entry = React.createClass({
 	    displayName: 'Entry',
 
+	    getInitialState: function getInitialState() {
+	        return {};
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+
+	        setInterval(function () {
+	            G.Loop();
+	            _this.setState({});
+	            // ++loops === 3 && this.setState({});
+	            // loops === 3 && (loops = 0)
+	        }, 2000);
+	    },
+
+	    upd: function upd() {
+	        this.setState({});
+	    },
+
 	    render: function render() {
-	        return React.createElement('div', null, React.createElement(TopMenu, null), React.createElement(LeftMenu, null), React.createElement(Main, null), React.createElement(RightMenu, null), React.createElement(BottomMenu, null));
+	        return React.createElement('div', { id: 'component-entry' }, React.createElement(TopMenu, { G: G, triggerUpdate: this.upd }), React.createElement(LeftMenu, { G: G, triggerUpdate: this.upd }), React.createElement(Main, { G: G, triggerUpdate: this.upd }), React.createElement(RightMenu, { G: G, triggerUpdate: this.upd }), React.createElement(BottomMenu, { G: G, triggerUpdate: this.upd }));
 	    }
 
 	});
@@ -21517,15 +21540,54 @@
 
 	var React = __webpack_require__(1);
 	var DOM = __webpack_require__(35);
+
+	var itemColors = {
+	    Steel: "#7d7a7a",
+	    Wood: "#926738",
+	    Stone: "#c5c5c5"
+	};
+
+	var Game = __webpack_require__(176);
 	// var PropTypes = React.PropTypes;
 
-	__webpack_require__(179);
+	__webpack_require__(177);
 
 	var LeftMenu = React.createClass({
 	    displayName: 'LeftMenu',
 
+	    getInitialState: function getInitialState() {
+	        return {};
+	    },
+
+	    componentDidMount: function componentDidMount() {},
+
+	    componentWillMount: function componentWillMount() {
+	        this.G = this.props.G;
+	    },
+
+	    renderInventory: function renderInventory() {
+	        var _this = this;
+
+	        return Object.keys(this.G.Materials).map(function (mat) {
+	            var amountShown = _this.G.formatNum(_this.G.Materials[mat].Amount);
+	            return React.createElement('div', { key: mat, className: 'itemRow' }, React.createElement('div', { className: 'itemName', style: { color: _this.G.Materials[mat].Color } }, mat), React.createElement('div', { className: 'itemAmount' }, ':', amountShown), React.createElement('div', { className: 'itemTick' }, React.createElement('span', null, 'Per tick:'), React.createElement('span', null, '~', _this.G.formatNum(_this.G.Materials[mat].TickAmount))));
+	        });
+	    },
+
+	    renderStats: function renderStats() {
+	        var _this2 = this;
+
+	        return Object.keys(this.G.Player).map(function (stat) {
+	            return React.createElement('div', { key: stat, className: 'statRow' }, React.createElement('div', { className: 'statName' }, stat), React.createElement('div', { className: 'statAmount' }, ':', _this2.G.Player[stat]));
+	        });
+	    },
+
 	    render: function render() {
-	        return React.createElement('div', { id: 'component-leftmenu' }, 'Left');
+
+	        var inventory = this.renderInventory();
+	        var stats = this.renderStats();
+
+	        return React.createElement('div', { id: 'component-leftmenu' }, 'Stats:', React.createElement('br', null), stats, React.createElement('br', null), 'Inventory:', React.createElement('br', null), inventory);
 	    }
 
 	});
@@ -21534,84 +21596,129 @@
 
 /***/ },
 /* 176 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	"use strict";
 
-	var React = __webpack_require__(1);
-	var DOM = __webpack_require__(35);
-	// var PropTypes = React.PropTypes;
+	var itemScale = 1.3;
+	// const startAmount = 60;
 
-	__webpack_require__(187);
-
-	var TopMenu = React.createClass({
-	    displayName: 'TopMenu',
-
-	    render: function render() {
-	        return React.createElement('div', { id: 'component-topmenu' }, 'Top');
+	function Game() {
+	    this.Materials = {
+	        Wood: {
+	            Main: "Lumber Mill",
+	            Level: 1,
+	            Amount: 10,
+	            FixedAmount: 4,
+	            TickAmount: 4,
+	            Color: "#926738",
+	            updateTick: function updateTick() {
+	                this.TickAmount = this.FixedAmount * Math.pow(itemScale, this.Level);
+	            }
+	        },
+	        Steel: {
+	            Main: "Refinery",
+	            Level: 1,
+	            Amount: 10,
+	            FixedAmount: 4,
+	            TickAmount: 4,
+	            Color: "#7d7a7a",
+	            updateTick: function updateTick() {
+	                this.TickAmount = this.FixedAmount * Math.pow(itemScale, this.Level);
+	            }
+	        },
+	        Stone: {
+	            Main: "Quarry",
+	            Level: 1,
+	            Amount: 10,
+	            FixedAmount: 4,
+	            TickAmount: 4,
+	            Color: "#c5c5c5",
+	            updateTick: function updateTick() {
+	                this.TickAmount = this.FixedAmount * Math.pow(itemScale, this.Level);
+	            }
+	        }
+	    };
+	    this.Player = {
+	        Attack: 1,
+	        Defense: 1,
+	        Health: 10,
+	        Workers: 0,
+	        Gatherers: 0
+	    };
+	};
+	Game.prototype.formatNum = function (num) {
+	    var amountShown = num.toFixed(1);
+	    num > 10000 && (amountShown = (num / 1000).toFixed(1) + "K");
+	    num > 10000000 && (amountShown = (num / 1000000).toFixed(1) + "M");
+	    num > 10000000000 && (amountShown = (num / 1000000000).toFixed(1) + "B");
+	    num > 10000000000000 && (amountShown = (num / 1000000000000).toFixed(1) + "T");
+	    num > 10000000000000000 && (amountShown = (num / 1000000000000000).toFixed(1) + "Q");
+	    num > 10000000000000000000 && (amountShown = (num / 1000000000000000000).toFixed(1) + "S");
+	    return amountShown;
+	};
+	Game.prototype.upgradeStat = function (stat) {
+	    this.Player[stat] += 1;
+	};
+	// ==========================STRUCTURES==================
+	// ==========================STRUCTURES==================
+	Game.prototype.subtractAmount = function (mats) {
+	    for (var p in mats) {
+	        this.Materials[p].Amount -= mats[p];
 	    }
+	};
+	Game.prototype.upgradeStructure = function (mat) {
+	    this.Materials[mat].Level += 1;
+	    this.Materials[mat].updateTick();
+	};
+	Game.prototype.calcStructureUpgrade = function (mat) {
+	    var mats = {};
+	    var calcAmount = Math.floor(this.Materials[mat].FixedAmount * Math.pow(1.3, this.Materials[mat].Level)) * 10;
+	    mats["Stone"] = calcAmount * 0.60 * (mat === "Stone" ? 1.1 : 1);
+	    mats["Steel"] = calcAmount * 0.45 * (mat === "Steel" ? 1.1 : 1);
+	    mats["Wood"] = calcAmount * 0.71 * (mat === "Wood" ? 1.1 : 1);
+	    return mats;
+	};
+	Game.prototype.hasSufficientMats = function (mats) {
+	    for (var p in mats) {
+	        if (this.Materials[p].Amount - mats[p] <= 0) {
+	            return false;
+	        }
+	    }
+	    return true;
+	};
+	Game.prototype.processResources = function () {
+	    var _this = this;
 
-	});
+	    Object.keys(this.Materials).forEach(function (mat) {
+	        _this.Materials[mat].Amount += _this.Materials[mat].TickAmount;
+	    });
+	};
+	// ===================================MAIN GAIN==================
+	// ===================================MAIN GAIN==================
+	// ===================================MAIN GAIN==================
+	Game.prototype.Loop = function () {
+	    this.processResources();
+	};
 
-	module.exports = TopMenu;
+	// Object.keys(Game.Materials).forEach((mat) => {
+	//     Game.Materials[mat].Workers = {};
+	//     Game.Materials[mat].Gatherers = {};
+	//     Game.Materials[mat].Addons = [];
+	// })
+	module.exports = Game;
 
 /***/ },
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	var React = __webpack_require__(1);
-	var DOM = __webpack_require__(35);
-	// var PropTypes = React.PropTypes;
-
-	__webpack_require__(185);
-
-	var RightMenu = React.createClass({
-	    displayName: 'RightMenu',
-
-	    render: function render() {
-	        return React.createElement('div', { id: 'component-rightmenu' }, 'Right');
-	    }
-
-	});
-
-	module.exports = RightMenu;
-
-/***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-	var DOM = __webpack_require__(35);
-	// var PropTypes = React.PropTypes;
-
-	__webpack_require__(183);
-
-	var BottomMenu = React.createClass({
-	    displayName: 'BottomMenu',
-
-	    render: function render() {
-	        return React.createElement('div', { id: 'component-bottommenu' }, 'Bottom');
-	    }
-
-	});
-
-	module.exports = BottomMenu;
-
-/***/ },
-/* 179 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(180);
+	var content = __webpack_require__(178);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
+	var update = __webpack_require__(180)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21628,21 +21735,21 @@
 	}
 
 /***/ },
-/* 180 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(181)();
+	exports = module.exports = __webpack_require__(179)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#component-leftmenu {\n  height: 100%;\n  width: 15%;\n  display: inline-block;\n  background-color: green;\n}\n", ""]);
+	exports.push([module.id, "#component-leftmenu {\n  height: 100%;\n  width: 19.5%;\n  display: inline-block;\n  background-color: #272727;\n  vertical-align: top;\n  padding-left: 4px;\n}\n#component-leftmenu .itemRow {\n  font-size: 15px;\n  display: inline-block;\n  width: 50%;\n  margin-top: 8px;\n}\n#component-leftmenu .itemRow .itemName {\n  vertical-align: middle;\n  text-align: left;\n  display: inline-block;\n  width: 35%;\n}\n#component-leftmenu .itemRow .itemAmount {\n  vertical-align: middle;\n  display: inline-block;\n  width: 50%;\n}\n#component-leftmenu .itemRow .itemTick span:first-of-type {\n  font-size: 12px;\n}\n#component-leftmenu .itemRow .itemTick span:not(:first-of-type) {\n  margin-left: 5px;\n  color: #3aff3a;\n}\n#component-leftmenu .statRow {\n  font-size: 14px;\n  margin-top: 5px;\n}\n#component-leftmenu .statRow .statName {\n  display: inline-block;\n  width: 30%;\n}\n#component-leftmenu .statRow .statAmount {\n  display: inline-block;\n  width: 40%;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 181 */
+/* 179 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21697,7 +21804,7 @@
 	};
 
 /***/ },
-/* 182 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -21949,96 +22056,39 @@
 
 
 /***/ },
-/* 183 */
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+	var DOM = __webpack_require__(35);
+	// var PropTypes = React.PropTypes;
+
+	__webpack_require__(182);
+
+	var TopMenu = React.createClass({
+	    displayName: 'TopMenu',
+
+	    render: function render() {
+	        return React.createElement('div', { id: 'component-topmenu' }, 'Top');
+	    }
+
+	});
+
+	module.exports = TopMenu;
+
+/***/ },
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(184);
+	var content = __webpack_require__(183);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./BottomMenu.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./BottomMenu.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 184 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(181)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#component-bottommenu {\n  text-align: center;\n  width: 100%;\n  height: 30px;\n  background-color: yellow;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(186);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./RightMenu.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./RightMenu.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(181)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#component-rightmenu {\n  height: 100%;\n  width: 15%;\n  display: inline-block;\n  background-color: green;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(188);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
+	var update = __webpack_require__(180)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22055,10 +22105,10 @@
 	}
 
 /***/ },
-/* 188 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(181)();
+	exports = module.exports = __webpack_require__(179)();
 	// imports
 
 
@@ -22069,47 +22119,7 @@
 
 
 /***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(190);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./Entry.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./Entry.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(181)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "* {\n  margin: 0;\n  padding: 0;\n}\nhtml,\nbody {\n  height: 100%;\n  width: 100%;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 191 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22118,10 +22128,19 @@
 	var DOM = __webpack_require__(35);
 	// var PropTypes = React.PropTypes;
 
-	__webpack_require__(192);
+	__webpack_require__(185);
+
+	var Game = __webpack_require__(176);
+	new Game().Loop();
 
 	var Main = React.createClass({
 	    displayName: 'Main',
+
+	    getInitialState: function getInitialState() {
+	        return {};
+	    },
+
+	    componentDidMount: function componentDidMount() {},
 
 	    render: function render() {
 	        return React.createElement('div', { id: 'component-main' }, 'Main');
@@ -22132,16 +22151,16 @@
 	module.exports = Main;
 
 /***/ },
-/* 192 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(193);
+	var content = __webpack_require__(186);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
+	var update = __webpack_require__(180)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22158,15 +22177,254 @@
 	}
 
 /***/ },
-/* 193 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(181)();
+	exports = module.exports = __webpack_require__(179)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#component-main {\n  text-align: center;\n  width: 70%;\n  height: 100%;\n  display: inline-block;\n}\n", ""]);
+	exports.push([module.id, "#component-main {\n  position: relative;\n  text-align: center;\n  width: 60%;\n  height: 100%;\n  display: inline-block;\n  background-color: #898395;\n  vertical-align: top;\n  color: white;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+	var DOM = __webpack_require__(35);
+
+	var Game = __webpack_require__(176);
+	// var PropTypes = React.PropTypes;
+
+	__webpack_require__(188);
+
+	var RightMenu = React.createClass({
+	    displayName: 'RightMenu',
+
+	    getInitialState: function getInitialState() {
+	        return {};
+	    },
+
+	    componentDidMount: function componentDidMount() {},
+
+	    componentWillMount: function componentWillMount() {
+	        this.G = this.props.G;
+	    },
+
+	    upgradeStructure: function upgradeStructure(mat) {
+	        var matsNeeded = this.G.calcStructureUpgrade(mat);
+	        if (!this.G.hasSufficientMats(matsNeeded)) {
+	            console.log("Not enough minerals");return;
+	        }
+	        this.G.subtractAmount(matsNeeded);
+	        this.G.upgradeStructure(mat);
+	        this.props.triggerUpdate();
+	    },
+
+	    upgradeStat: function upgradeStat(stat) {
+	        this.G.upgradeStat(stat);
+	        // let matsNeeded = this.G.calcStructureUpgrade(mat);
+	        // if(!this.G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
+	        // this.G.subtractAmount(matsNeeded)
+	        // this.G.upgradeStructure(mat)
+	        this.props.triggerUpdate();
+	    },
+
+	    displayUpgradeCost: function displayUpgradeCost(material) {
+	        var _this = this;
+
+	        var mats = this.G.calcStructureUpgrade(material);
+	        var cost = Object.keys(mats).map(function (mat) {
+	            var style = { name: { color: _this.G.Materials[mat].Color }, all: {} };
+	            if (_this.G.Materials[mat].Amount < mats[mat]) {
+	                style.name = style.all = { color: "#ff4848" };
+	            }
+	            return React.createElement('div', { key: mat, style: style.all }, React.createElement('span', { style: style.name }, mat, ':'), ' ', React.createElement('span', null, _this.G.formatNum(mats[mat])));
+	        });
+	        return React.createElement('div', { className: 'structureCost' }, cost);
+	    },
+
+	    renderStructures: function renderStructures() {
+	        var _this2 = this;
+
+	        return Object.keys(this.G.Materials).map(function (mat) {
+	            var matsNeeded = _this2.G.calcStructureUpgrade(mat);
+	            var buttonVisibility = _this2.G.hasSufficientMats(matsNeeded) ? { display: "inline-block" } : { display: "none" };
+
+	            return React.createElement('div', { key: _this2.G.Materials[mat].Main, className: 'structureRow' }, React.createElement('div', { className: 'structureName', style: { color: _this2.G.Materials[mat].Color } }, _this2.G.Materials[mat].Main, ':'), React.createElement('div', { className: 'structureLevel' }, _this2.G.Materials[mat].Level), React.createElement('button', { className: 'structureUpgrade', style: buttonVisibility, onClick: _this2.upgradeStructure.bind(_this2, mat) }, 'Upgrade'), React.createElement('div', { className: 'structureCostBox' }, 'Cost: ', _this2.displayUpgradeCost(mat)));
+	        });
+	    },
+
+	    activateTab: function activateTab(tab) {
+	        var tabs = document.getElementsByClassName("rightmenuTab");
+	        for (var p in tabs) {
+	            tabs[p].style && (tabs[p].className = "rightmenuTab");
+	        }
+	        document.getElementById(tab + "Tab").className += " selected";
+
+	        var childs = document.getElementById("rightMenu").childNodes;
+	        for (var _p in childs) {
+	            childs[_p].style && (childs[_p].style.display = "none");
+	        }
+	        document.getElementById(tab).style.display = "block";
+	    },
+
+	    render: function render() {
+
+	        var structures = this.renderStructures();
+
+	        return React.createElement('div', { id: 'component-rightmenu' }, React.createElement('div', { id: 'rightmenuBar' }, React.createElement('div', { id: 'structureTab', className: 'rightmenuTab selected', onClick: this.activateTab.bind(this, "structure") }, 'Structures'), React.createElement('div', { id: 'trainingTab', className: 'rightmenuTab', onClick: this.activateTab.bind(this, "training") }, 'Training')), React.createElement('div', { id: 'rightMenu' }, React.createElement('div', { id: 'structure' }, structures), React.createElement('div', { id: 'training' }, 'Training Tab', React.createElement('br', null), React.createElement('button', { onClick: this.upgradeStat.bind(this, "Attack") }, 'Upgrade Attack'), React.createElement('br', null), React.createElement('button', { onClick: this.upgradeStat.bind(this, "Defense") }, 'Upgrade Defense'), React.createElement('br', null), React.createElement('button', { onClick: this.upgradeStat.bind(this, "Health") }, 'Upgrade Health'), React.createElement('br', null), React.createElement('button', { onClick: this.upgradeStat.bind(this, "Workers") }, 'Upgrade Workers'), React.createElement('br', null), React.createElement('button', { onClick: this.upgradeStat.bind(this, "Gatherers") }, 'Upgrade Gatherers'))));
+	    }
+
+	});
+
+	module.exports = RightMenu;
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(189);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(180)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./RightMenu.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./RightMenu.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(179)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#component-rightmenu {\n  height: 100%;\n  width: 19.8%;\n  display: inline-block;\n  background-color: #272727;\n  vertical-align: top;\n  padding-left: 4px;\n}\n#component-rightmenu #rightMenu #structure {\n  display: block;\n}\n#component-rightmenu #rightMenu #training {\n  display: none;\n}\n#component-rightmenu #rightMenu .structureRow {\n  font-size: 14px;\n  display: inline-block;\n  margin-top: 10px;\n}\n#component-rightmenu #rightMenu .structureRow .structureName {\n  display: inline-block;\n  width: 38%;\n  height: 20px;\n  padding: 2px;\n}\n#component-rightmenu #rightMenu .structureRow .structureLevel {\n  width: 35px;\n  display: inline-block;\n}\n#component-rightmenu #rightMenu .structureRow .structureUpgrade {\n  display: inline-block;\n}\n#component-rightmenu #rightMenu .structureRow .structureCostBox {\n  display: inline-block;\n  width: 100%;\n  font-size: 12px;\n}\n#component-rightmenu #rightMenu .structureRow .structureCostBox .structureCost {\n  width: 83%;\n  display: inline-block;\n  vertical-align: top;\n}\n#component-rightmenu #rightMenu .structureRow .structureCostBox .structureCost > div {\n  width: 46%;\n  display: inline-block;\n  margin-left: 8px;\n}\n#component-rightmenu #rightMenu .structureRow .structureCostBox .structureCost > div > span {\n  display: inline-block;\n  width: 54%;\n}\n#component-rightmenu #rightMenu .structureRow .structureCostBox .structureCost > div > span:first-of-type {\n  width: 38%;\n}\n#component-rightmenu #rightmenuBar {\n  margin-left: -4px;\n  width: 100%;\n  height: 30px;\n  line-height: 30px;\n}\n#component-rightmenu #rightmenuBar .selected {\n  background-color: #bbbbbb;\n}\n#component-rightmenu #rightmenuBar .rightmenuTab {\n  display: inline-block;\n  width: 50%;\n  text-align: center;\n}\n#component-rightmenu #rightmenuBar .rightmenuTab:hover {\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+	var DOM = __webpack_require__(35);
+	// var PropTypes = React.PropTypes;
+
+	__webpack_require__(191);
+
+	var BottomMenu = React.createClass({
+	    displayName: 'BottomMenu',
+
+	    render: function render() {
+	        return React.createElement('div', { id: 'component-bottommenu' }, 'Bottom');
+	    }
+
+	});
+
+	module.exports = BottomMenu;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(192);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(180)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./BottomMenu.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./BottomMenu.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(179)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#component-bottommenu {\n  text-align: center;\n  width: 100%;\n  height: 30px;\n  background-color: yellow;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(194);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(180)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./Entry.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./Entry.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(179)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#component-entry {\n  height: 100%;\n  font-size: 18px;\n  color: white;\n  font-family: monospace;\n}\n", ""]);
 
 	// exports
 
