@@ -3,25 +3,36 @@
     "version": "0.0.1",
     "main": "src/jsServer/index.js",
     "description": "Do what you want.",
-    "scripts": {
-        "watch": "webpack --config='src/config/webpack.config.js' --progress --watch --colors",
-        "build": "webpack --config='src/config/webpack.config.js' --progress --colors"
-    },
     "dependencies": {
-
     },
     "devDependencies": {
-        "babel-core": "^6.13.2",
+        "babel-core": "^6.22.1",
         "babel-loader": "^6.2.4",
-        "babel-preset-es2015": "^6.13.2",
-        "babel-preset-react": "^6.11.1",
+        "babel-preset-es2015": "^6.22.0",
+        "babel-preset-react": "^6.22.0",
+        "babel-preset-stage-0": "^6.22.0",
+        "ezc": "git://159.203.106.87/ezc.git#77d120b",
         "less": "^2.7.1",
         "less-loader": "^2.2.3",
-        "css-loader": "^0.23.1",
+        "css-loader": "^0.26.1",
         "json-loader": "^0.5.4",
         "react": "^15.3.0",
         "react-dom": "^15.3.0",
         "style-loader": "^0.13.1",
-        "webpack": "^1.13.1"
+        "webpack": "^1.14.0",
+        "webpack-dev-server": "^1.16.2"
+    },
+    "scripts": {
+        "postinstall": "npm outdated --depth=0",
+        "webpack": "BUILD='dev' PORT='5000' node ./node_modules/.bin/webpack-dev-server --config='src/config/webpack.config.js'  --progress --colors",
+        "build": "BUILD='dev' PORT='5000' node ./node_modules/webpack/bin/webpack.js --config='src/config/webpack.config.js' --progress --colors",
+        "watch": "BUILD='dev' PORT='5000' node ./node_modules/webpack/bin/webpack.js --config='src/config/webpack.config.js' --progress --colors --watch",
+        "release": "BUILD='prod' PORT='5000' node ./node_modules/webpack/bin/webpack.js --config='src/config/webpack.config.js' --progress --colors --optimize-minimize",
+        "db": "ezc db",
+        "deploy": "ezc deploy",
+        "create": "ezc create",
+        "start": "npm i ezc && ezc start",
+        "test": "ezc test",
+        "help": "ezc help"
     }
 }
