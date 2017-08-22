@@ -28,10 +28,12 @@ const LeftMenu = React.createClass({
 
     renderInventory: function() {
         return Object.keys(this.G.Materials).map((mat) => {
+            // <div className="itemName" style={{color: this.G.Materials[mat].Color}}>{mat}</div>
             let amountShown = this.G.formatNum(this.G.Materials[mat].Amount)
             return (
                 <div key={mat} className="itemRow">
-                    <div className="itemName" style={{color: this.G.Materials[mat].Color}}>{mat}</div>
+
+                    <img className="itemName" src={`./images/${mat}.png`} />
                     <div className="itemAmount">:{amountShown}</div>
                     <div className="itemTick"><span>Per tick:</span><span>~{this.G.formatNum(this.G.Materials[mat].TickAmount)}</span></div>
                 </div>
@@ -64,6 +66,7 @@ const LeftMenu = React.createClass({
                 Inventory:
                 <br />
                 {inventory}
+                
             </div>
         );
     }
