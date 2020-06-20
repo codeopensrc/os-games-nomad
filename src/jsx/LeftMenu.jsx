@@ -28,6 +28,7 @@ const LeftMenu = React.createClass({
 
     renderInventory: function() {
         return Object.keys(this.G.Materials).map((mat) => {
+            if(!this.G.Materials[mat].active) { return; }
             // <div className="itemName" style={{color: this.G.Materials[mat].Color}}>{mat}</div>
             let amountShown = this.G.formatNum(this.G.Materials[mat].Amount)
             return (
@@ -42,11 +43,11 @@ const LeftMenu = React.createClass({
     },
 
     renderStats: function () {
-        return Object.keys(this.G.Player).map((stat) => {
+        return Object.keys(this.G.Player).map((stat, i) => {
             return (
-                <div key={stat} className="statRow">
+                <div key={i} className="statRow">
                     <div className="statName">{stat}</div>
-                    <div className="statAmount">:{this.G.Player[stat]}</div>
+                    <div className="statAmount">:{this.G.Player[stat].unlocked.toString()}</div>
                 </div>
             )
         })
@@ -61,12 +62,16 @@ const LeftMenu = React.createClass({
             <div id="component-leftmenu">
                 Stats:
                 <br />
-                {stats}
+                <div id={`stats`}>
+                    {stats}
+                </div>
                 <br />
                 Inventory:
                 <br />
-                {inventory}
-                
+                <div id={`inventory`}>
+                    {inventory}
+                </div>
+
             </div>
         );
     }

@@ -37,9 +37,11 @@ const Entry = React.createClass({
         return (
             <div id="component-entry">
                 <TopMenu G={G} triggerUpdate={this.upd}/>
-                <LeftMenu G={G} triggerUpdate={this.upd}/>
-                <Main G={G} triggerUpdate={this.upd}/>
-                <RightMenu G={G} triggerUpdate={this.upd}/>
+                <div id={`mid`}>
+                    <LeftMenu G={G} triggerUpdate={this.upd}/>
+                    <Main G={G} triggerUpdate={this.upd}/>
+                    <RightMenu G={G} triggerUpdate={this.upd}/>
+                </div>
                 <BottomMenu G={G} triggerUpdate={this.upd}/>
             </div>
         );

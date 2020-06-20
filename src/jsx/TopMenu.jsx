@@ -12,7 +12,7 @@ const TopMenu = React.createClass({
     render: function() {
         return (
             <div id="component-topmenu">
-                Top
+                <img src={`./images/Logo.png`} />
             </div>
         );
     }

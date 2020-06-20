@@ -2,48 +2,78 @@
 
 #component-leftmenu {
     height: 100%;
-    width: 19.5%;
-    display: inline-block;
+    max-width: 270px;
+    min-width: 165px;
+    display: flex;
+    flex: 2;
+    flex-flow: column;
     background-color: #272727;
     vertical-align: top;
     padding-left: 4px;
-    .itemRow {
-        font-size: @mainFont - 3px;
-        display: inline-block;
-        width: 50%;
-        margin-top: 8px;
-        .itemName {
-            vertical-align: middle;
-            text-align: left;
-            display: inline-block;
-            width: 35%;
-        }
-        .itemAmount {
-            vertical-align: middle;
-            display: inline-block;
-            width: 50%;
-        }
-        .itemTick {
-            span:first-of-type {
-                font-size: 12px;
+    #inventory {
+        display: flex;
+        flex: 1;
+        flex-flow: row wrap;
+        .itemRow {
+            font-size: @mainFont - 3px;
+            display: flex;
+            flex-flow: row wrap;
+            max-width: 50%;
+            min-width: 125px;
+            margin-top: 8px;
+            .itemName {
+                // flex: 1;
+                vertical-align: middle;
+                text-align: left;
+                // display: inline-block;
+                width: 40%;
+                height: 75%;
             }
-            span:not(:first-of-type) {
-                // font-size: 15px;
-                margin-left: 5px;
-                color: #3aff3a;
+            .itemAmount {
+                // flex: 1;
+                display: flex;
+                // width: 30%;
+                text-align: center ;
+                align-items: center;
+                vertical-align: middle;
+                // display: inline-block;
+                // width: 50%;
+            }
+            .itemTick {
+                flex: 1;
+                width: 100%;
+                span:first-of-type {
+                    font-size: 12px;
+                }
+                span:not(:first-of-type) {
+                    // font-size: 15px;
+                    margin-left: 5px;
+                    color: #3aff3a;
+                }
             }
         }
     }
-    .statRow {
-        font-size: @mainFont - 4px;
-        margin-top: 5px;
-        .statName {
-            display: inline-block;
-            width: 30%;
-        }
-        .statAmount {
-            display: inline-block;
-            width: 40%;
+    #stats {
+        display: flex;
+        flex: 1;
+        flex-flow: column;
+        .statRow {
+            font-size: @mainFont - 4px;
+            margin-top: 5px;
+            display: flex;
+            .statName {
+                // flex: 2.3;
+                // display: inline-block;
+                // width: 39%;
+                min-width: 110px;
+            }
+            .statAmount {
+                // flex: 1.3;
+                align-self: flex-start;
+                // display: inline-block;
+                // width: 40%;
+            }
         }
     }
+
 }
