@@ -5,6 +5,11 @@ module.exports = {
         "name": "App",
         "cwd": "./",
         "watch": ["server"],
+        "watch_options": {
+            "usePolling": true,
+            "interval": 300,
+            "binaryInterval": 300
+        },
         "script": "./server/server.js",
         "out_file": "./logs/server-out.log",
         "error_file": "./logs/server-err.log",

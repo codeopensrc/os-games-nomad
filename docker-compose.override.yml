@@ -4,12 +4,13 @@ services:
         build:
             context: .
             target: src
-        image: jestrr/nomad:dev
+        image: registry.codeopensrc.com/kc/nomad:dev
         entrypoint: ["pm2-dev", "server/pm2.config.js"]
         volumes:
-            - ./src:/home/app/src
-            - ./server:/home/app/server
-            - ./docker-compose.override.yml:/home/app/docker-compose.yml
+            - "${FOLDER_LOCATION:-.}/pub:/home/app/pub"
+            - "${FOLDER_LOCATION:-.}/src:/home/app/src"
+            - "${FOLDER_LOCATION:-.}/server:/home/app/server"
+            - "${FOLDER_LOCATION:-.}/docker-compose.override.yml:/home/app/docker-compose.yml"
         ports:
             - "7015:80"
         labels:

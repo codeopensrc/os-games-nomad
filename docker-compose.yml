@@ -4,7 +4,7 @@ services:
         build:
             context: .
             target: prod
-        image: jestrr/nomad:0.0.1
+        image: registry.codeopensrc.com/kc/nomad:0.0.1
         ports:
             - "7010:80"
         deploy:

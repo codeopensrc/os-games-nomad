@@ -141,35 +141,40 @@ function Game() {
         // Nuts
     }
     this.Player = {
-        "Silicon Mine": {
-            unlocked: false,
-            unlocks: ["Silicon"]
+        TechTree: {
+            "Silicon Mine": {
+                unlocked: false,
+                unlocks: ["Silicon"]
+            },
+            Schooling: {
+                unlocked: false,
+                unlocks: []
+            },
+            "Chip Factory": {
+                unlocked: false,
+                unlocks: ["Chip"],
+                requires: ["Silicon Mine"]
+            },
+            Training: {
+                unlocked: false,
+                unlocks: []
+            },
+            Logistics: {
+                unlocked: false,
+                unlocks: []
+            },
+            Financing: {
+                unlocked: false,
+                unlocks: []
+            },
+            Security: {
+                unlocked: false,
+                unlocks: []
+            },
         },
-        Schooling: {
-            unlocked: false,
-            unlocks: [""]
-        },
-        "Chip Factory": {
-            unlocked: false,
-            unlocks: ["Chip"],
-            requires: ["Silicon Mine"]
-        },
-        Training: {
-            unlocked: false,
-            unlocks: [""]
-        },
-        Logistics: {
-            unlocked: false,
-            unlocks: [""]
-        },
-        Financing: {
-            unlocked: false,
-            unlocks: [""]
-        },
-        Security: {
-            unlocked: false,
-            unlocks: [""]
-        },
+        Stats: {
+            Attack: 30,
+        }
         // Training: false,
         // Logistics: false,
         // Financing: false,
@@ -195,10 +200,10 @@ Game.prototype.formatNum = function (num) {
     return amountShown
 };
 Game.prototype.unlockTech = function (tech) {
-    let prereqMet = !this.Player[tech].requires || this.Player[tech].requires.every((neededTech) => this.Player[neededTech].unlocked)
+    let prereqMet = !this.Player.TechTree[tech].requires || this.Player.TechTree[tech].requires.every((neededTech) => this.Player.TechTree[neededTech].unlocked)
     if(!prereqMet) { return console.log("Not all prequsites have been unlocked"); }
-    this.Player[tech].unlocked = true;
-    this.Player[tech].unlocks.forEach((mat) => {
+    this.Player.TechTree[tech].unlocked = true;
+    this.Player.TechTree[tech].unlocks.forEach((mat) => {
         this.Materials[mat].setActive = true;
     })
 

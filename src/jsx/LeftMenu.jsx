@@ -42,12 +42,12 @@ const LeftMenu = React.createClass({
         })
     },
 
-    renderStats: function () {
-        return Object.keys(this.G.Player).map((stat, i) => {
+    renderTechTree: function () {
+        return Object.keys(this.G.Player.TechTree).map((tech, i) => {
             return (
-                <div key={i} className="statRow">
-                    <div className="statName">{stat}</div>
-                    <div className="statAmount">:{this.G.Player[stat].unlocked.toString()}</div>
+                <div key={i} className="techTreeRow">
+                    <div className="techTreeName">{tech}</div>
+                    <div className="techTreeAmount">:{this.G.Player.TechTree[tech].unlocked.toString()}</div>
                 </div>
             )
         })
@@ -56,14 +56,14 @@ const LeftMenu = React.createClass({
     render: function() {
 
         let inventory = this.renderInventory()
-        let stats = this.renderStats();
+        let techTree = this.renderTechTree();
 
         return (
             <div id="component-leftmenu">
-                Stats:
+                TechTree:
                 <br />
-                <div id={`stats`}>
-                    {stats}
+                <div id={`techTree`}>
+                    {techTree}
                 </div>
                 <br />
                 Inventory:

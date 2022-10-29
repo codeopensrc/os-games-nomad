@@ -84,11 +84,11 @@ const Main = React.createClass({
     attackPoint: function (point) {
         console.log("Index is: ", point.index);
         console.log("Resrouces at this base are:", point.resources);
-        console.log(this.G.Player.Attack, point.defense);
-        if(this.G.Player.Attack < point.defense) {
+        console.log(this.G.Player.Stats.Attack, point.defense);
+        if(this.G.Player.Stats.Attack < point.defense) {
             return console.log("You're too weak");
         }
-        if(this.G.Player.Attack >= point.defense) {
+        if(this.G.Player.Stats.Attack >= point.defense) {
             console.log("You're our new king");
         }
         if(!point.resources) { return console.log("Already Captured"); }
@@ -99,11 +99,11 @@ const Main = React.createClass({
     },
 
     render: function() {
-        // {this.renderPoints()}
         return (
             <div id="component-main">
                 <div id={`mainMap`}>
                     Mid
+                    {this.renderPoints()}
                 </div>
             </div>
         );

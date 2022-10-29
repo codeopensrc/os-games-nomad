@@ -72,7 +72,6 @@ const RightMenu = React.createClass({
             let buttonVisibility = this.G.hasSufficientMats(matsNeeded)
                 ? {opacity: 1}
                 : {opacity: 0}
-                console.log(buttonVisibility);
             return (
                 <div key={this.G.Materials[mat].main} className="structureRow">
                     <div className="structureName" style={{color: this.G.Materials[mat].color}}>{this.G.Materials[mat].main}:</div>
@@ -95,7 +94,7 @@ const RightMenu = React.createClass({
     },
 
     renderPlayerUnlocks: function () {
-        return Object.keys(this.G.Player).map((unlock, ind) =>
+        return Object.keys(this.G.Player.TechTree).map((unlock, ind) =>
             <button className={`playerUnlock`} key={ind} onClick={this.unlockTech.bind(this, unlock)}>Unlock {unlock}</button>
         )
     },
