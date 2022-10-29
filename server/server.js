@@ -6,6 +6,7 @@ const fs = require("fs");
 const url = require("url");
 const path = require("path");
 const qs = require('querystring');
+const zlib = require("zlib")
 
 const { service } = require("os-npm-util");
 const routes = require("./routes.js");
@@ -18,7 +19,7 @@ const OUTPUT_FILES = process.env.OUTPUT_FILES;
 const DEV_ENV = process.env.DEV_ENV === "true"
 const REGISTER_SERVICE = process.env.REGISTER_SERVICE === "true";
 const SERVICE_NAME = process.env.SERVICE_NAME ? process.env.SERVICE_NAME : ""
-const SERVE_FROM_PUB_DIR = ["app.bundle.js"]
+const SERVE_FROM_PUB_DIR = ["app.bundle.js", "favicon.ico"]
 
 service.setConfig({
     register: REGISTER_SERVICE,
@@ -32,7 +33,7 @@ serverState.registerConnection("http")
 
 
 const server = {
-    startServer: function () {
+    startServer: function() {
         console.log("======= Starting server =======");
         let options = {};
         let keyExists = fs.existsSync("/run/secrets/privkey")
@@ -66,7 +67,7 @@ const server = {
 
         let isDockerHealthCheck = req.headers.host === "localhost" && req.url === "/healthcheck"
 
-        if(req.url.match(/api|ajax/)) { routes(req, res); }
+        if(req.url.match('/api/') || req.url.match(/ajax/)) { routes(req, res); }
         else if (isDockerHealthCheck) {
             serverState.handleHealthCheck(res)
         }
@@ -74,42 +75,61 @@ const server = {
             let extname = path.extname(url.parse(req.url).pathname);
             let file = (url.parse(req.url).pathname).slice(1, this.length);
             let exts = {
+                ".unityweb": { mime: "application/octet-stream", encoding: null },
                 ".datagz": { mime: "text/javascript", encoding: "utf8" },
                 ".memgz": { mime: "text/javascript", encoding: "utf8" },
                 ".jsgz": { mime: "text/javascript", encoding: "utf8" },
                 ".json": { mime: "text/javascript", encoding: "utf8" },
                 ".js": { mime: "text/javascript", encoding: "utf8" },
-                ".ico": { mime: "text/x-icon", encoding: null },
-                ".png": { mime: "text/png", encoding: null },
-                ".jpg": { mime: "text/jpeg", encoding: null },
-                ".jpeg": { mime: "text/jpeg", encoding: null },
+                ".gz": { mime: "application/gzip", encoding: null },
+                ".ico": { mime: "image/x-icon", encoding: null },
+                ".png": { mime: "image/png", encoding: null },
+                ".jpg": { mime: "image/jpeg", encoding: null },
+                ".jpeg": { mime: "image/jpeg", encoding: null },
+                ".svg": { mime: "image/svg+xml", encoding: null },
                 ".css": { mime: "text/css", encoding: "utf8" },
                 ".html": { mime: "text/html", encoding: "utf8" },
                 ".xls": { mime: "application/vnd.ms-excel", encoding: "utf8" },
                 ".xlsx": { mime: "application/vnd.ms-excel", encoding: "utf8" },
                 ".xlsm": { mime: "application/vnd.ms-excel", encoding: "utf8" },
-                ".pdf": { mime: "application/pdf", encoding: "utf8" },
-                ".sh": { mime: "text/plain", encoding: "utf8" }
+                ".pdf": { mime: "application/pdf", encoding: "utf8" }
             }
-            let filePath = exts[extname] ? PUB_FILES+file : PUB_FILES+"index.html";
+            let filePath = exts[extname] ? STATIC_FILES+file : PUB_FILES+"index.html";
             let contentType = exts[extname] ? exts[extname].mime : 'text/html';
             let encoding = exts[extname] ? exts[extname].encoding : "utf8";
 
-            SERVE_FROM_PUB_DIR.forEach((pubFile) => file.match(pubFile) ? filePath = PUB_FILES+pubFile: "" )
-            extname.indexOf("gz") > -1 && res.setHeader("Content-Encoding", "gzip");
+            if(file.indexOf("wasm.gz") > 1 || file.indexOf("wasm.unityweb") > 1) { contentType = "application/wasm" }
+            if(file.indexOf("js.gz") > 1 || file.indexOf("js.unityweb") > 1) { contentType = "text/javascript" }
+            if(file.indexOf("data.gz") > 1 || file.indexOf("data.unityweb") > 1) { contentType = "text/javascript" }
+            SERVE_FROM_PUB_DIR.forEach((pubFile) => file.match(pubFile) && (filePath = PUB_FILES+pubFile) )
 
-            if(req.url.indexOf("/download/") > -1) {
-                res.setHeader('Content-Disposition', 'attachment; filename='+path.basename(STATIC_FILES+file));
-                filePath = STATIC_FILES+file.replace("download/", "");
-            }
+            let readable = fs.createReadStream(filePath, {encoding: encoding})
 
-            res.setHeader('Cache-Control', 'public, max-age=' + (60 * 60 * 24 * 30))
-            res.writeHead(200, {"Content-Type": contentType});
-            fs.readFile(filePath, encoding, (err, data) => {
-                if(filePath.match(`${PUB_FILES}index.html`)) {
-                    data = data.replace(/%%VERSION%%/, service.IMAGE_VER)
+            readable.on("error", () => {
+                res.writeHead(404, {"Content-Type": 'text/html'});
+                fs.createReadStream(`${PUB_FILES}404.html`).pipe(res)
+            })
+
+            readable.on("open", () => {
+                let isIndex = filePath.match(`${PUB_FILES}index.html`)
+
+                if(extname.indexOf("gz") > -1 || extname.indexOf("unityweb") > -1) { res.setHeader("Content-Encoding", "gzip"); }
+
+                // TODO: We need to implement authentication for downloading files.
+                if(req.url.indexOf("/download/") > -1 && !isIndex) {
+                    res.setHeader('Content-Disposition', 'attachment; filename='+path.basename(STATIC_FILES+file));
+                    filePath = STATIC_FILES+file.replace("download/", "");
                 }
-                res.end(data)
+
+                res.setHeader('Cache-Control', 'public, max-age=' + (60 * 60 * 24 * 30))
+                res.writeHead(200, {"Content-Type": contentType});
+
+                contentType == "application/gzip" && readable.pipe(zlib.createGunzip()).pipe(res)
+                contentType != "application/gzip" && !isIndex && readable.pipe(res)
+                isIndex && readable.on("end", () => res.end())
+                isIndex && readable.on("data", (chunk) => {
+                    res.write(chunk.toString().replace(/%%VERSION%%/, service.IMAGE_VER))
+                })
             })
         }
     }
