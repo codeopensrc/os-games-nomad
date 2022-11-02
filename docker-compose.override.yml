@@ -4,7 +4,7 @@ services:
         build:
             context: .
             target: src
-        image: registry.codeopensrc.com/kc/nomad:dev
+        image: registry.codeopensrc.com/os/games/nomad/app:dev
         entrypoint: ["pm2-dev", "server/pm2.config.js"]
         volumes:
             - "${FOLDER_LOCATION:-.}/pub:/home/app/pub"
