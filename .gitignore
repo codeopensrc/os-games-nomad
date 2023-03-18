@@ -3,12 +3,12 @@ logs
 .git
 dumps
 
-app.bundle.js
 index.html
 npm-debug.log
 .DS_Store
 
 ignore/*
+*bundle.js
 *.env
 *.swp
 *.swo
