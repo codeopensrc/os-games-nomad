@@ -1,0 +1,123 @@
+## skaffold helm deploy requires the image key
+## IfNotPresent is also important incase we dont push the image
+app:
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    tag: "skaffold-dev"
+  replicaCount: 1
+  service:
+    ports:
+      - servicePort: 80
+        targetContainerPortName: http
+      - servicePort: 5055
+        targetContainerPortName: reloader
+  ingress:
+    enabled: false
+    ingressClassName: "nginx"
+    #annotations:
+    #  cert-manager.io/cluster-issuer: letsencrypt-staging
+    hosts:
+      - host: nomad.k8s.example.com
+      - host: nomad.reloader.k8s.example.com
+        optSvcPort: 5055
+    #tls:
+    #  - hosts:
+    #      - nomad.k8s.example.com
+    #      - nomad.reloader.k8s.example.com
+    #    secretName: nomad-tls
+  containerPorts:
+    - name: http
+      port: 80
+    - name: reloader
+      port: 5055
+  lifecyclePostStartCommand:
+    ["/bin/sh", "-c", "npm run reloader >> /var/log/hotreload.log 2>&1 &"]
+  volumeMounts:
+    - name: shared-logs
+      mountPath: /var/log
+      mountType:
+        emptyDir: {}
+  additionalContainers:
+    - name: hotreload-logger
+      image: busybox
+      command: ["/bin/sh", "-c",
+        "while [ ! -f /var/log/hotreload.log ]; do sleep 5; done; \
+         tail -f /var/log/hotreload.log"
+      ]
+      volumeMounts:
+        - name: shared-logs
+          mountPath: /var/log
+  configMapData:
+    DEV_DATABASE_URL_ORIGIN: "mongodb://nomad-db-0.nomad-db,nomad-db-1.nomad-db,nomad-db-2.nomad-db:27017"
+    DEV_ENV:   "true"
+    ENABLE_DB: "false"
+    LIVE_RELOADER_PORT: 5055
+    LOG_EVERY_NUM_CHECKS: 5
+    #PM2_TZ: "America/Los_Angeles"
+db: 
+  enabled: false
+  replicaCount: 3
+  image:
+    repository: mongo
+    pullPolicy: IfNotPresent
+    tag: 4.4.6
+  command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+  service:
+    type: None
+    ports:
+      - servicePort: 27017
+        targetContainerPortName: mongo
+  ingress:
+    enabled: false
+  containerPorts:
+    - name: mongo
+      port: 27017
+  containerProbe:
+    enabled: true
+    type: tcp
+    port: mongo
+    probes:
+      livenessProbe:
+        failureThreshold: 5
+        periodSeconds: 15
+      readinessProbe:
+        failureThreshold: 2
+        periodSeconds: 15
+  useStatefulSet: true
+  statefulSetPodManagementPolicy: "Parallel"
+  job:
+    enabled: true
+    image:
+      repository: mongo
+      pullPolicy: Always
+      tag: 4.4.6
+    backoffLimit: 3
+    ttlSecondsAfterFinished: 60
+    restartPolicy: Never
+    command:
+    - bash
+    - -c
+    - |
+      echo "Wait 15 for dbs to initialize"
+      sleep 15;
+      INIT=$(mongo --host "nomad-db-0.nomad-db" --eval \
+        "rs.initiate( { _id : 'rs0', members: [
+            { _id: 0, host: 'nomad-db-0.nomad-db:27017' },
+            { _id: 1, host: 'nomad-db-1.nomad-db:27017' },
+            { _id: 2, host: 'nomad-db-2.nomad-db:27017' }
+        ]})");
+      echo "init is: $INIT";
+      CODE=$(echo "$INIT" | sed -nr 's/.*ok" : ([0-9]).*/\1/p');
+      echo "mongo ok is: $CODE";
+      if [ ! -z "$CODE" ] && [ "$CODE" = "1" ]; then exit 0; fi;
+      exit 1;
+  persistence:
+    statefulset:
+      persistentVolumeClaimRetentionPolicy:
+        whenDeleted: Delete
+  volumeClaimMounts:
+    - mountPath: /data/db
+      subPath: db
+  secretStringData:
+    MONGO_INITDB_DATABASE: mongo

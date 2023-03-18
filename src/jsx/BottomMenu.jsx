@@ -1,15 +1,22 @@
 "use strict";
 
-const React = require('react');
-const DOM = require('react-dom');
+import React from 'react';
+import DOM from 'react-dom';
 // var PropTypes = React.PropTypes;
 
-require("../style/BottomMenu.less");
+import "../style/BottomMenu.less"
 
 
-const BottomMenu = React.createClass({
+class BottomMenu extends React.Component {
 
-    render: function() {
+    constructor(props) {
+        super(props)
+        this.state = { }
+    }
+
+    componentDidMount() { }
+
+    render() {
         return (
             <div id="component-bottommenu">
                 Bottom
@@ -17,6 +24,6 @@ const BottomMenu = React.createClass({
         );
     }
 
-});
+};
 
-module.exports = BottomMenu;
+export { BottomMenu as default };

@@ -1,44 +1,42 @@
 "use strict";
 
-const React = require('react');
-const DOM = require('react-dom');
+import React from 'react';
+import DOM from 'react-dom';
 // var PropTypes = React.PropTypes;
 
-require("../style/Main.less");
+import "../style/Main.less"
 
 let Game = require("../js/Game.js");
 // new Game().Loop()
 
 
-const Main = React.createClass({
+class Main extends React.Component {
 
-    getInitialState: function() {
-        return {
+    constructor(props) {
+        super(props)
+        this.state = {
             points: []
-        };
-    },
-
-    componentWillMount: function() {
+        }
         this.G = this.props.G;
-    },
+    }
 
-    componentDidMount: function() {
+    componentDidMount() {
         this.createRandomizedPoints();
-    },
+    }
 
-    calcDef: function (level) {
+    calcDef(level) {
         return level * (Math.random() * 2.3 + level).toFixed(2)
-    },
+    }
 
-    calcHealth: function (level) {
+    calcHealth(level) {
         return level * (Math.random() * 5.6 + level).toFixed(2)
-    },
+    }
 
-    calcAttack: function (level) {
+    calcAttack(level) {
         return level * (Math.random() * 1.4 + level).toFixed(2)
-    },
+    }
 
-    createRandomizedPoints: function() {
+    createRandomizedPoints() {
         let numPoints = 15
         let points = [];
         let maxX = 880;
@@ -65,9 +63,9 @@ const Main = React.createClass({
             points.push(point)
         }
         this.setState({ points: points })
-    },
+    }
 
-    renderPoints: function () {
+    renderPoints() {
         return this.state.points.map((point, i) => {
             // let color = point.taken ? "#51ca72" : "#caab51"
             let color = point.taken ? "taken" : "nottaken"
@@ -79,9 +77,9 @@ const Main = React.createClass({
                 </div>
             )
         })
-    },
+    }
 
-    attackPoint: function (point) {
+    attackPoint(point) {
         console.log("Index is: ", point.index);
         console.log("Resrouces at this base are:", point.resources);
         console.log(this.G.Player.Stats.Attack, point.defense);
@@ -96,9 +94,9 @@ const Main = React.createClass({
         point.resources = null;
         point.taken = true;
         this.props.triggerUpdate();
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <div id="component-main">
                 <div id={`mainMap`}>
@@ -109,6 +107,6 @@ const Main = React.createClass({
         );
     }
 
-});
+};
 
-module.exports = Main;
+export { Main as default };

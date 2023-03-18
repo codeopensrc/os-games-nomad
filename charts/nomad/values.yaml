@@ -1,0 +1,13 @@
+app:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: registry.codeopensrc.com/os/games/nomad/app
+  secretStringData:
+    MONGO_DB_NAME: "mongo"
+    SAMPLE_SECRET: "SAMPLE_SECRET_ENV_VAR"
+  configMapData:
+    DEV_DATABASE_URL_ORIGIN: "mongodb://nomad-db:27017"
+    ENABLE_DB:               "false"
+db:
+  enabled: false

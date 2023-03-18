@@ -1,43 +1,41 @@
 "use strict";
 
-const React = require('react');
-const DOM = require('react-dom');
+import React from 'react';
+import DOM from 'react-dom';
 
 let Game = require("../js/Game.js");
 // var PropTypes = React.PropTypes;
 
-require("../style/RightMenu.less");
+import "../style/RightMenu.less"
 
-const RightMenu = React.createClass({
-    getInitialState: function() {
-        return { };
-    },
+class RightMenu extends React.Component {
 
-    componentDidMount: function() {
-    },
-
-    componentWillMount: function() {
+    constructor(props) {
+        super(props)
+        this.state = { }
         this.G = this.props.G;
-    },
+    }
 
-    upgradeStructure: function (mat) {
+    componentDidMount() { }
+
+    upgradeStructure(mat) {
         let matsNeeded = this.G.calcStructureUpgrade(mat);
         if(!this.G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
         this.G.subtractAmount(matsNeeded)
         this.G.upgradeStructure(mat)
         this.props.triggerUpdate();
-    },
+    }
 
-    unlockTech: function (tech) {
+    unlockTech(tech) {
         this.G.unlockTech(tech)
         // let matsNeeded = this.G.calcStructureUpgrade(mat);
         // if(!this.G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
         // this.G.subtractAmount(matsNeeded)
         // this.G.upgradeStructure(mat)
         this.props.triggerUpdate();
-    },
+    }
 
-    displayUpgradeCost: function (material) {
+    displayUpgradeCost(material) {
         let mats = this.G.calcStructureUpgrade(material);
         let calcTickReduction = this.G.Materials[material].calcTickReduction
 
@@ -63,9 +61,9 @@ const RightMenu = React.createClass({
                 {cost}
             </div>
         )
-    },
+    }
 
-    renderStructures: function () {
+    renderStructures() {
         return Object.keys(this.G.Materials).map((mat) => {
             if(!this.G.Materials[mat].active) { return; }
             let matsNeeded = this.G.calcStructureUpgrade(mat);
@@ -81,9 +79,9 @@ const RightMenu = React.createClass({
                 </div>
             )
         })
-    },
+    }
 
-    activateTab: function (tab) {
+    activateTab(tab) {
         let tabs = document.getElementsByClassName("rightmenuTab");
         for(let p in tabs) { tabs[p].style && (tabs[p].className = "rightmenuTab"); }
         document.getElementById(tab+"Tab").className += " selected";
@@ -91,15 +89,15 @@ const RightMenu = React.createClass({
         let childs = document.getElementById("rightMenu").childNodes;
         for(let p in childs) { childs[p].style && (childs[p].style.display = "none"); }
         document.getElementById(tab).style.display = "block";
-    },
+    }
 
-    renderPlayerUnlocks: function () {
+    renderPlayerUnlocks() {
         return Object.keys(this.G.Player.TechTree).map((unlock, ind) =>
             <button className={`playerUnlock`} key={ind} onClick={this.unlockTech.bind(this, unlock)}>Unlock {unlock}</button>
         )
-    },
+    }
 
-    render: function() {
+    render() {
 
         let structures = this.renderStructures();
         let unlocks = this.renderPlayerUnlocks();
@@ -123,6 +121,6 @@ const RightMenu = React.createClass({
         );
     }
 
-});
+};
 
-module.exports = RightMenu;
+export { RightMenu as default };

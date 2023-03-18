@@ -1,7 +1,7 @@
 "use strict";
 
-const React = require('react');
-const DOM = require('react-dom');
+import React from 'react';
+import DOM from 'react-dom';
 
 const itemColors = {
     Steel: "#7d7a7a",
@@ -12,21 +12,19 @@ const itemColors = {
 let Game = require("../js/Game.js");
 // var PropTypes = React.PropTypes;
 
-require("../style/LeftMenu.less");
+import "../style/LeftMenu.less"
 
-const LeftMenu = React.createClass({
-    getInitialState: function() {
-        return { };
-    },
+class LeftMenu extends React.Component {
 
-    componentDidMount: function() {
-    },
-
-    componentWillMount: function() {
+    constructor(props) {
+        super(props)
+        this.state = { }
         this.G = this.props.G;
-    },
+    }
 
-    renderInventory: function() {
+    componentDidMount() { }
+
+    renderInventory() {
         return Object.keys(this.G.Materials).map((mat) => {
             if(!this.G.Materials[mat].active) { return; }
             // <div className="itemName" style={{color: this.G.Materials[mat].Color}}>{mat}</div>
@@ -40,9 +38,9 @@ const LeftMenu = React.createClass({
                 </div>
             )
         })
-    },
+    }
 
-    renderTechTree: function () {
+    renderTechTree() {
         return Object.keys(this.G.Player.TechTree).map((tech, i) => {
             return (
                 <div key={i} className="techTreeRow">
@@ -51,9 +49,9 @@ const LeftMenu = React.createClass({
                 </div>
             )
         })
-    },
+    }
 
-    render: function() {
+    render() {
 
         let inventory = this.renderInventory()
         let techTree = this.renderTechTree();
@@ -76,6 +74,6 @@ const LeftMenu = React.createClass({
         );
     }
 
-});
+};
 
-module.exports = LeftMenu;
+export { LeftMenu as default };

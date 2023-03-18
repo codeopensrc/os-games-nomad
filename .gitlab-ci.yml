@@ -1,0 +1,652 @@
+stages:
+  - prepare
+  - build
+  - deploy
+  - stop
+  - publish
+  - commit
+  - release
+  - deploy_prod
+  - stop_prod
+
+variables:
+  PROJECT_NODE_IMAGE: $CI_REGISTRY_IMAGE/node
+  PROJECT_APP_IMAGE: $CI_REGISTRY_IMAGE/app
+  TOKEN_REPO_WRITE_NAME: ci_push_token
+  TOKEN_REPO_SELF_WRITE: "secret_value"
+  TOKEN_REGISTRY_READ_NAME: ci_registry_read_token
+  TOKEN_REGISTRY_SELF_READ: "secret_value"
+  TOKEN_API_SNIPPET_WRITE: "secret_value"
+  SERVICE_NAME: ${CI_PROJECT_NAME}
+  APP_CHART_DIR: charts/nomad
+  SUBDOMAIN: nomad
+  MONGO_DB_NAME: citmp
+  DEPLOY_SNIP_PROJECT_ID: 7
+  DEPLOY_SNIP_ID: 33
+  DEPLOY_SNIP_FILENAME: ENVS.txt
+  USE_DEPLOY_SNIP: "true"
+  BUILDKITD_POD: buildkitd-0
+  BUILDKITD_NAMESPACE: buildkitd
+  DOCKERFILE: Dockerfile
+  ENABLE_DB: "false"
+  SKAFFOLD_CLI_OPTS: "--interactive=false --update-check=false"
+  SAMPLE_SECRET: "secret_value"
+  RELEASE:
+    description: "Optionally define a release when running against master branch - options 'stable, patch, minor, major'"
+  ONLY_DEPLOY_PROD:
+    description: "Optionally skip build steps and only run 'deploy_production' job - Only option 'true'"
+  ONLY_PUBLISH_CHART:
+    description: "Only run after manually updating Chart.yaml and Chart.lock files. Optionally skip build steps and only run 'publish_charts' job - Only option 'true'"
+  STOP_PROD:
+    description: "USE WITH CAUTION - Used to stop production environment - Only option 'true'"
+
+default:
+  before_script:
+  - SERVICE_NAME=${SERVICE_NAME//\./-}
+  - SERVER_DOMAIN=${CI_SERVER_HOST//gitlab\./}
+
+.apply_registry_secret: &apply_registry_secret
+  - kubectl delete secret -n $KUBE_NAMESPACE gitlab-registry || true
+  - kubectl create secret -n $KUBE_NAMESPACE docker-registry gitlab-registry
+    --docker-server="$CI_REGISTRY" --docker-username="$TOKEN_REGISTRY_READ_NAME"
+    --docker-password="$TOKEN_REGISTRY_SELF_READ" -o yaml --dry-run=client | kubectl apply -n $KUBE_NAMESPACE -f -
+
+.create_docker_json: &create_docker_json
+  - |
+    mkdir ~/.docker && \
+    cat <<EOF > ~/.docker/config.json
+    {"auths":{"$CI_REGISTRY":{"auth":"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)"}}}
+    EOF
+
+.get_node_ver: &get_node_ver
+  - FOUND_NODE_VER=$(sed -rn "s/.*NODE_VER=(.*)/\1/p" Dockerfile)
+
+.not_protected: &not_protected
+  '$CI_COMMIT_REF_NAME != "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+
+.is_web_node_ver_change: &is_web_node_ver_change
+  '$CI_COMMIT_REF_NAME != "master" && $CI_PIPELINE_SOURCE == "web" && $NODE_VER != ""'
+
+.is_web_master_stable: &is_web_master_stable
+  '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME == "master" && $RELEASE == "stable"'
+
+.is_web_master_release: &is_web_master_release
+  '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME == "master" && ($RELEASE != "" && $RELEASE != "stable")'
+
+.trigger_deploy_prod_job: &trigger_deploy_prod_job
+  ## Keeping SKIP_BETA var to showcase passing vars to pipelines
+  - curl -X POST --form "variables[SKIP_BETA]=$SKIP_BETA"
+    "${CI_SERVER_URL}/api/v4/projects/$CI_PROJECT_ID/trigger/pipeline?token=${CI_JOB_TOKEN}&ref=${CI_COMMIT_REF_NAME}"
+
+.get_deploy_snippet: &get_deploy_snippet
+  - curl "${CI_API_V4_URL}/projects/$DEPLOY_SNIP_PROJECT_ID/snippets/$DEPLOY_SNIP_ID/files/main/$DEPLOY_SNIP_FILENAME/raw" > $DEPLOY_SNIP_FILENAME
+
+.update_deploy_snippet: &update_deploy_snippet
+  - |
+    cat <<EOF > snippet.json
+    {"files":[{ "action": "update", "file_path": "$DEPLOY_SNIP_FILENAME","content" : "$(printf '%s\\n' $(<$DEPLOY_SNIP_FILENAME))"}]}
+    EOF
+  - 'curl -X PUT -H "PRIVATE-TOKEN: ${TOKEN_API_SNIPPET_WRITE}" -H "Content-Type: application/json" -d @snippet.json
+    "${CI_API_V4_URL}/projects/$DEPLOY_SNIP_PROJECT_ID/snippets/$DEPLOY_SNIP_ID"'
+
+## TODO: Switch to using helm chart appVersion
+.get_current_version: &get_current_version
+  - DOCKER_SERVICE_NAME="main:"
+  - PROD_IMAGE=$(awk "/${DOCKER_SERVICE_NAME}/{getline; print; exit;}" docker-compose.yml)
+  - CURVER=$(echo $PROD_IMAGE | cut -d ":" -f3 | cut -d "-" -f1)
+
+.exit_if_sha_matches_stable: &exit_if_sha_matches_stable
+  - LAST_CI_SHA=$(git log --oneline | grep -A 1 "Stable\|Release" | cut -d " " -f1 | awk NR==1) || echo 0 # Last Stable/Release commit
+  - echo $LAST_CI_SHA
+  - "[[ $COMMIT_SHA = $LAST_CI_SHA ]] && exit 0"
+
+.get_sha_to_build: &get_sha_to_build
+  - COMMIT_SHA=$(git log -1 --pretty=format:%h)
+  - STABLE_SHA=$(git log --oneline | grep -A 1 Stable | cut -d " " -f1 | awk NR==1) || echo 0 # Last Stable commit
+  - RELEASE_SHA=$(git log --oneline | grep -A 1 Release | cut -d " " -f1 | awk NR==1) || echo 0 # Last Release commit
+  - IMAGE_SHA=$(git log --oneline | grep -A 1 Stable | cut -d " " -f1 | awk NR==2) || echo 0 # Last docker-compose tag
+    #Use commit. If commit matches stable use last image. If commit matches release rebuild release
+  - SHA_TO_BUILD="-${COMMIT_SHA}"
+  - '[[ $COMMIT_SHA = $STABLE_SHA ]] && SHA_TO_BUILD="-$IMAGE_SHA"'
+  - '[[ $COMMIT_SHA = $RELEASE_SHA ]] && SHA_TO_BUILD=""'
+  - echo $COMMIT_SHA $IMAGE_SHA $STABLE_SHA $RELEASE_SHA
+
+.create_beta: &create_beta
+  - *get_current_version
+  - MAJOR_MINOR=$(echo $CURVER | cut -d "." -f 1-2)
+  - PATCH=$(echo $CURVER | cut -d "." -f 3)
+  - NEXT_PATCH=$(($PATCH + 1))
+  - BETA=${MAJOR_MINOR}.${NEXT_PATCH}-beta
+
+.create_next_version: &create_next_version
+  - *get_current_version
+  - MAJOR=$(echo $CURVER | cut -d "." -f 1)
+  - MINOR=$(echo $CURVER | cut -d "." -f 2)
+  - PATCH=$(echo $CURVER | cut -d "." -f 3)
+  - NEXT_MAJOR=$(($MAJOR + 1))
+  - NEXT_MINOR=$(($MINOR + 1))
+  - NEXT_PATCH=$(($PATCH + 1))
+  - "[[ $RELEASE == 'major' ]] && VERSION=${NEXT_MAJOR}.0.0"
+  - "[[ $RELEASE == 'minor' ]] && VERSION=${MAJOR}.${NEXT_MINOR}.0"
+  - "[[ $RELEASE == 'patch' ]] && VERSION=${MAJOR}.${MINOR}.${NEXT_PATCH}"
+
+.create_next_chart_version: &create_next_chart_version
+  - PROD_CHART=$(awk "/version:/{print; exit;}" ${APP_CHART_DIR}/Chart.yaml)
+  - CURCHART=$(echo $PROD_CHART | cut -d ":" -f2 | cut -d "-" -f1 | sed "s/^ *//")
+  - MAJOR_CHART=$(echo $CURCHART | cut -d "." -f 1)
+  - MINOR_CHART=$(echo $CURCHART | cut -d "." -f 2)
+  - PATCH_CHART=$(echo $CURCHART | cut -d "." -f 3)
+  - NEXT_MAJOR_CHART=$(($MAJOR_CHART + 1))
+  - NEXT_MINOR_CHART=$(($MINOR_CHART + 1))
+  - NEXT_PATCH_CHART=$(($PATCH_CHART + 1))
+  - "[[ $RELEASE == 'major' ]] && CHART_VERSION=${NEXT_MAJOR_CHART}.0.0"
+  - "[[ $RELEASE == 'minor' ]] && CHART_VERSION=${MAJOR_CHART}.${NEXT_MINOR_CHART}.0"
+  - "[[ $RELEASE == 'patch' ]] && CHART_VERSION=${MAJOR_CHART}.${MINOR_CHART}.${NEXT_PATCH_CHART}"
+  - "[[ $RELEASE == 'stable' ]] && CHART_VERSION=${MAJOR_CHART}.${MINOR_CHART}.${NEXT_PATCH_CHART}"
+
+.build_image: &build_image
+  - buildctl --addr kube-pod://${BUILDKITD_POD}?namespace=${BUILDKITD_NAMESPACE} build
+    --frontend dockerfile.v0 --local dockerfile=. --local context=.
+    --opt target=${BUILD_TARGET} --opt filename=./${DOCKERFILE}
+    --output type=image,\"name=${OUTPUT_IMGS}\",push=true
+    --export-cache type=inline
+    ${IMPORT_CACHE_ARGS}
+    ${BUILD_ARGS}
+
+.create_helm_values: &create_helm_values
+  - |
+    ENABLE_CONSUL=false
+    RECLAIM_POLICY=Delete
+    [[ $KUBE_NAMESPACE = "production" ]] && ENABLE_CONSUL=true
+    #[[ $KUBE_NAMESPACE = "production" ]] && RECLAIM_POLICY=Retain
+    cat <<EOF > helm_ci_values.yaml
+    app:
+      imagePullSecrets:
+        - name: gitlab-registry
+      image:
+        repository: "${PROJECT_APP_IMAGE}"
+        tag: "${HELM_IMAGE_TAG}"
+      svcDiscovery:
+        consul:
+          enabled: $ENABLE_CONSUL
+          env:
+            CONSUL_HOST: consul.${SERVER_DOMAIN}
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-prod
+        hosts:
+          - host: "${INGRESS_HOST}"
+        tls:
+          - hosts: 
+              - "${INGRESS_HOST}"
+            secretName: ${SUBDOMAIN}-tls
+      ciLabels:
+        app: "${APPNAME}"
+        env: "${CI_ENVIRONMENT_SLUG}"
+      ciAnnotations:
+        app.gitlab.com/app: "${CI_PROJECT_PATH_SLUG}"
+        app.gitlab.com/env: "${CI_ENVIRONMENT_SLUG}"
+      secretStringData:
+        MONGO_DB_NAME: "${MONGO_DB_NAME}"
+        SAMPLE_SECRET: "${SAMPLE_SECRET}"
+      configMapData:
+        ENABLE_DB:            "${ENABLE_DB}"
+        DEV_DATABASE_URL_ORIGIN: "mongodb://${APPNAME}-db:27017"
+    db:
+      enabled: $ENABLE_DB
+      ciLabels:
+        app: "${APPNAME}"
+        env: "${CI_ENVIRONMENT_SLUG}"
+      ciAnnotations:
+        app.gitlab.com/app: "${CI_PROJECT_PATH_SLUG}"
+        app.gitlab.com/env: "${CI_ENVIRONMENT_SLUG}"
+      secretStringData:
+        MONGO_INITDB_DATABASE: "${MONGO_DB_NAME}"
+      persistence:
+        statefulset:
+          persistentVolumeClaimRetentionPolicy:
+            whenDeleted: "${RECLAIM_POLICY}"
+    EOF
+
+###! 'helm repo add' necessary in helm v4 for 'repository: https' dependency charts
+###! https://github.com/helm/helm/issues/8036
+.add_helm_repos: &add_helm_repos
+  - CHART_NAMES=( $(grep name ./${APP_CHART_DIR}/Chart.lock | awk '{print $3}') )
+  - CHART_URLS=( $(grep repository ./${APP_CHART_DIR}/Chart.lock | awk '{print $2}') )
+  - for ind in "${!CHART_NAMES[@]}"; do helm repo add "${CHART_NAMES[$ind]}" "${CHART_URLS[$ind]}"; done
+
+## Thinking skaffold for review/deployment/integration of multiple apps 
+##  and helm or argo for build/deploying the beta/prod version of the singular app
+.skaffold_deploy: &skaffold_deploy
+  - '[[ -n $HELM_IMAGE_TAG ]] && sed -i "s|appVersion: .*|appVersion: \"${HELM_IMAGE_TAG}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - skaffold config set --global collect-metrics false
+  - *add_helm_repos
+  - skaffold deploy -p ci --build-artifacts=tags.json ${SKAFFOLD_CLI_OPTS}
+  - helm history $APPNAME -n $KUBE_NAMESPACE
+  - kubectl get all -n $KUBE_NAMESPACE -l "app.kubernetes.io/instance=${APPNAME}"
+
+.deploy_helm_chart: &deploy_helm_chart
+  - '[[ -n $HELM_IMAGE_TAG ]] && sed -i "s|appVersion: .*|appVersion: \"${HELM_IMAGE_TAG}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - *add_helm_repos
+  - helm dependency build ${APP_CHART_DIR}
+  - helm upgrade $APPNAME ${APP_CHART_DIR} --install -f skaffold/ci-values.yaml -f helm_ci_values.yaml -n $KUBE_NAMESPACE --wait
+  - helm history $APPNAME -n $KUBE_NAMESPACE
+  - kubectl get all -n $KUBE_NAMESPACE -l "app.kubernetes.io/instance=${APPNAME}"
+  ## rollout status multiple resource support in 1.25 https://github.com/kubernetes/kubernetes/pull/108777
+  ## Kubernetes 1.24 only supports "deploy/${DEPLOYMENT_NAME}" and does not support "deploy -l 'selector'" as well
+  #- DEPLOYMENT=$(kubectl get deploy -n $KUBE_NAMESPACE -l "app.kubernetes.io/instance=${APPNAME}" --no-headers -o custom-columns="DEPLOY:metadata.name")
+  ## Just kinda hardcode the deploy/sts name until 1.25 for now
+  - '[[ "$ENABLE_DB" = "true" ]] && kubectl rollout status sts/${APPNAME}-db -n $KUBE_NAMESPACE -w'
+  - kubectl rollout status deploy/${APPNAME}-app -n $KUBE_NAMESPACE -w
+
+.publish_helm_charts: &publish_helm_charts
+  - 'sed -i "s| repository: file| #repository: file|" ${APP_CHART_DIR}/Chart.yaml'
+  - 'sed -i "s| #repository: https| repository: https|" ${APP_CHART_DIR}/Chart.yaml'
+  - helm package -u ${APP_CHART_DIR}
+  - curl -sS -X POST -F "chart=@${APP_CHART_DIR#charts/}-${CHART_VERSION}.tgz"
+    --user gitlab-ci-token:$CI_JOB_TOKEN
+    ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/api/stable/charts
+  ## To use
+  #helm repo add os ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/stable
+  #helm upgrade --install my-helm-release os/nomad
+
+workflow:
+  rules:
+  - if: $CI_COMMIT_TAG
+    when: never
+  - if: '$ONLY_DEPLOY_PROD == "true" || $STOP_PROD == "true" || $ONLY_PUBLISH_CHART == "true"'
+    variables:
+      SKIP_WEB_DEFAULT_RUN: "true"
+  - when: always
+
+
+prepare_node_image:
+  stage: prepare
+  tags:
+  - kubernetes_builder
+  variables:
+    BUILD_TARGET: base
+  script:
+  - *create_docker_json
+  - *get_node_ver
+  - "OUTPUT_IMGS=${PROJECT_NODE_IMAGE}:${FOUND_NODE_VER}"
+  - *build_image
+  rules:
+  - if: $CI_PIPELINE_SOURCE != "push" && $CI_PIPELINE_SOURCE != "web"
+    when: never
+  - if: *is_web_node_ver_change
+  - if: *not_protected
+    changes:
+      paths:
+        - Dockerfile
+
+echo_env_vars:
+  stage: build
+  tags:
+  - kubernetes_builder
+  script:
+  - echo $CI_PIPELINE_SOURCE
+  - echo $CI_COMMIT_REF_NAME
+  - echo $CI_DEFAULT_BRANCH
+  - echo $CI_COMMIT_SHORT_SHA
+  - echo $CI_SERVER_URL
+  - echo $CI_REGISTRY_IMAGE
+  - echo $CI_PROJECT_URL
+  - echo $CI_PROJECT_NAMESPACE
+  - echo $CI_PROJECT_NAME
+  - echo $CI_PROJECT_PATH
+  - echo $CI_PROJECT_ID
+  - echo $CI_KUBERNETES_ACTIVE
+  - echo $CI_CONFIG_PATH
+  - echo $RELEASE
+  - echo $ONLY_DEPLOY_PROD
+  - echo $STOP_PROD
+  - echo $ONLY_PUBLISH_CHART
+  rules:
+  - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+
+########################
+#### FEATURE BRANCH
+########################
+build_review:
+  stage: build
+  tags:
+  - kubernetes_builder
+  script:
+  - *create_docker_json
+  - skaffold config set --global collect-metrics false
+  - skaffold build -p ci --default-repo $CI_REGISTRY_IMAGE --file-output=tags.json ${SKAFFOLD_CLI_OPTS}
+  artifacts:
+    paths:
+      - tags.json
+    expire_in: 1 hour
+  rules:
+  - if: $CI_PIPELINE_SOURCE != "push" && $CI_PIPELINE_SOURCE != "web"
+    when: never
+  - if: *not_protected
+
+deploy_review:
+  stage: deploy
+  tags:
+  - kubernetes
+  variables:
+    KUBE_NAMESPACE: review
+  script:
+  - echo "$KUBE_NAMESPACE"
+  - APPNAME=${CI_ENVIRONMENT_SLUG}-${SERVICE_NAME}
+  - HELM_IMAGE_TAG=${CI_COMMIT_SHORT_SHA}
+  - 'INGRESS_HOST=${SUBDOMAIN}.${CI_ENVIRONMENT_SLUG}.dev.k8s.${SERVER_DOMAIN}'
+  - 'URL=http://${INGRESS_HOST}'
+  - echo "URL=${URL}" > deploy.env
+  - 'echo "APPNAME: ${APPNAME}"'
+  - 'echo "URL: ${URL}"'
+  - *apply_registry_secret
+  - *create_helm_values
+  - export APPNAME
+  - export KUBE_NAMESPACE
+  - *skaffold_deploy
+  artifacts:
+    reports:
+      dotenv: deploy.env 
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: $URL
+    on_stop: stop_review
+    auto_stop_in: 1 hour
+  rules:
+  - if: *not_protected
+
+stop_review:
+  stage: stop
+  tags:
+  - kubernetes
+  variables:
+    KUBE_NAMESPACE: review
+    GIT_STRATEGY: none
+  script:
+  - echo "Stop commit"
+  - echo "$KUBE_NAMESPACE"
+  - APPNAME=${CI_ENVIRONMENT_SLUG}-${SERVICE_NAME}
+  - helm uninstall $APPNAME -n $KUBE_NAMESPACE || true
+  dependencies: []
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  rules:
+  - if: *not_protected
+    when: manual
+
+
+########################
+########################
+#### MASTER BRANCH
+########################
+########################
+build_beta:
+  stage: build
+  tags:
+  - kubernetes_builder_prod
+  script:
+  - *create_docker_json
+  - *create_beta
+  - BUILD_TARGET=prod
+  - 'BUILD_ARGS="--opt build-arg:BUILD_BASE=ci"'
+  - 'IMPORT_CACHE_ARGS="--import-cache type=registry,ref=${PROJECT_APP_IMAGE}:cache"'
+  - 'IMPORT_CACHE_ARGS="${IMPORT_CACHE_ARGS} --import-cache type=registry,ref=${PROJECT_APP_IMAGE}:${BETA}"'
+  - "OUTPUT_IMGS=${PROJECT_APP_IMAGE}:${BETA}"
+  - *build_image
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true" || $RELEASE != ""'
+    when: never
+  - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") && $CI_COMMIT_REF_NAME == "master"
+
+deploy_beta:
+  stage: deploy
+  tags:
+  - kubernetes_prod
+  variables:
+    KUBE_NAMESPACE: beta
+  script:
+  - *create_beta
+  - echo "$KUBE_NAMESPACE"
+  - APPNAME=${SERVICE_NAME}
+  - HELM_IMAGE_TAG=${BETA}
+  - 'INGRESS_HOST=${SUBDOMAIN}.beta.k8s.${SERVER_DOMAIN}'
+  - 'URL=https://${INGRESS_HOST}'
+  - echo "URL=${URL}" > deploy.env
+  - 'echo "APPNAME: ${APPNAME}"'
+  - 'echo "URL: ${URL}"'
+  - *apply_registry_secret
+  - *create_helm_values
+  - *deploy_helm_chart
+  artifacts:
+    reports:
+      dotenv: deploy.env 
+  environment:
+    name: beta
+    url: $URL
+    on_stop: stop_beta
+    auto_stop_in: 1 hour
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true" || $RELEASE != ""'
+    when: never
+  - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") && $CI_COMMIT_REF_NAME == "master"
+
+stop_beta:
+  stage: stop
+  tags:
+  - kubernetes_prod
+  variables:
+    KUBE_NAMESPACE: beta
+    GIT_STRATEGY: none
+  script:
+  - echo "Stop beta"
+  - echo "$KUBE_NAMESPACE"
+  - APPNAME=${SERVICE_NAME}
+  - helm uninstall $APPNAME -n $KUBE_NAMESPACE || true
+  environment:
+    name: beta
+    action: stop
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true" || $RELEASE != ""'
+    when: never
+  - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") && $CI_COMMIT_REF_NAME == "master"
+    when: manual
+
+publish_charts:
+  stage: publish
+  tags:
+  - kubernetes_prod
+  script:
+  - *create_next_chart_version
+  - CHART_VERSION=${CURCHART}
+  - *publish_helm_charts
+  rules:
+  - if: $ONLY_PUBLISH_CHART == "true" && $CI_COMMIT_REF_NAME == "master"
+
+###############################
+###   Dont Tag Commit -  $RELEASE is [stable]
+###############################
+commit_stable:
+  stage: commit
+  tags:
+  - kubernetes_builder_prod
+  script:
+  - *get_current_version
+  - *create_next_chart_version
+  - echo $CURVER
+  - COMMIT_SHA=$(git log -1 --pretty=format:%h)
+  - echo $COMMIT_SHA
+  - *exit_if_sha_matches_stable
+  - sed -i "s|${CURVER}-*.*|${CURVER}-${COMMIT_SHA}|" docker-compose.yml
+  - 'sed -i "s|^version: ${CURCHART}|version: ${CHART_VERSION}|" ${APP_CHART_DIR}/Chart.yaml'
+  - 'sed -i "s|appVersion: \"${CURVER}-*.*\"|appVersion: \"${CURVER}-${COMMIT_SHA}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - helm dependency update ${APP_CHART_DIR}
+  - git add docker-compose.yml ${APP_CHART_DIR}/Chart.yaml ${APP_CHART_DIR}/Chart.lock
+  - *publish_helm_charts
+  - git config --global user.name "${GITLAB_USER_NAME}"
+  - git config --global user.email "${GITLAB_USER_EMAIL}"
+  - 'git commit -m "Stable: ${CURVER}-${COMMIT_SHA}" --author="GitLab Runner <gitlab-runner@${CI_SERVER_HOST}>" -s'
+  - 'git remote set-url origin https://${TOKEN_REPO_WRITE_NAME}:${TOKEN_REPO_SELF_WRITE}@$CI_SERVER_HOST/${CI_PROJECT_PATH}.git'
+  - git push -o ci.skip origin HEAD:master
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true"'
+    when: never
+  - if: *is_web_master_stable
+
+release_stable:
+  stage: release
+  tags:
+  - kubernetes_builder_prod
+  script:
+  - *create_docker_json
+  - *create_beta
+  - echo $CURVER
+  - echo $BETA
+  - *get_sha_to_build
+  - echo $SHA_TO_BUILD
+  - BUILD_TARGET=prod
+  - 'BUILD_ARGS="--opt build-arg:BUILD_BASE=ci"'
+  - 'IMPORT_CACHE_ARGS="--import-cache type=registry,ref=${PROJECT_APP_IMAGE}:cache"'
+  - 'IMPORT_CACHE_ARGS="${IMPORT_CACHE_ARGS} --import-cache type=registry,ref=${PROJECT_APP_IMAGE}:${BETA}"'
+  - "OUTPUT_IMGS=${PROJECT_APP_IMAGE}:${CURVER}${SHA_TO_BUILD},${PROJECT_APP_IMAGE}:latest,${PROJECT_APP_IMAGE}:${CURVER}-stable"
+  - *build_image
+  - *trigger_deploy_prod_job
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true"'
+    when: never
+  - if: *is_web_master_stable
+
+
+###############################
+###   Tag Version Commit -  $RELEASE is [patch, minor, major]
+###############################
+commit_version:
+  stage: commit
+  tags:
+  - kubernetes_builder_prod
+  script:
+  - echo $RELEASE
+  - *create_next_version
+  - *create_next_chart_version
+  - echo $CURVER
+  - echo ${VERSION}
+  - 'curl "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/merge_requests?state=merged&target_branch=$CI_DEFAULT_BRANCH" > mreq.json'
+  - curl -O $CI_SERVER_URL/os/changelogger/-/raw/master/genlog.sh
+  - bash genlog.sh $RELEASE -s $CI_SERVER_URL -p $CI_PROJECT_PATH -t $CURVER -v -m mreq.json -n $NOTES
+  - git add CHANGELOG.md 2>/dev/null || echo 0
+  - sed -i "s|${CURVER}-*.*|${VERSION}|" docker-compose.yml
+  - 'sed -i "s|^version: ${CURCHART}|version: ${CHART_VERSION}|" ${APP_CHART_DIR}/Chart.yaml'
+  - 'sed -i "s|appVersion: \"${CURVER}-*.*\"|appVersion: \"${VERSION}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - helm dependency update ${APP_CHART_DIR}
+  - git add docker-compose.yml ${APP_CHART_DIR}/Chart.yaml ${APP_CHART_DIR}/Chart.lock
+  - *publish_helm_charts
+  - git config --global user.name "${GITLAB_USER_NAME}"
+  - git config --global user.email "${GITLAB_USER_EMAIL}"
+  - 'git commit -m "Release: ${VERSION}" --author="GitLab Runner <gitlab-runner@${CI_SERVER_HOST}>" -s'
+  - git tag ${VERSION}
+  - 'git remote set-url origin https://${TOKEN_REPO_WRITE_NAME}:${TOKEN_REPO_SELF_WRITE}@$CI_SERVER_HOST/${CI_PROJECT_PATH}.git'
+  - git push -o ci.skip origin HEAD:master --tags
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true"'
+    when: never
+  - if: *is_web_master_release
+
+release_version:
+  stage: release
+  tags:
+  - kubernetes_builder_prod
+  script:
+  - *create_docker_json
+  - echo $RELEASE
+  - *create_beta
+  - *create_next_version
+  - echo $CURVER
+  - echo $BETA
+  - echo ${VERSION}
+  - BUILD_TARGET=prod
+  - 'BUILD_ARGS="--opt build-arg:BUILD_BASE=ci"'
+  - 'IMPORT_CACHE_ARGS="--import-cache type=registry,ref=${PROJECT_APP_IMAGE}:cache"'
+  - 'IMPORT_CACHE_ARGS="${IMPORT_CACHE_ARGS} --import-cache type=registry,ref=${PROJECT_APP_IMAGE}:${BETA}"'
+  - 'IMPORT_CACHE_ARGS="${IMPORT_CACHE_ARGS} --import-cache type=registry,ref=${PROJECT_APP_IMAGE}:${CURVER}-stable"'
+  - "OUTPUT_IMGS=${PROJECT_APP_IMAGE}:$VERSION,${PROJECT_APP_IMAGE}:latest"
+  - *build_image
+  - *trigger_deploy_prod_job
+  rules:
+  - if: '$SKIP_WEB_DEFAULT_RUN == "true"'
+    when: never
+  - if: *is_web_master_release
+
+
+###############################
+###   Deploy from master branch
+###############################
+deploy_production:
+  stage: deploy_prod
+  tags:
+  - kubernetes_prod
+  variables:
+    KUBE_NAMESPACE: production
+  script:
+  - echo "$KUBE_NAMESPACE"
+  - APPNAME=${SERVICE_NAME}
+  ## Need HELM_IMAGE_TAG for 'image.tag' otherwise it falls back to 'tpl' chart's appVersion
+  - HELM_IMAGE_TAG=$(grep ^appVersion ./${APP_CHART_DIR}/Chart.yaml | awk '{print $2}' | tr -d '"')
+  - 'INGRESS_HOST=${SUBDOMAIN}.${SERVER_DOMAIN}'
+  - 'URL=https://${INGRESS_HOST}'
+  - echo "URL=${URL}" > deploy.env
+  - 'echo "APPNAME: ${APPNAME}"'
+  - 'echo "URL: ${URL}"'
+  - *apply_registry_secret
+  - *create_helm_values
+  - *deploy_helm_chart
+  - '[[ -z $USE_DEPLOY_SNIP || $USE_DEPLOY_SNIP != "true" ]] && exit 0'
+  - *get_deploy_snippet
+  - FOUND_ID=$(sed -n "/^$CI_PROJECT_ID$/p" $DEPLOY_SNIP_FILENAME)
+  - '[[ -n $FOUND_ID ]] && exit 0'
+  - echo "$CI_PROJECT_ID" >> $DEPLOY_SNIP_FILENAME
+  - *update_deploy_snippet
+  artifacts:
+    reports:
+      dotenv: deploy.env 
+  environment:
+    name: production
+    url: $URL
+  rules:
+  - if: $ONLY_DEPLOY_PROD == "true"
+    when: always
+  - if: '$CI_PIPELINE_SOURCE == "pipeline" && $CI_COMMIT_REF_NAME == "master"'
+
+stop_production:
+  stage: stop_prod
+  tags:
+  - kubernetes_prod
+  variables:
+    KUBE_NAMESPACE: production
+    GIT_STRATEGY: none
+  script:
+  - echo "Stop prod"
+  - echo "$KUBE_NAMESPACE"
+  - APPNAME=${SERVICE_NAME}
+  - helm uninstall $APPNAME -n $KUBE_NAMESPACE || true
+  - '[[ -z $USE_DEPLOY_SNIP || $USE_DEPLOY_SNIP != "true" ]] && exit 0'
+  - *get_deploy_snippet
+  - sed -i "/^$CI_PROJECT_ID$/d" $DEPLOY_SNIP_FILENAME
+  - *update_deploy_snippet
+  environment:
+    name: production
+    action: stop
+  rules:
+  - if: '$STOP_PROD == "true" && $CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME == "master"'
+
+## TODO: Either we configure an elevated runner to delete the tmp namespace after stop/merge (if possible).
+##  Or we run a single project namespace for the review cluster (we setup 4, review dev beta prod. 3 are not gitlab managed)
+## Only concern with NS-per-env is if we delete the env and a duplicate gets made will it cause an issue (seemed so before) - needs testing
+.cleanup:
+  stage: clean
+  script:
+  - echo "CLEAN"
+  rules:
+  - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME != "master"'
+    when: manual

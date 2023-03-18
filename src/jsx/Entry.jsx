@@ -1,52 +1,90 @@
 "use strict";
 
-const React = require('react');
-const DOM = require('react-dom');
+import { hot } from 'react-hot-loader/root';
+import React from 'react';
+import DOM from 'react-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Link
+} from 'react-router-dom';
 
-const LeftMenu = require("./LeftMenu.jsx");
-const TopMenu = require("./TopMenu.jsx");
-const Main = require("./Main.jsx");
-const RightMenu = require("./RightMenu.jsx");
-const BottomMenu = require("./BottomMenu.jsx");
+import LeftMenu from "./LeftMenu.jsx"
+import TopMenu from "./TopMenu.jsx"
+import Main from "./Main.jsx"
+import RightMenu from "./RightMenu.jsx"
+import BottomMenu from "./BottomMenu.jsx"
 
 let Game = require("../js/Game.js");
 let G = new Game();
 let loops = 0;
 // var PropTypes = React.PropTypes;
 
-require("../style/Entry.less")
+import "../style/Entry.less"
 
-const Entry = React.createClass({
+class Test extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            test: this.props.gameState
+        }
+    }
+    render() {
+        return (
+            <div id={`test`}>
+                <h3>Test</h3>
+                <h4>{this.state.test}</h4>
+            </div>
+        );
+    }
+}
 
-    getInitialState: function() {
-        return { };
-    },
+class Entry extends React.Component {
 
-    componentDidMount: function() {
+    constructor(props) {
+        super(props)
+        this.state = {
+            testVar: "hi"
+        }
+    }
+
+    componentDidMount() {
         setInterval(() => {
             G.Loop();
             this.setState({})
             // ++loops === 3 && this.setState({});
             // loops === 3 && (loops = 0)
         }, 2000);
-    },
+    }
 
-    upd: function() { this.setState({}) },
+    upd() { this.setState({}) }
 
-    render: function() {
+    render() {
         return (
-            <div id="component-entry">
-                <TopMenu G={G} triggerUpdate={this.upd}/>
-                <div id={`mid`}>
-                    <LeftMenu G={G} triggerUpdate={this.upd}/>
-                    <Main G={G} triggerUpdate={this.upd}/>
-                    <RightMenu G={G} triggerUpdate={this.upd}/>
+            <Router>
+                <div id="component-entry">
+                    {/*<Link to={"/"} className={"headerButton"}>Home</Link> */}
+                    {/*<Link to={"/test"} className={"headerButton"}>Test</Link> */}
+                    <Switch>
+                        <Route exact path={"/"}>
+                            <TopMenu G={G} triggerUpdate={this.upd.bind(this)}/>
+                            <div id={`mid`}>
+                                <LeftMenu G={G} triggerUpdate={this.upd.bind(this)}/>
+                                <Main G={G} triggerUpdate={this.upd.bind(this)}/>
+                                <RightMenu G={G} triggerUpdate={this.upd.bind(this)}/>
+                            </div>
+                            <BottomMenu G={G} triggerUpdate={this.upd.bind(this)}/>
+                        </Route>
+                        {/*<Route path={"/test"} render={() => <Test gameState={this.state.testVar}/>} /> */}
+                    </Switch>
                 </div>
-                <BottomMenu G={G} triggerUpdate={this.upd}/>
-            </div>
+            </Router>
         );
     }
 
-});
+};
+
+export default hot(Entry);
 
 DOM.render(<Entry />, document.getElementById("main"))

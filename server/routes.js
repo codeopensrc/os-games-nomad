@@ -1,18 +1,18 @@
 'use strict';
 
 const url = require("url");
+const db = require("./db.js");
 
-const { auth } = require("os-npm-util");
-
-const DEV_ENV = process.env.DEV_ENV === "true";
-const DEFAULT_AUTH_URL = `http://auth_${DEV_ENV?"dev":"main"}:80`
-auth.USE_AUTH = process.env.USE_AUTH === "true";
-auth.URL = process.env.AUTH_URL ? process.env.AUTH_URL : DEFAULT_AUTH_URL
+// Toggle initializing DB
+const enableDB = process.env.ENABLE_DB == "true"
+//TODO: Requires mongoose - see db.js
+//db.init(enableDB)
 
 const routes = function (req, res) {
 
     const respond = (response) => {
         response = response || "";
+        typeof(response) == "object" && res.setHeader("Content-Type", "application/json");
         res.writeHead(200, {'Access-Control-Allow-Origin' : '*'} );
         "err" === response && res.end("err") // TODO: We should really send a more explicit msg in future
         "err" !== response && res.end(JSON.stringify(response));
@@ -22,71 +22,50 @@ const routes = function (req, res) {
     let input = '';
     req.on('data', (buffer) => { input += buffer.toString(); })
 
-    req.on("end", () => {
+    req.on('end', () => {
         let parsed = input ? JSON.parse(input) : "";
 
         let requrl = url.parse(req.url).pathname
         let headers = req.headers;
 
         switch(requrl) {
-            case "/api/get/menu": auth.getMenu(headers, respond) //username / key
+            case "/api/get/sampletest": respond("I am a test response from the server")
             break;
-            case "/api/get/username": getUser(headers, "user", respond) //username / key
+            case "/api/get/mongoquery": sampleQuery("sample", res)
             break;
-            case "/api/post/logout": sendLogout(headers, respond) //username / key
+            case "/api/post/mongoupdate": sampleUpdate(parsed, "sample", res)
+            break;
+            case "/api/delete/mongodelete": sampleDelete(parsed, "sample", res)
             break;
             default: respond();
         }
     })
 }
 
+//  See docker-compose.yml and top of this file to enable mongo
+//  Requires db.init(true) to be run once before using these sample methods
+//  See db.js
+//db.retrieve: function (type, res)
+//db.retrieveOne: function (query, type, res)
+//db.submit: function (clientJson, type, res)
+//db.remove: function (clientJson, type, res)
 
-// TODO: Maybe start caching credentials for a minute at a time to prevent
-// multiple consecutive and frequent calls
-function checkAccess(headers, app, accessReq, callback) {
-    auth.checkAccess({headers, app, accessReq})
-    .then(({ status, hasPermissions }) => {
-        if(!status) {
-            console.log("checkAccess: User has incorrect authentication credentials");
-            return callback({status: false, data: "Incorrect credentials"})
-        }
-        if(!hasPermissions) {
-            console.log("checkAccess: User does not have required access for action");
-            return callback({status: false, data: "Insufficient priveleges"})
-        }
-        callback({status: true})
-    })
-    .catch((e) => {
-        console.log("ERR - ROUTES.CHECKACCESS:\n", e);
-        callback({status: false, data: "Server error"})
-    })
+function sampleQuery(mongocollection, res) {
+    console.log("Server received sample GET from client")
+    !db.isConnected && res.end(JSON.stringify("Received GET for mongoquery! See routes.sampleQuery for enabling DB"))
+    db.isConnected && db.retrieve(mongocollection, res)
 }
 
-function sendLogout(headers, respond) {
-    auth.logout({headers})
-    .then(({ status }) => {
-        if(!status) {
-            console.log("User has incorrect authentication credentials");
-            return respond({status: false, data: "Incorrect credentials"})
-        }
-        respond({status: true, data: "Success"})
-    })
-    .catch((e) => {
-        console.log("Bad:", e);
-        respond({status: false, data: "Server error"})
-    })
+function sampleUpdate(clientJson, mongocollection, res) {
+    console.log("Server received sample POST from client: ", clientJson)
+    !db.isConnected && res.end(JSON.stringify("Recieved POST for mongoupdate! See routes.sampleUpdate for enabling DB"))
+    db.isConnected && db.submit(clientJson, mongocollection, res)
 }
 
-function getUser(headers, accessReq, respond) {
-    checkAccess(headers, "base_react_app", accessReq, ({status, data}) => {
-        if(status) {
-            let email = headers["auth-email"]
-            respond({status: true, data: email})
-        }
-        else {
-            respond({status: false, data})
-        }
-    })
+function sampleDelete(clientJson, mongocollection, res) {
+    console.log("Server received sample DELETE from client: ", clientJson)
+    !db.isConnected && res.end(JSON.stringify("Recieved DELETE for mongodelete! See routes.sampleDelete for enabling DB"))
+    db.isConnected && db.remove(clientJson, mongocollection, res)
 }
 
 module.exports = routes;

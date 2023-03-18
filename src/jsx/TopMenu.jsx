@@ -1,15 +1,22 @@
 "use strict";
 
-const React = require('react');
-const DOM = require('react-dom');
+import React from 'react';
+import DOM from 'react-dom';
 // var PropTypes = React.PropTypes;
 
-require("../style/TopMenu.less");
+import "../style/TopMenu.less"
 
 
-const TopMenu = React.createClass({
+class TopMenu extends React.Component {
 
-    render: function() {
+    constructor(props) {
+        super(props)
+        this.state = { }
+    }
+
+    componentDidMount() { }
+
+    render() {
         return (
             <div id="component-topmenu">
                 <img src={`./images/Logo.png`} />
@@ -17,6 +24,6 @@ const TopMenu = React.createClass({
         );
     }
 
-});
+};
 
-module.exports = TopMenu;
+export { TopMenu as default };

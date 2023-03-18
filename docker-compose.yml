@@ -1,24 +1,56 @@
 version: "3.5"
+x-buildargs:
+    &default-buildargs
+    BUILD_BASE: base
+volumes:
+    temp_data:
 services:
+    dev:
+        image: nomad/app:dev
+        ports: 
+            - "7005:80"     # Vanilla watch `npm run watch`
+            - "7055:5055"   # Hot reloading server `npm run reloader`
+        build:
+            context: .
+            target: src
+            args: *default-buildargs
+        volumes:
+            - "${FOLDER_LOCATION:-.}/src:/home/app/src"
+            - "${FOLDER_LOCATION:-.}/server:/home/app/server"
+        env_file:
+            - "${COMPOSE_ENV_FILE:-.env.tmpl}"
+        environment:
+            DEV_DATABASE_URL_ORIGIN: "mongodb://mongodb:27017"
+            LOG_EVERY_NUM_CHECKS: 5
+            DEV_ENV: "true"
+            ENABLE_DB: "false"
+            LIVE_RELOADER_PORT: 5055
+            #PM2_TZ: "America/Los_Angeles"
+        ###! Uncomment to bring up the mongodb service
+        ###! Also set ENABLE_DB to "true" - See server/routes.js to adjust behavior
+        #depends_on:
+        #    - mongodb
+ 
+    #### Dev DB service ===
+    mongodb:
+        image: mongo:4.4.6
+        ports: ["27017:27017"]
+        restart: on-failure
+        environment:
+            MONGO_INITDB_DATABASE: "${MONGO_DB_NAME:-mongo}"
+        volumes:
+            - temp_data:/data/db
+    ###############################################################
+    ###############################################################
     main:
+        image: registry.codeopensrc.com/os/games/nomad/app:0.0.1
+        ports: ["7000:80"]
+        labels: ["com.codeopensrc.consul=nomad"]
         build:
             context: .
             target: prod
-        image: registry.codeopensrc.com/os/games/nomad/app:0.0.1
-        ports:
-            - "7010:80"
-        deploy:
-            replicas: 1
-            update_config:
-                parallelism: 1
-                delay: 10s
-                failure_action: rollback
-                max_failure_ratio: .3
-                order: start-first
-            restart_policy:
-                max_attempts: 3
-                condition: on-failure
-            placement:
-                preferences:
-                    - spread: node.labels.dc
-                    - spread: node.labels.az
+            args: *default-buildargs
+        env_file:
+            - "${COMPOSE_ENV_FILE:-.env.tmpl}"
+        environment:
+            ENABLE_DB:              "false"

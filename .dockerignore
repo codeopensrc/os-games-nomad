@@ -1,7 +1,20 @@
-node_modules/
-logs
 .git
-dumps
+.DS_Store
+.dockerignore
+.env*
+.gitignore
+.gitlab-ci.yml
 
 npm-debug.log
-.DS_Store
+Dockerfile
+build.sh
+
+**/*.vim
+**/*.swp
+**/*.swo
+**/*.md
+
+logs
+dumps
+node_modules/
+helmchart/
