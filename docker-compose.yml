@@ -43,7 +43,7 @@ services:
     ###############################################################
     ###############################################################
     main:
-        image: registry.codeopensrc.com/os/games/nomad/app:0.0.1
+        image: registry.codeopensrc.com/os/games/nomad/app:0.1.0
         ports: ["7000:80"]
         labels: ["com.codeopensrc.consul=nomad"]
         build:
