@@ -7,23 +7,15 @@ import DOM from 'react-dom';
 import "../style/TopMenu.less"
 
 
-class TopMenu extends React.Component {
+const TopMenu = function() {
+    //const [testVar, setTestVar] = useState("")
+    //const { G, triggerUpdate } = props
 
-    constructor(props) {
-        super(props)
-        this.state = { }
-    }
-
-    componentDidMount() { }
-
-    render() {
-        return (
-            <div id="component-topmenu">
-                <img src={`./images/Logo.png`} />
-            </div>
-        );
-    }
-
+    return (
+        <div id="component-topmenu">
+            <img src={`./images/Logo.png`} />
+        </div>
+    );
 };
 
 export { TopMenu as default };

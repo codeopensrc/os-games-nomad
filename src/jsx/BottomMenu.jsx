@@ -7,23 +7,15 @@ import DOM from 'react-dom';
 import "../style/BottomMenu.less"
 
 
-class BottomMenu extends React.Component {
+const BottomMenu = function() {
+    //const [testVar, setTestVar] = useState("")
+    //const { G, triggerUpdate } = props
 
-    constructor(props) {
-        super(props)
-        this.state = { }
-    }
-
-    componentDidMount() { }
-
-    render() {
-        return (
-            <div id="component-bottommenu">
-                Bottom
-            </div>
-        );
-    }
-
+    return (
+        <div id="component-bottommenu">
+            Bottom
+        </div>
+    );
 };
 
 export { BottomMenu as default };

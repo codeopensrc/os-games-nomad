@@ -1,48 +1,41 @@
 "use strict";
 
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import DOM from 'react-dom';
 
-let Game = require("../js/Game.js");
 // var PropTypes = React.PropTypes;
 
 import "../style/RightMenu.less"
 
-class RightMenu extends React.Component {
+const RightMenu = function(props) {
+    //const [testVar, setTestVar] = useState("")
+    const { G, triggerUpdate } = props
 
-    constructor(props) {
-        super(props)
-        this.state = { }
-        this.G = this.props.G;
+    const upgradeStructure = (mat) => {
+        let matsNeeded = G.calcStructureUpgrade(mat);
+        if(!G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
+        G.subtractAmount(matsNeeded)
+        G.upgradeStructure(mat)
+        triggerUpdate();
     }
 
-    componentDidMount() { }
-
-    upgradeStructure(mat) {
-        let matsNeeded = this.G.calcStructureUpgrade(mat);
-        if(!this.G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
-        this.G.subtractAmount(matsNeeded)
-        this.G.upgradeStructure(mat)
-        this.props.triggerUpdate();
+    const unlockTech = (tech) => {
+        G.unlockTech(tech)
+        // let matsNeeded = G.calcStructureUpgrade(mat);
+        // if(!G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
+        // G.subtractAmount(matsNeeded)
+        // G.upgradeStructure(mat)
+        triggerUpdate();
     }
 
-    unlockTech(tech) {
-        this.G.unlockTech(tech)
-        // let matsNeeded = this.G.calcStructureUpgrade(mat);
-        // if(!this.G.hasSufficientMats(matsNeeded)) { console.log("Not enough minerals"); return;  }
-        // this.G.subtractAmount(matsNeeded)
-        // this.G.upgradeStructure(mat)
-        this.props.triggerUpdate();
-    }
-
-    displayUpgradeCost(material) {
-        let mats = this.G.calcStructureUpgrade(material);
-        let calcTickReduction = this.G.Materials[material].calcTickReduction
+    const displayUpgradeCost = (material) => {
+        let mats = G.calcStructureUpgrade(material);
+        let calcTickReduction = G.Materials[material].calcTickReduction
 
         let cost = Object.keys(mats).map((mat) => {
 
-            let style = {name: {color: this.G.Materials[mat].Color} , all: {}}
-            if(this.G.Materials[mat].Amount < mats[mat]) { style.name = style.all = {color: "#ff4848"} }
+            let style = {name: {color: G.Materials[mat].Color} , all: {}}
+            if(G.Materials[mat].Amount < mats[mat]) { style.name = style.all = {color: "#ff4848"} }
 
             let costPerTick = Object.keys(calcTickReduction).length
                 ? (<span>-{calcTickReduction[mat]}/tick</span>)
@@ -50,7 +43,7 @@ class RightMenu extends React.Component {
 
             return (
                 <div key={mat} style={style.all}>
-                    <span style={style.name}>{mat}:</span> <span>{this.G.formatNum(mats[mat])}</span>
+                    <span style={style.name}>{mat}:</span> <span>{G.formatNum(mats[mat])}</span>
                     {costPerTick}
                 </div>
             )
@@ -63,25 +56,25 @@ class RightMenu extends React.Component {
         )
     }
 
-    renderStructures() {
-        return Object.keys(this.G.Materials).map((mat) => {
-            if(!this.G.Materials[mat].active) { return; }
-            let matsNeeded = this.G.calcStructureUpgrade(mat);
-            let buttonVisibility = this.G.hasSufficientMats(matsNeeded)
+    const renderStructures = () => {
+        return Object.keys(G.Materials).map((mat) => {
+            if(!G.Materials[mat].active) { return; }
+            let matsNeeded = G.calcStructureUpgrade(mat);
+            let buttonVisibility = G.hasSufficientMats(matsNeeded)
                 ? {opacity: 1}
                 : {opacity: 0}
             return (
-                <div key={this.G.Materials[mat].main} className="structureRow">
-                    <div className="structureName" style={{color: this.G.Materials[mat].color}}>{this.G.Materials[mat].main}:</div>
-                    <div className="structureLevel">{this.G.Materials[mat].level}</div>
-                    <button className="structureUpgrade" style={buttonVisibility} onClick={this.upgradeStructure.bind(this, mat)}>Upgrade</button>
-                    <div className="structureCostBox">Cost: {this.displayUpgradeCost(mat)}</div>
+                <div key={G.Materials[mat].main} className="structureRow">
+                    <div className="structureName" style={{color: G.Materials[mat].color}}>{G.Materials[mat].main}:</div>
+                    <div className="structureLevel">{G.Materials[mat].level}</div>
+                    <button className="structureUpgrade" style={buttonVisibility} onClick={() => upgradeStructure(mat)}>Upgrade</button>
+                    <div className="structureCostBox">Cost: {displayUpgradeCost(mat)}</div>
                 </div>
             )
         })
     }
 
-    activateTab(tab) {
+    const activateTab = (tab) => {
         let tabs = document.getElementsByClassName("rightmenuTab");
         for(let p in tabs) { tabs[p].style && (tabs[p].className = "rightmenuTab"); }
         document.getElementById(tab+"Tab").className += " selected";
@@ -91,36 +84,33 @@ class RightMenu extends React.Component {
         document.getElementById(tab).style.display = "block";
     }
 
-    renderPlayerUnlocks() {
-        return Object.keys(this.G.Player.TechTree).map((unlock, ind) =>
-            <button className={`playerUnlock`} key={ind} onClick={this.unlockTech.bind(this, unlock)}>Unlock {unlock}</button>
+    const renderPlayerUnlocks = () => {
+        return Object.keys(G.Player.TechTree).map((unlock, ind) =>
+            <button className={`playerUnlock`} key={ind} onClick={() => unlockTech(unlock)}>Unlock {unlock}</button>
         )
     }
 
-    render() {
 
-        let structures = this.renderStructures();
-        let unlocks = this.renderPlayerUnlocks();
+    let structures = renderStructures();
+    let unlocks = renderPlayerUnlocks();
 
-        return (
-            <div id="component-rightmenu">
-                <div id="rightmenuBar">
-                    <div id="structureTab" className="rightmenuTab selected" onClick={this.activateTab.bind(this, "structure")}>Structures</div>
-                    <div id="unlockTab" className="rightmenuTab" onClick={this.activateTab.bind(this, "unlock")}>Unlock</div>
+    return (
+        <div id="component-rightmenu">
+            <div id="rightmenuBar">
+                <div id="structureTab" className="rightmenuTab selected" onClick={() => activateTab("structure")}>Structures</div>
+                <div id="unlockTab" className="rightmenuTab" onClick={() => activateTab("unlock")}>Unlock</div>
+            </div>
+            <div id="rightMenu">
+                <div id="structure">
+                    {structures}
                 </div>
-                <div id="rightMenu">
-                    <div id="structure">
-                        {structures}
-                    </div>
-                    <div id="unlock">
-                        Unlock Tab
-                        {unlocks}
-                    </div>
+                <div id="unlock">
+                    Unlock Tab
+                    {unlocks}
                 </div>
             </div>
-        );
-    }
-
+        </div>
+    );
 };
 
 export { RightMenu as default };

@@ -16,6 +16,18 @@ html, body, #main {
     font-size: @mainFont;
     color: white;
     font-family: monospace;
+
+    #component-header {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        .headerButton {
+            display: flex;
+            justify-content: center;
+            width: 15vw;
+            z-index: 100;
+        }
+    }
     #mid {
         height: 87vh;
         display: flex;
