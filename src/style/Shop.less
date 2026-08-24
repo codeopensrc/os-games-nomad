@@ -1,0 +1,154 @@
+@import (once) "Vars.less";
+
+#shopPage {
+    #barterScreen {
+        width: 18em;
+        > div {
+            margin: 3px 8px;
+        }
+
+        #barterPrice {
+            font-size: @mainFont - 3px; 
+            .buy, .gamble { color: #ff6f6ffc; }
+            .sell { color: #53ff53; }
+            .coin {
+                width: 20px;
+                height: @mainFont;
+            }
+        }
+        #barterInputContainer {
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+            #barterNum {
+                height: @mainFont + 2px;
+                border-radius: 2px;
+                margin: 0 4px;
+                min-width: 28px;
+            }
+        }
+        .barterButton {
+            width: 4.8em;
+        }
+        .barterButton:nth-child(2) {
+            width: 2em;
+            align-self: center;
+        }
+        .description {
+            display: inline-block;
+            text-align: start;
+            > div:first-child {
+                font-size: @mainFont - 4px;
+                float: left;
+                margin: 0px 6px 0px 0px;
+            }
+            > div:nth-child(2) {
+                font-size: @mainFont - 5px;
+                font-weight: bold;
+                font-style: italic;
+            }
+        }
+        .green { color: #13dd02; }
+    }
+
+
+    #shopContainer {
+        display: flex;
+        flex-flow: column;
+        height: 97%;
+        width: 35%;
+
+        #fullheal {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+            font-size: @mainFont - 2px;
+            margin-bottom: 3px;
+            #fullhealCost {
+                display: flex;
+                flex-flow: row;
+                width: 10%;
+                .coin {
+                    width: 18px;
+                    height: @mainFont;
+                }
+            }
+            #fullhealText {
+                width: 75%;
+                display: flex;
+                flex-flow: row;
+                justify-content: center;
+                align-items: center;
+                margin-right: 30px;
+                .icon {
+                    margin: 2px 12px;
+                    height: 22px;
+                    width: 22px;
+                    background-size: 100%;
+                    background-image: url("staticons/maxhealth.png");
+                }
+            }
+        }
+        #shop, #den {
+            display: flex;
+            flex-flow: row wrap;
+            align-content: start;
+            height: 42%;
+            border: 1px solid black;
+            background: #3b376da1;
+            border-radius: 8px;
+            margin: 4px;
+            padding: 8px;
+            overflow-y: scroll;
+            .bagBorder();
+            .shopBackground();
+
+            .refreshTimer, .denTitle {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin: 10px;
+                text-shadow: 2px 2px 2px black;
+                background: #0000005e;
+            }
+        }
+        #den {
+            height: 56%;
+            background: #642d2d;
+            .denBackground();
+            .invItem {
+                padding: 0px 0px 12px 0px;
+                height: 6.3em;
+            }
+        }
+    }
+
+    //common has background image
+    #bag {
+        #quickBox {
+            #quickButton {
+                min-width: 8rem;
+            }
+        }
+    }
+    #bag, #shop, #den {
+        .price {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            bottom: 2px;
+            right: 8px;
+            font-size: @mainFont - 4px;
+            .coin {
+                width: 16px;
+                height: @mainFont - 2px;
+            }
+        }
+        .invItem {
+            height: 7.6em;
+            padding: 3px 0px 10px 0px;
+        }
+    }
+}

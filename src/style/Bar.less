@@ -1,0 +1,77 @@
+@import (once) "Vars.less";
+
+.barContainer {
+    display: flex;
+    position: relative;
+    align-self: center;
+    height: 25px;
+    width: 70%;
+    background: #0000007d;
+    border: 3px solid black;
+    border-radius: 10px;
+        
+    .barText {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        position: absolute;
+        width: 100%;
+        text-shadow: 2px 1px 3px black;
+    }
+    .bar {
+        display: flex;
+        transition: width 0.2s linear;
+        border-radius: 8px 6px 6px 8px;
+    }
+
+    &#playerHealth, &#enemyHealth, &#miniplayerHealth, &#minienemyHealth {
+        width: 95%;
+        .bar {
+            .healthBackground()
+        }
+    }
+    &#playerHealth, &#enemyHealth {
+        &.elitehealth {
+            border: 2px solid silver;
+            box-shadow: 0px 0px 5px 1px silver;
+        }
+        &.bosshealth {
+            border: 2px solid #7700a2;
+            box-shadow: 0px 0px 8px 3px #a521ff;
+        }
+    }
+    &#skill .bar {
+        background: #479d47;
+    }
+    &#exp .bar {
+        background: #b9b140;
+    }
+    &#playerAttack, &#enemyAttack {
+        width: 80%;
+        .bar {
+            background: #455697;
+        }
+    }
+    &#activity {
+        height: 19px;
+        width: 65%;
+        border: 2px solid black;
+        border-radius: 6px;
+        .barText {
+            color: white;
+            font-size: @mainFont - 2px;
+            text-shadow: 2px 2px 2px black;
+        }
+        .bar {
+            background: #b9b140;
+            border-radius: 6px 3px 3px 6px;
+        }
+    }
+
+    &#craft {
+        width: 60%;
+        .bar {
+            background: #455697;
+        }
+    }
+}

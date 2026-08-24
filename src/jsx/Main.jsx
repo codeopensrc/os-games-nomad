@@ -1,96 +1,66 @@
 "use strict";
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import DOM from 'react-dom';
 // var PropTypes = React.PropTypes;
+
+import Inventory from "./Inventory.jsx"
+import Battle from "./Battle.jsx"
+import Skill from "./Skill.jsx"
+import Craft from "./Craft.jsx"
+import Shop from "./Shop.jsx"
+import Dungeon from "./Dungeon.jsx"
 
 import "../style/Main.less"
 
 const Main = function(props) {
-    const [points, setPoints] = useState([])
-    const { G, triggerUpdate } = props
+    const { G, triggerUpdate, coreFns } = props
+
+    const [filters, setFilters] = useState({data: {}})
+
+    const updateFilters = (newFilters) => {
+        setFilters({data: newFilters})
+    }
 
     useEffect(() => {
-        createRandomizedPoints();
+        const foundFilters = localStorage.getItem("filters");
+        if(foundFilters) {
+            setFilters({data: JSON.parse(foundFilters)})
+        }
     }, [])
 
-    const calcDef = (level) => {
-        return level * (Math.random() * 2.3 + level).toFixed(2)
-    }
 
-    const calcHealth = (level) => {
-        return level * (Math.random() * 5.6 + level).toFixed(2)
-    }
+    let invDisplay = <Inventory G={G} triggerUpdate={triggerUpdate} coreFns={coreFns} filters={{...filters, update: updateFilters}}/>
+    let battleDisplay = <Battle G={G} triggerUpdate={triggerUpdate} coreFns={coreFns}/>
+    let dungeonDisplay = <Dungeon G={G} triggerUpdate={triggerUpdate} coreFns={coreFns}/>
+    let skillDisplay = <Skill G={G} triggerUpdate={triggerUpdate} coreFns={coreFns}/>
+    let craftDisplay = <Craft G={G} triggerUpdate={triggerUpdate} coreFns={coreFns}/>
+    let shopDisplay = <Shop G={G} triggerUpdate={triggerUpdate} coreFns={coreFns} filters={{...filters, update: updateFilters}}/>
 
-    const calcAttack = (level) => {
-        return level * (Math.random() * 1.4 + level).toFixed(2)
+    let displays = {
+        "Inventory": invDisplay,
+        "Battle": battleDisplay,
+        "Training": craftDisplay,
+        "Shop": shopDisplay,
+        "Dungeon": dungeonDisplay,
+        "Alchemy": craftDisplay,
+        "Farming": skillDisplay,
+        "Forestry": skillDisplay,
+        "Smithing": craftDisplay,
+        "Enchanting": craftDisplay,
+        "Cooking": craftDisplay,
+        "Prayer": craftDisplay,
+        "Inscription": craftDisplay,
+        "Jewelcrafting": craftDisplay,
     }
-
-    const createRandomizedPoints = () => {
-        let numPoints = 15
-        let points = [];
-        let maxX = 880;
-        let maxY = 770;
-        let createPoint = (index) => {
-            let resources = {}
-            Object.keys(G.Materials).forEach((mat) => {
-                let num = Math.ceil(Math.random() * (G.Materials[mat].TickAmount * 1.8) + (G.Materials[mat].TickAmount * 1.6))
-                resources[mat] = num
-            })
-            return {
-                index: index,
-                x: Math.floor(Math.random() * maxX),
-                y: Math.floor(Math.random() * maxY),
-                resources: resources,
-                taken: false,
-                defense: calcDef(index),
-                health: calcHealth(index)
-            }
-        }
-
-        for(let i = 0; i < numPoints; i++) {
-            let point = createPoint(i)
-            points.push(point)
-        }
-        setPoints(points)
-    }
-
-    const renderPoints = () => {
-        return points.map((point, i) => {
-            // let color = point.taken ? "#51ca72" : "#caab51"
-            let color = point.taken ? "taken" : "nottaken"
-            return (
-                <div key={i} style={{left: point.x, top: point.y}}
-                    className={`point ${color}`}
-                    onClick={() => attackPoint(point)}>
-                    {i}
-                </div>
-            )
-        })
-    }
-
-    const attackPoint = (point) => {
-        console.log("Index is: ", point.index);
-        console.log("Resrouces at this base are:", point.resources);
-        console.log(G.Player.Stats.Attack, point.defense);
-        if(G.Player.Stats.Attack < point.defense) {
-            return console.log("You're too weak");
-        }
-        if(G.Player.Stats.Attack >= point.defense) {
-            console.log("You're our new king");
-        }
-        if(!point.resources) { return console.log("Already Captured"); }
-        G.addAmount(point.resources)
-        point.resources = null;
-        point.taken = true;
-        triggerUpdate();
-    }
+    let activeDisplay = displays[G.Screen]
+        ? displays[G.Screen]
+        : G.Screen ? skillDisplay : null
 
     return (
         <div id="component-main">
-            <div id={`mainMap`}>
-                Mid
-                {renderPoints()}
+            <div id={`mainView`} className={`${G.Screen}`}>
+                {activeDisplay}
             </div>
         </div>
     );

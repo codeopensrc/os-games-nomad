@@ -1,0 +1,282 @@
+@import (once) "Vars.less";
+
+#craftPage {
+
+    #mainCraft {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-content: space-evenly;
+        width: 90%;
+        height: 85%;
+        border: 2px solid black;
+        border-radius: 8px;
+        margin: 10px auto;
+        background: #54626191;
+
+        #recipeList {
+            display: flex;
+            flex-flow: column;
+            height: 90%;
+            width: 27%;
+            border-radius: 8px;
+            padding-top: 5px;
+            margin: 10px 0 10px 10px;
+            background: #181818;
+            overflow-y: scroll;
+
+            .category {
+                display: flex;
+                flex-flow: column;
+                .categoryname {
+                    display: flex;
+                    margin: 4px 5px;
+                    color: #fffc49;
+                    &:hover {
+                        cursor: pointer;
+                        font-weight: bold;
+                    }
+                    .arrow {
+                        display: inline-block;
+                        height: 3px;
+                        width: 3px;
+                        border: solid white;
+                        border-width: 0 2px 2px 0;
+                        padding: 2px;
+                        &.right {
+                            margin: 6px 8px 0 0px;
+                            transform: rotate(-45deg);
+                            -webkit-transform: rotate(-45deg);
+                        }
+                        &.down {
+                            margin: 4px 6px 0 2px;
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                        }
+                    }
+                }
+            }
+            .category .itemname {
+                margin-left: 30px;
+            }
+            .itemname {
+                display: flex;
+                text-align: left;
+                margin: 2px 0px 2px 15px;
+
+                &.disabled {
+                    color: #ff5656;
+                }
+                &.inexperienced {
+                    opacity: 20%;
+                    color: white;
+                }
+                &:hover {
+                    cursor: pointer;
+                    font-weight: bold;
+                }
+            }
+        }
+        #selectedRecipe {
+            display: flex;
+            flex-flow: column;
+            align-items: start;
+            height: 90%;
+            width: 65%;
+            border-left: 0;
+            border-radius: 0 8px 8px 0;
+            padding-top: 5px;
+            margin: 10px 10px 10px 0;
+            #materialsContainer {
+                display: flex;
+                flex-flow: column;
+                justify-content: space-evenly;
+                width: 100%;
+                height: 17rem;
+                border-bottom: 2px solid black;
+                > div {
+                    text-shadow: 1px 2px 2px black;
+                    font-size: 1.3rem;
+                }
+                .disabled {
+                    color: #ff5e5e;
+                }
+                #recipeMaterials {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    width: 100%;
+                    flex: 4;
+
+                    .insufficient {
+                        background-color: #a25b5b;
+                    }
+                    .sufficient {
+                        background-color: #2f8f27;
+                    }
+                    .additionalRecipeMaterials {
+                        display: flex;
+                        flex-flow: column;
+                        max-width: 16.4rem;
+                        min-width: 12.3rem;
+                        max-height: 8rem;
+                        border-radius: 8px;
+                        background: #9cbaff80;;
+                        margin: 3px 0;
+                        border: 1px solid white;
+                        font-size: @mainFont - 3px;
+                        flex: 1;
+                        overflow-y: scroll;
+
+                        > div:nth-child(2) {
+                            display: flex;
+                            flex-flow: row wrap;
+                            justify-content: center;
+                            gap: 2px;
+                        }
+                        .materialIcon {
+                            width: 4.8rem;
+                            height: 3.8rem;
+                            padding: 5px 0px 0px 0px;
+                            margin: 2px;
+                            font-size: @mainFont - 8px;
+                            .invImage {
+                                width: 1.4rem;
+                                height: 1.3rem;
+                            }
+                            .itemCount {
+                                font-size: @mainFont - 7px;
+                            }
+                        }
+                        .selected {
+                            border: 2px solid white;
+                            margin: 1px;
+                            box-shadow: 2px 3px 2px black;
+                        }
+                    }
+                }
+            }
+            #craftedItem {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-evenly;
+                align-items: start;
+                width: 100%;
+                height: 45%;
+                margin: 10px;
+
+                #craftedItemText {
+                    display: flex;
+                    width: 65%;
+                    height: 30%;
+                    margin: 5px;
+                    background: #181818;
+                    padding: 6px;
+                    border-radius: 6px;
+                    text-align: start;
+                }
+                #craftedItemAction {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    height: 15%;
+                    width: 95%;
+
+                    #craftInputContainer {
+                        display: flex;
+                        flex-flow: row;
+                    }
+                }
+                .craftInfo {
+                    color: #dbdb4e;
+                    font-size: @mainFont - 1px;
+                    margin: 1px;
+                    &.craftTime {
+                        color: white;
+                        font-size: @mainFont - 4px;
+                    }
+                    &.exp {  }
+                }
+                #modifiableInventory {
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-content: start;
+                    height: 55%;
+                    width: 95%;
+                    border: 1px solid black;
+                    overflow-y: scroll;
+                    .bagBorder();
+                    .bagBackground();
+
+                    .invItem {
+                        //Rest in common.less
+                        width: 4.4rem;
+                        height: 3.8rem;
+                        font-size: @mainFont - 10px;
+                        padding: 4px 0px 0px 0px;
+                        border: 1px solid black;
+                        margin: 5px;
+                        text-shadow: 1px 1px 0px black;
+                        &.junk { .junk(@width: 1px, @text: title); }
+                        &.uncommon { .uncommon(@width: 1px, @text: title); }
+                        &.rare { .rare(@width: 1px, @text: title); }
+                        &.epic { .epic(@width: 1px, @text: title); }
+
+                        &.Equipped {
+                            box-shadow: 1px 1px 2px white;
+                            border-width: 2px;
+                        }
+                        .equippedText {
+                            top: 1px;
+                            position: absolute;
+                        }
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    #craftedItemIcon, .materialIcon {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 8em;
+        height: 6.6em;
+        padding: 12px 0px 0px 0px;
+        border: 1px solid black;
+        margin: 3px;
+        background: #3c3c3c;
+        border-radius: 8px;
+        font-size: @mainFont - 5px;
+        &:hover {
+            cursor: pointer;
+        }
+        &:focus {
+            outline: none;
+        }
+
+        .itemCount {
+            position: absolute;
+            top: 2px;
+            left: 5px;
+            font-size: @mainFont - 5px;
+        }
+        .invImage {
+            width: 3em;
+            height: 36px;
+            margin: 4px;
+            align-content: center;
+        }
+    }
+    #craftedItemIcon {
+        width: 8.5em;
+        border: 3px solid black;
+    }
+}

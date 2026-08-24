@@ -1,0 +1,198 @@
+@import (once) "Vars.less";
+
+#component-stats {
+    #gearStats, #itemStats {
+        display: flex;
+        flex-flow: column;
+        align-items: start;
+        width: 13.5rem;
+        position: absolute;
+        background: #6a6345e8;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 0 0 10px 0;
+        text-shadow: 2px 1px 3px black;
+        box-shadow: 6px 6px 6px black;
+        z-index: 5;
+        &.junk { .junk(@text: title) }
+        &.uncommon { .uncommon(@text: title) }
+        &.rare { .rare(@text: title) }
+        &.epic { .epic(@text: title) }
+        > div {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin: 1px 6px;
+        }
+        .stat {
+            font-size: @mainFont - 3px;
+            border-bottom: 1px dashed white;
+        }
+        .dps {
+            align-content: center;
+            font-weight: bold;
+            color: #ffe65b;
+            font-size: @mainFont - 2px; 
+        }
+        > div:first-child {
+            align-self: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: @mainFont + 3px; 
+            text-align: center;
+        }
+        .slot, .skill {
+            justify-content: center;
+            align-self: center;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        .runeforged {
+            justify-content: center;
+            align-self: center;
+            color: #0afddb;
+            text-shadow: 0px 0px 2px;
+            font-size: @mainFont - 6px;
+            margin: -3px 0 4px 0;
+        }
+        .green { color: #13dd02; }
+        .recipe {
+            display: flex;
+            flex-flow: column;
+            align-items: start;
+            width: 90%;
+            margin: 4px 8px 0;
+            .recipeItem {
+                font-size: @mainFont - 5px;
+                color: #8ee4ff;
+                text-align: left;  
+                margin-left: 10px;
+                text-indent: -10px;
+            }
+        }
+        .description {
+            display: flex;
+            flex-flow: column;
+            text-align: start;
+            width: 96%;
+            margin: 0;
+            padding: 5px;
+            > div:first-child {
+                background: #4d4527bd;
+                border-radius: 4px;
+                font-size: @mainFont - 5px;
+                padding: 5px;
+                font-weight: bold;
+                font-style: italic;
+                box-shadow: 2px 3px 3px #0000006e;
+            }
+        }
+        .bonus {
+            &.inactive {
+                color: grey;
+            }
+            &.active {
+                color: white;
+            }
+            div {
+                font-size: @mainFont - 6px;
+                margin-left: 0 !important;
+            }
+            span { margin-left: 6px; }
+        }
+        .enchant, .socket, .bonus, .crafted, .affix {
+            display: flex;
+            justify-content: left;
+            align-self: center;
+            min-width: 82%;
+            font-size: 13px;
+            margin: 5px 2px 0px;
+            padding: 3px;
+            border-radius: 4px;
+            box-shadow: 1px 2px 2px #0000006e;
+
+            background: #4d4527bd;
+            background-repeat: no-repeat;
+            background-position-x: 6px;
+            background-position-y: 1px;
+            background-size: 1.27rem;
+
+            > div:first-child {
+                display: flex;
+                margin-left: 31px;
+            }
+            .green {
+               margin-left: 8px; 
+            }
+        }
+        .socket {
+            background-size: 1.32rem;
+            background-position-x: 5px;
+            //TODO: Can use as any/prismatic or something
+            background-image: url("staticons/socket.png");
+            &.redsocket { background-image: url("staticons/uncut_red.png"); }
+            &.yellowsocket { background-image: url("staticons/uncut_yellow.png"); }
+            &.bluesocket { background-image: url("staticons/uncut_blue.png"); }
+            .gem {
+                width: 100%;
+                background-size: 1.3rem;
+                margin-left: 23px !important;
+                padding-left: 21px !important;
+                background-repeat: no-repeat;
+                background-position-x: -2px;
+                background-position-y: -1px;
+                &.redgem { background-image: url("staticons/cut_red.png"); }
+                &.bluegem { background-image: url("staticons/cut_blue.png"); }
+                &.yellowgem { background-image: url("staticons/cut_yellow.png"); }
+                &.greengem { background-image: url("staticons/cut_green.png"); }
+                &.purplegem { background-image: url("staticons/cut_purple.png"); }
+                span { color: #13dd02; }
+
+                > div { margin-right: 8px; }
+            }
+        }
+        .affix {
+            background-image: url("staticons/affix.png");
+            background-size: 1rem;
+            background-position-x: 8px;
+            background-position-y: 4px;
+            color: #afc8f7;
+            span {
+                margin-left: 6px;
+                font-weight: bold;
+            }
+            > div { margin-right: 8px; }
+        }
+        .enchant {
+            background-image: url("staticons/enchant.png");
+        }
+        .crafted {
+            background-image: url("staticons/crafted.png");
+            &.rune { background-position-y: 2px; }
+            &.rune_of_chance { background-image: url("staticons/rune_of_chance.png"); }
+            &.rune_of_enhancement { background-image: url("staticons/rune_of_enhancement.png"); }
+            &.rune_of_rarity { background-image: url("staticons/rune_of_rarity.png"); }
+            &.rune_of_striking { background-image: url("staticons/rune_of_striking.png"); }
+            &.rune_of_protection { background-image: url("staticons/rune_of_protection.png"); }
+            &.rune_of_fortitude { background-image: url("staticons/rune_of_fortitude.png"); }
+            &.rune_of_strength { background-image: url("staticons/rune_of_strength.png"); }
+            &.rune_of_agility { background-image: url("staticons/rune_of_agility.png"); }
+            &.rune_of_intellect { background-image: url("staticons/rune_of_intellect.png"); }
+        }
+        .extraItemButtons {
+            display: flex;
+            flex-flow: column;
+            button { margin: 4px }
+            .disabled { 
+                background: grey;
+                box-shadow: none;
+                border: none;
+                &:active { transform: none }
+            }
+        }
+    }
+    #itemStats {
+        width: 16em;
+    }
+}

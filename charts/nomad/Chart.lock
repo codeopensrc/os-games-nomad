@@ -1,9 +1,9 @@
 dependencies:
 - name: tpl
   repository: https://gitlab.codeopensrc.com/api/v4/projects/36/packages/helm/stable
-  version: 0.8.3
+  version: 0.10.3
 - name: tpl
   repository: https://gitlab.codeopensrc.com/api/v4/projects/36/packages/helm/stable
-  version: 0.8.3
-digest: sha256:6dfd421d034eedf9b3dc8fac522293bc2b0bf941b1fc5c331a20815c7298b7aa
-generated: "2023-04-05T21:17:37.629281445-07:00"
+  version: 0.10.3
+digest: sha256:95b9dfb043d60e85bf6de7a3029a29259284cef18335f92767f80eb1499488f7
+generated: "2026-08-24T01:15:11.232807069-07:00"

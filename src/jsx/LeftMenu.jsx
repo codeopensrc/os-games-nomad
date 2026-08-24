@@ -1,67 +1,66 @@
 "use strict";
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import DOM from 'react-dom';
-
-const itemColors = {
-    Steel: "#7d7a7a",
-    Wood: "#926738",
-    Stone: "#c5c5c5"
-}
 
 // var PropTypes = React.PropTypes;
 
 import "../style/LeftMenu.less"
 
 const LeftMenu = function(props) {
-    //const [testVar, setTestVar] = useState("")
-    let { G, triggerUpdate } = props
+    const { G, triggerUpdate, coreFns } = props
 
-    const renderInventory = () => {
-        return Object.keys(G.Materials).map((mat) => {
-            if(!G.Materials[mat].active) { return; }
-            // <div className="itemName" style={{color: G.Materials[mat].Color}}>{mat}</div>
-            let amountShown = G.formatNum(G.Materials[mat].Amount)
-            return (
-                <div key={mat} className="itemRow">
-
-                    <img className="itemName" src={`./images/${mat}.png`} />
-                    <div className="itemAmount">:{amountShown}</div>
-                    <div className="itemTick"><span>Per tick:</span><span>~{G.formatNum(G.Materials[mat].TickAmount)}</span></div>
-                </div>
-            )
-        })
+    const selectSkill = (skill) => {
+        coreFns.loadScreen(skill.name)
+    }
+    const selectInventory = () => {
+        coreFns.loadInventory()
+    }
+    const selectBattle = () => {
+        if(!G.Enemy) { return }
+        coreFns.loadBattle()
+    }
+    const selectShop = () => {
+        coreFns.loadShop()
+    }
+    const selectDungeon = () => {
+        coreFns.loadScreen("Dungeon")
     }
 
-    const renderTechTree = () => {
-        return Object.keys(G.Player.TechTree).map((tech, i) => {
-            return (
-                <div key={i} className="techTreeRow">
-                    <div className="techTreeName">{tech}</div>
-                    <div className="techTreeAmount">:{G.Player.TechTree[tech].unlocked.toString()}</div>
-                </div>
-            )
-        })
-    }
-
-
-    let inventory = renderInventory();
-    let techTree = renderTechTree();
+    const skillTree = Object.keys(G.Skills).map((skillname) => {
+        let skill = G.Skills[skillname]
+        let activeSkill = G.ActiveSkill == skillname ? "active" : ""
+        return (
+            <div key={skillname} onClick={()=>selectSkill(skill)} className={`skillTreeRow ${activeSkill}`}>
+                <img className={`skillImage ${skillname}`} alt={"Item"}/>
+                <div className={"skillTreeName"}>{skillname}:</div>
+                <div className={"skillTreeLevel"}>{skill.level.toString()}</div>
+            </div>
+        )
+    })
 
     return (
         <div id="component-leftmenu">
-            TechTree:
-            <br />
-            <div id={`techTree`}>
-                {techTree}
+            <div id={`inventoryButton`} className={"leftMainButton"} onClick={()=>selectInventory()}>
+                Inventory
+                <img id={`inventoryImage`} src={`./images/inventory.png`} alt={"Item"}/>
             </div>
-            <br />
-            Inventory:
-            <br />
-            <div id={`inventory`}>
-                {inventory}
+            <div id={`battleButton`} className={`leftMainButton ${G.Battling?"battling":""}`} onClick={()=>selectBattle()}>
+                Battle
+                <img id={`battleImage`} src={`./images/battle.png`} alt={"Item"}/>
             </div>
-
+            <div id={`dungeonButton`} className={"leftMainButton"} onClick={()=>selectDungeon()}>
+                Adventure
+                <img src={`./images/adventure.png`} alt={"Item"}/>
+            </div>
+            <div id={`shopButton`} className={"leftMainButton"} onClick={()=>selectShop()}>
+                Shop
+                <img id={`shopImage`} src={`./images/shop.png`} alt={"Item"}/>
+            </div>
+            <div id={`skillTree`}>
+                <div style={{textAlign: "center"}}>Skills:</div>
+                {skillTree}
+            </div>
         </div>
     );
 };

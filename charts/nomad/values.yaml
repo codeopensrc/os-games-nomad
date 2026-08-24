@@ -1,13 +1,17 @@
+.enable_db: &enable_db false
+
 app:
   enabled: true
   replicaCount: 1
   image:
     repository: registry.codeopensrc.com/os/games/nomad/app
+    tag: 0.1.1
   secretStringData:
-    MONGO_DB_NAME: "mongo"
+    MONGO_DB_NAME: "nomad"
     SAMPLE_SECRET: "SAMPLE_SECRET_ENV_VAR"
   configMapData:
     DEV_DATABASE_URL_ORIGIN: "mongodb://nomad-db:27017"
-    ENABLE_DB:               "false"
+    ENABLE_DB:            *enable_db
+    AUTH_URL:             ""
 db:
-  enabled: false
+  enabled: *enable_db

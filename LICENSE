@@ -1,21 +1,179 @@
-The MIT License (MIT)
+Private Use Source-Available License
 
-Copyright (c) 2016 Casey Jones
+Copyright © 2026 Casey Jones. All rights reserved.
+1. Definitions
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+“Software” means the source code, compiled code, configuration, documentation, and other materials expressly identified by the Copyright Holder as being covered by this License.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+“You” means the individual or legal entity exercising rights under this License.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+“Private Use” means using, running, studying, testing, or modifying the Software for your own personal, private, educational, research, or other non-public purposes. Private Use may include operating the Software or a Modified Version on a private server for yourself and a limited group of personally invited friends or other individuals, provided that:
+
+    access is limited to a reasonably small and specifically invited group;
+
+    the server or Software is not publicly advertised or made available to the general public;
+
+    access is not sold, rented, sublicensed, or otherwise provided in exchange for payment or other commercial consideration; and
+
+    the Software is not operated as a commercial service or business.
+
+Private Use does not include operating a publicly accessible server, public game service, matchmaking service, or other instance intended to provide access to the Software or a Modified Version to the general public.
+
+“Commercial Use” means use of the Software for the purpose of obtaining monetary compensation, generating revenue, promoting a commercial product or service, providing a commercial service, or otherwise using the Software in connection with a commercial enterprise.
+
+“Modified Version” means any work based upon or incorporating the Software or a substantial portion of the Software that has been changed, adapted, translated, or otherwise modified.
+
+“Distribute” means providing, transmitting, publishing, releasing, selling, sublicensing, or otherwise making a copy of the Software or a Modified Version available to another person or entity.
+
+“Publicly Hosted” means operating or making the Software or a Modified Version accessible over a network to members of the public or to an unrestricted group of third parties.
+
+“Copyright Holder” means Casey Jones, together with any other person or entity that owns copyright in the Software.
+2. Copyright and Scope of This License
+
+The Software is protected by copyright and other applicable intellectual-property laws.
+
+Except for the limited rights expressly granted by this License, the Copyright Holder retains all rights, title, and interest in and to the Software.
+
+This License applies only to material in the Software for which the Copyright Holder owns or controls the applicable rights. It does not grant rights to third-party software, libraries, frameworks, assets, or other materials that are subject to separate licenses.
+3. Permission for Private Use
+
+Subject to the terms and conditions of this License, the Copyright Holder grants You a worldwide, non-exclusive, royalty-free license to:
+
+    view and inspect the source code;
+
+    download and copy the Software for Private Use;
+
+    run the Software for Private Use;
+
+    fork the Software for Private Use;
+
+    modify the Software for Private Use;
+
+    create Modified Versions for Private Use; and
+
+    run Modified Versions for Private Use, including on a private server for yourself and a limited group of personally invited individuals as permitted by the definition of Private Use.
+
+You do not need to obtain additional permission from the Copyright Holder to exercise these rights, provided that your use remains within the scope of this License.
+4. Git Repository Visibility and Forking
+
+The Copyright Holder may make the Software available in a public source-code repository, including on GitHub or another source-code hosting platform.
+
+The public availability of the repository does not grant permission to publicly distribute, publicly host, commercially use, or otherwise exploit the Software beyond the rights expressly granted by this License.
+
+Likewise, the ability of a platform to technically allow You to fork, clone, download, mirror, or otherwise copy the repository does not itself grant additional copyright or licensing rights.
+
+You may fork or clone the repository for purposes permitted by this License, including Private Use. A fork or clone created for Private Use must remain subject to the restrictions of this License.
+
+A publicly visible repository, public fork, or publicly accessible copy is not, by itself, evidence that public distribution or public hosting is permitted.
+
+Where a hosting platform provides functionality that makes a repository or fork publicly visible or accessible, You remain responsible for ensuring that your use complies with this License.
+5. Prohibited Uses
+
+Without prior written permission from the Copyright Holder, You may not:
+
+    sell, rent, lease, sublicense, or otherwise commercially exploit the Software or a Modified Version;
+
+    publicly distribute the Software or a Modified Version;
+
+    publish the Software or a Modified Version for others to download or obtain;
+
+    publicly host the Software or a Modified Version;
+
+    operate a publicly accessible instance of the Software or a Modified Version;
+
+    provide the Software or a Modified Version to third parties as a service;
+
+    use the Software or a Modified Version to operate a commercial service;
+
+    incorporate the Software or a substantial portion of it into a product or service offered to third parties;
+
+    make the Software or a Modified Version available through a public website, public server, app store, public software repository, package registry, or similar distribution mechanism; or
+
+    represent the Software or a Modified Version as being the official software, game, service, or product of the Copyright Holder.
+
+These restrictions apply whether or not You charge money for the Software or Modified Version.
+6. Private Copies and Private Servers
+
+You may keep copies of the Software and Modified Versions for yourself and may operate them on computers, servers, or other devices under your control.
+
+You may also operate a private server for yourself and a limited group of personally invited friends or other individuals, provided that the server satisfies the requirements for Private Use.
+
+A private server does not become public merely because it is connected to the Internet. However, making a server generally accessible to the public, publicly advertising it, allowing unrestricted public registration, or operating it as a public game service constitutes Public Hosting and is not permitted under this License.
+7. No Public Forks or Public Distribution
+
+You may create and maintain forks and Modified Versions for Private Use.
+
+This License does not grant permission to publish, distribute, or publicly host such forks or Modified Versions.
+
+If You wish to publish or publicly host a fork or Modified Version, You must obtain a separate written license from the Copyright Holder.
+8. Commercial Licensing
+
+The Copyright Holder may, at its sole discretion, grant additional rights, including rights to commercially use, distribute, modify, publicly host, or otherwise exploit the Software.
+
+Any such additional rights must be granted in writing by the Copyright Holder.
+
+Nothing in this License prevents the Copyright Holder from offering separate commercial licenses to other individuals or entities.
+9. Third-Party Components
+
+The Software may incorporate, depend upon, link to, or distribute software, libraries, frameworks, or other materials created by third parties (“Third-Party Components”).
+
+Third-Party Components are not covered by this License to the extent that they are subject to separate copyright or license terms.
+
+Nothing in this License grants the Copyright Holder ownership of, or attempts to restrict, rights in Third-Party Components that are independently granted to You by their respective copyright holders.
+
+You must comply with the applicable license terms for Third-Party Components when exercising rights in those components.
+
+A list of known Third-Party Components and their applicable license information may be provided in THIRD-PARTY-LICENSES.md or another accompanying notice file.
+
+If a Third-Party Component is distributed under a license that grants rights broader than those granted by this License, those broader rights remain applicable to that Third-Party Component and are not restricted by this License.
+
+If a Third-Party Component requires attribution, copyright notices, license notices, source-code availability, or other notices as a condition of its license, those requirements remain applicable.
+
+Nothing in this License requires You to treat a Third-Party Component as being subject to this License merely because it is included with, linked to, or distributed alongside the Software.
+10. Trademarks and Branding
+
+This License does not grant permission to use any trademarks, service marks, logos, names, characters, artwork, branding, domain names, or other identifying materials belonging to the Copyright Holder.
+
+In particular, permission to privately use or modify the Software does not grant permission to represent a Modified Version as the official version of the Software.
+11. Attribution
+
+If You maintain a private copy or Modified Version, You must retain existing copyright notices and license notices contained in the Software.
+
+This requirement does not require You to publish or otherwise disclose your private modifications.
+12. No Warranty
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, OR NON-INFRINGEMENT.
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDER SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR RELATED TO THE SOFTWARE OR THE USE OF THE SOFTWARE.
+13. Termination
+
+Your rights under this License automatically terminate if You materially violate its terms.
+
+Upon termination, You must cease exercising the rights granted by this License and must stop using and running copies of the Software or Modified Versions that are no longer authorized by this License.
+
+Termination does not affect any rights or remedies that the Copyright Holder may have under applicable law.
+14. Reservation of Rights
+
+All rights not expressly granted by this License are reserved by the Copyright Holder.
+
+Nothing in this License shall be interpreted as granting permission to publicly distribute, publicly host, commercially exploit, sublicense, or otherwise make the Software available to third parties except as expressly permitted above.
+15. Governing Law
+
+This License shall be governed by the laws of the State of California, without regard to its conflict-of-law provisions.
+
+Any dispute arising under this License shall be subject to the jurisdiction of the courts located in the State of California, unless otherwise required by applicable law.
+16. Entire Agreement
+
+This License constitutes the entire agreement concerning the licensing of the Software and supersedes prior or contemporaneous agreements concerning the subject matter of this License.
+
+If any provision of this License is found to be unenforceable, the remaining provisions shall remain in effect to the maximum extent permitted by law.
+
+Software: Nomad Idle
+
+Copyright Holder: Casey Jones
+
+Copyright: © 2026 Casey Jones
+
+For commercial licensing or permission to publicly host or distribute the Software, contact:
+
+nomad.idle@gmail.com

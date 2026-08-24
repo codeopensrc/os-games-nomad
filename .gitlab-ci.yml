@@ -20,6 +20,7 @@ variables:
   SERVICE_NAME: ${CI_PROJECT_NAME}
   APP_CHART_DIR: charts/nomad
   SUBDOMAIN: nomad
+  AUTH_URL: ""
   MONGO_DB_NAME: citmp
   DEPLOY_SNIP_PROJECT_ID: 7
   DEPLOY_SNIP_ID: 33
@@ -29,6 +30,7 @@ variables:
   BUILDKITD_NAMESPACE: buildkitd
   DOCKERFILE: Dockerfile
   ENABLE_DB: "false"
+  CONSUL_ENABLED: "false"
   SKAFFOLD_CLI_OPTS: "--interactive=false --update-check=false"
   SAMPLE_SECRET: "secret_value"
   RELEASE:
@@ -157,7 +159,7 @@ default:
   - |
     ENABLE_CONSUL=false
     RECLAIM_POLICY=Delete
-    [[ $KUBE_NAMESPACE = "production" ]] && ENABLE_CONSUL=true
+    [[ $KUBE_NAMESPACE = "production" && $CONSUL_ENABLED = "true" ]] && ENABLE_CONSUL=true
     #[[ $KUBE_NAMESPACE = "production" ]] && RECLAIM_POLICY=Retain
     cat <<EOF > helm_ci_values.yaml
     app:
@@ -192,7 +194,11 @@ default:
         SAMPLE_SECRET: "${SAMPLE_SECRET}"
       configMapData:
         ENABLE_DB:            "${ENABLE_DB}"
+        AUTH_URL:             "${AUTH_URL}"
         DEV_DATABASE_URL_ORIGIN: "mongodb://${APPNAME}-db:27017"
+      pdb:
+        enabled: true
+        maxUnavailable: 1
     db:
       enabled: $ENABLE_DB
       ciLabels:
@@ -220,6 +226,7 @@ default:
 ##  and helm or argo for build/deploying the beta/prod version of the singular app
 .skaffold_deploy: &skaffold_deploy
   - '[[ -n $HELM_IMAGE_TAG ]] && sed -i "s|appVersion: .*|appVersion: \"${HELM_IMAGE_TAG}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - '[[ -n $HELM_IMAGE_TAG ]] && sed -i "s|tag: .*|tag: ${HELM_IMAGE_TAG}|" ${APP_CHART_DIR}/values.yaml'
   - skaffold config set --global collect-metrics false
   - *add_helm_repos
   - skaffold deploy -p ci --build-artifacts=tags.json ${SKAFFOLD_CLI_OPTS}
@@ -228,6 +235,7 @@ default:
 
 .deploy_helm_chart: &deploy_helm_chart
   - '[[ -n $HELM_IMAGE_TAG ]] && sed -i "s|appVersion: .*|appVersion: \"${HELM_IMAGE_TAG}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - '[[ -n $HELM_IMAGE_TAG ]] && sed -i "s|tag: .*|tag: ${HELM_IMAGE_TAG}|" ${APP_CHART_DIR}/values.yaml'
   - *add_helm_repos
   - helm dependency build ${APP_CHART_DIR}
   - helm upgrade $APPNAME ${APP_CHART_DIR} --install -f skaffold/ci-values.yaml -f helm_ci_values.yaml -n $KUBE_NAMESPACE --wait
@@ -482,8 +490,9 @@ commit_stable:
   - sed -i "s|${CURVER}-*.*|${CURVER}-${COMMIT_SHA}|" docker-compose.yml
   - 'sed -i "s|^version: ${CURCHART}|version: ${CHART_VERSION}|" ${APP_CHART_DIR}/Chart.yaml'
   - 'sed -i "s|appVersion: \"${CURVER}-*.*\"|appVersion: \"${CURVER}-${COMMIT_SHA}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - 'sed -i "s|tag: ${CURVER}-*.*|tag: ${CURVER}-${COMMIT_SHA}|" ${APP_CHART_DIR}/values.yaml'
   - helm dependency update ${APP_CHART_DIR}
-  - git add docker-compose.yml ${APP_CHART_DIR}/Chart.yaml ${APP_CHART_DIR}/Chart.lock
+  - git add docker-compose.yml ${APP_CHART_DIR}/Chart.yaml ${APP_CHART_DIR}/values.yaml ${APP_CHART_DIR}/Chart.lock
   - *publish_helm_charts
   - git config --global user.name "${GITLAB_USER_NAME}"
   - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -539,8 +548,9 @@ commit_version:
   - sed -i "s|${CURVER}-*.*|${VERSION}|" docker-compose.yml
   - 'sed -i "s|^version: ${CURCHART}|version: ${CHART_VERSION}|" ${APP_CHART_DIR}/Chart.yaml'
   - 'sed -i "s|appVersion: \"${CURVER}-*.*\"|appVersion: \"${VERSION}\"|" ${APP_CHART_DIR}/Chart.yaml'
+  - 'sed -i "s|tag: ${CURVER}-*.*|tag: ${VERSION}|" ${APP_CHART_DIR}/values.yaml'
   - helm dependency update ${APP_CHART_DIR}
-  - git add docker-compose.yml ${APP_CHART_DIR}/Chart.yaml ${APP_CHART_DIR}/Chart.lock
+  - git add docker-compose.yml ${APP_CHART_DIR}/Chart.yaml ${APP_CHART_DIR}/values.yaml ${APP_CHART_DIR}/Chart.lock
   - *publish_helm_charts
   - git config --global user.name "${GITLAB_USER_NAME}"
   - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -588,10 +598,10 @@ deploy_production:
   - kubernetes_prod
   variables:
     KUBE_NAMESPACE: production
+    #AUTH_URL: ${CI_SERVER_URL}
   script:
   - echo "$KUBE_NAMESPACE"
   - APPNAME=${SERVICE_NAME}
-  ## Need HELM_IMAGE_TAG for 'image.tag' otherwise it falls back to 'tpl' chart's appVersion
   - HELM_IMAGE_TAG=$(grep ^appVersion ./${APP_CHART_DIR}/Chart.yaml | awk '{print $2}' | tr -d '"')
   - 'INGRESS_HOST=${SUBDOMAIN}.${SERVER_DOMAIN}'
   - 'URL=https://${INGRESS_HOST}'

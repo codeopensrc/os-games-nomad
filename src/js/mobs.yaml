@@ -1,0 +1,351 @@
+dungeons:
+- name: forgotten_cellar
+  mobs: ["cow", "boar", "vulture", "farmhand", "farmer"]
+  #mobs: ["farmer"]
+  lootTable: {
+    copper_dagger: 9, copper_sword: 15, copper_mace: 7, copper_boots: 10, copper_helm: 15, copper_chest: 7,
+    bronze_dagger: 0.30, bronze_sword: 0.45, bronze_mace: 0.40, bronze_boots: 0.35, bronze_helm: 0.45, bronze_chest: 0.25, 
+    golden_goblet: 0.5, stat_rune_1: 10.1, misc_rune_1: 8,
+    orb_of_choice: 2.2, orb_of_absolute: 2.2, orb_of_jewelry: 1.60,
+    # ~20.1% rune  ~2.4% enchant orb ~1.8% jewel
+  }
+- name: eerie_caverns
+  mobs: ["bat", "wolf", "bear", "imp", "goblin"]
+  #mobs: ["goblin"]
+  lootTable: {
+    bronze_dagger: 8, bronze_sword: 12, bronze_mace: 5, bronze_boots: 8, bronze_helm: 11, bronze_chest: 5,
+    iron_dagger: 0.30, iron_sword: 0.45, iron_mace: 0.40, iron_boots: 0.35, iron_helm: 0.45, iron_chest: 0.25,
+    simple_ring: 2.5, simple_necklace: 2.5,
+    copper_boots: 2.5, copper_dagger: 2.5, copper_sword: 3.5, copper_chest: 2, copper_helm: 3.5,
+    golden_goblet: 1.0, stat_rune_1: 15, misc_rune_1: 11,
+    orb_of_choice: 3.6, orb_of_absolute: 3.6, orb_of_jewelry: 3.05,
+    # ~24.2% rune  ~3.4% enchant orb ~2.8% jewel
+  }
+- name: bandit_stronghold
+  mobs: ["gambler", "rogue", "bandit", "bruiser", "soldier"]
+  #mobs: ["soldier"]
+  lootTable: {
+    iron_dagger: 9, iron_sword: 13, iron_mace: 7, iron_boots: 11, iron_helm: 13, iron_chest: 7,
+    steel_dagger: 0.30, steel_sword: 0.45, steel_mace: 0.40, steel_boots: 0.35, steel_helm: 0.45, steel_chest: 0.25,
+    nice_ring: 2.5, nice_necklace: 2.5, simple_ring: 1, simple_necklace: 1, 
+    bronze_dagger: 2.5, bronze_sword: 3.3, bronze_mace: 3.0, bronze_boots: 3.0, bronze_helm: 3.2, bronze_chest: 4,
+    copper_dagger: 0.7, copper_sword: 0.8, copper_mace: 0.8, copper_boots: 0.8, copper_helm: 0.9, copper_chest: 1.1,
+    golden_goblet: 1.2, stat_rune_1: 25.5, misc_rune_1: 20.5,
+    orb_of_choice: 7.3, orb_of_absolute: 7.3, orb_of_jewelry: 6.5,
+    # ~28.5% rune  ~4.5% enchant orb ~4.0% jewel
+  }
+- name: catacombs
+  mobs: ["monk", "priest", "paladin", "crusader", "templar"]
+  #mobs: ["templar"]
+  lootTable: { 
+    steel_dagger: 9, steel_sword: 13, steel_mace: 7, steel_boots: 11, steel_helm: 13, steel_chest: 7,
+    mithril_dagger: 0.30, mithril_sword: 0.45, mithril_mace: 0.40, mithril_boots: 0.35, mithril_helm: 0.45, mithril_chest: 0.25,
+    fancy_ring: 2.5, fancy_necklace: 2.5, nice_ring: 1, nice_necklace: 1, simple_ring: 0.3, simple_necklace: 0.3, 
+    iron_dagger: 2.5, iron_sword: 3.3, iron_mace: 3.0, iron_boots: 3.0, iron_helm: 3.2, iron_chest: 4,
+    bronze_dagger: 0.7, bronze_sword: 0.8, bronze_mace: 0.8, bronze_boots: 0.8, bronze_helm: 0.9, bronze_chest: 1.1,
+    golden_goblet: 1.2, stat_rune_2: 18.5, misc_rune_2: 14,
+    orb_of_choice: 8.8, orb_of_absolute: 8.8, orb_of_jewelry: 8.0,
+    # ~21.2% rune2  ~5.7% enchant orb ~5.2% jewel
+  }
+- name: crypt
+  mobs: ["skeleton", "zombie", "ghoul", "banshee", "lich"]
+  #mobs: ["lich"]
+  lootTable: { 
+    mithril_dagger: 9, mithril_sword: 13, mithril_mace: 7, mithril_boots: 11, mithril_helm: 13, mithril_chest: 7,
+    #mithril_dagger: 0.30, mithril_sword: 0.45, mithril_mace: 0.40, mithril_boots: 0.35, mithril_helm: 0.45, mithril_chest: 0.25,
+    fancy_ring: 2.5, fancy_necklace: 2.5, nice_ring: 1, nice_necklace: 1, simple_ring: 0.3, simple_necklace: 0.3, 
+    steel_dagger: 2.5, steel_sword: 3.3, steel_mace: 3.0, steel_boots: 3.0, steel_helm: 3.2, steel_chest: 4,
+    iron_dagger: 0.7, bronze_sword: 0.8, bronze_mace: 0.8, bronze_boots: 0.8, bronze_helm: 0.9, bronze_chest: 1.1,
+    golden_goblet: 1.2, stat_rune_2: 25, misc_rune_2: 18.6,
+    orb_of_choice: 11.7, orb_of_absolute: 11.7, orb_of_jewelry: 10.9,
+    recipe_smithing_vol8: 15, recipe_smithing_vol9: 15, 
+    # ~25.5% rune2  ~6.9% enchant orb ~6.4% jewel
+  }
+#- name: castle_tower
+#  mobs: ["archer", "footman", "knight", "mage", "royal_guard", "king"]
+#  #mobs: ["king"]
+#  lootTable: { }
+
+
+zones:
+- name: fields
+  mobs: ["cow", "boar", "vulture", "farmhand", "farmer"]
+- name: cave
+  mobs: ["bat", "wolf", "bear", "imp", "goblin"]
+- name: bandit_camp
+  mobs: ["gambler", "rogue", "bandit", "bruiser", "soldier"]
+- name: temple
+  mobs: ["monk", "priest", "paladin", "crusader", "templar"]
+- name: graveyard
+  mobs: ["skeleton", "zombie", "ghoul", "banshee", "lich"]
+#- name: castle
+#  mobs: ["archer", "footman", "knight", "mage", "royal_guard"]
+
+mobs:
+#####
+## fields
+#####  copper
+- name: cow
+  stats: { health: 20,  exp: 1,  attack: 4,  defense: 4,  attackSpeed: 4 }
+  lootTable: { meat: 35, bone: 30, fang: 15, horn: 20, light_fur: 30, light_hide: 33,
+    recipe_smithing_vol1: 4.5,
+    recipe_cooking_vol1: 4.5, }
+- name: boar
+  stats: { health: 25, exp: 3,  attack: 6,  defense: 4,  attackSpeed: 4 }
+  lootTable: { meat: 30, bone: 30, fang: 25, horn: 35, light_fur: 15, light_hide: 13,
+    recipe_alchemy_vol1: 4.5,
+    recipe_enchanting_vol1: 4.5, }
+- name: vulture
+  stats: { health: 31, exp: 5,  attack: 7,  defense: 5,  attackSpeed: 3 }
+  lootTable: { meat: 20, bone: 60, horn: 25, light_hide: 23, beak: 30,
+    recipe_prayer_vol1: 4.5,
+    recipe_inscription_vol1: 4.5, }
+- name: farmhand
+  stats: { health: 39, exp: 8,  attack: 10,  defense: 5,  attackSpeed: 2.5 }
+  lootTable: {bone: 15, tomato: 8, carrot: 10, berry: 8, pumpkin: 5, cloth: 35,
+    recipe_jewelcrafting_vol1: 4.5,
+    recipe_smithing_vol1: 4.5,
+    recipe_cooking_vol1: 4.5,
+    recipe_alchemy_vol1: 4.5, }
+- name: farmer
+  stats: { health: 55, exp: 12, attack: 12,  defense: 7,  attackSpeed: 4 }
+  lootTable: { bone: 15, wheat: 11, corn: 18, cloth: 25, weapon_fragments: 30,
+    recipe_enchanting_vol1: 4.5,
+    recipe_prayer_vol1: 4.5,
+    recipe_inscription_vol1: 4.5,
+    recipe_jewelcrafting_vol1: 4.5,
+    forgotten_cellar_key: 4, cave_key: 0.5, }
+#####
+## cave
+#####  bronze
+- name: bat
+  stats: { health: 80, exp: 7,  attack: 13,  defense: 6,  attackSpeed: 3 }
+  lootTable: {meat: 15, large_bone: 25, fang: 20, horn: 20, light_hide: 9, claw: 20, wing: 20, heavy_fur: 30,
+    recipe_smithing_vol2: 4.5,
+    recipe_cooking_vol2: 4.5, }
+- name: wolf
+  stats: { health: 85, exp: 10, attack: 15, defense: 8,  attackSpeed: 3 }
+  lootTable: {meat: 25, large_bone: 25, fang: 33, claw: 15, heavy_fur: 36, light_hide: 18,
+    recipe_alchemy_vol2: 4.5,
+    recipe_enchanting_vol2: 4.5, }
+- name: bear
+  stats: { health: 108, exp: 15, attack: 18, defense: 12,  attackSpeed: 4 }
+  lootTable: {meat: 35, large_bone: 30, fang: 14, claw: 35, heavy_fur: 32, heavy_hide: 18,
+    recipe_prayer_vol2: 4.5,
+    recipe_inscription_vol2: 4.5, }
+- name: imp
+  stats: { health: 130, exp: 18, attack: 19, defense: 9,  attackSpeed: 3 }
+  lootTable: {meat: 15, large_bone: 15, light_fur: 20, horn: 30, light_hide: 18, claw: 25, wing: 35,
+    recipe_jewelcrafting_vol2: 4.5,
+    recipe_smithing_vol2: 4.5,
+    recipe_cooking_vol2: 4.5,
+    recipe_alchemy_vol2: 4.5, }
+- name: goblin
+  stats: { health: 155, exp: 20, attack: 22, defense: 13,  attackSpeed: 3 }
+  lootTable: {large_bone: 25, fang: 25, horn: 15, heavy_fur: 20, heavy_hide: 26, weapon_fragments_2: 30,
+    recipe_enchanting_vol2: 4.5,
+    recipe_prayer_vol2: 4.5,
+    recipe_inscription_vol2: 4.5,
+    recipe_jewelcrafting_vol2: 4.5,
+    eerie_caverns_key: 4, bandit_camp_key: 0.5 }
+#####
+## bandit_camp
+#####  iron
+- name: gambler
+  stats: { health: 100, exp: 17, attack: 16, defense: 11,  attackSpeed: 5 }
+  lootTable: { bone: 10, large_bone: 20, thick_bone: 20, strange_powder: 20, leather_scraps: 35, metal_scraps: 15, boot_scraps: 35,
+    recipe_alchemy_vol3: 4.5, recipe_smithing_vol3: 4.5, recipe_prayer_vol3: 4.5,
+    recipe_enchanting_vol3: 4.5, recipe_inscription_vol3: 4.5, recipe_jewelcrafting_vol3: 4.5 }
+- name: bandit
+  stats: { health: 110, exp: 19, attack: 19, defense: 14,  attackSpeed: 4 }
+  lootTable: { bone: 10, large_bone: 20, thick_bone: 20, strange_powder: 20, leather_scraps: 25, metal_scraps: 25, boot_scraps: 25,
+    recipe_alchemy_vol3: 4.5, recipe_smithing_vol3: 4.5, recipe_prayer_vol3: 4.5,
+    recipe_enchanting_vol3: 4.5, recipe_inscription_vol3: 4.5, recipe_jewelcrafting_vol3: 4.5 }
+- name: rogue
+  stats: { health: 125, exp: 21, attack: 22, defense: 13,  attackSpeed: 3 }
+  lootTable: { bone: 10, large_bone: 20, thick_bone: 20, strange_powder: 20, leather_scraps: 25, metal_scraps: 30, helmet_scraps: 35,
+    recipe_alchemy_vol3: 4.5, recipe_smithing_vol3: 4.5, recipe_prayer_vol3: 4.5,
+    recipe_enchanting_vol3: 4.5, recipe_inscription_vol3: 4.5, recipe_jewelcrafting_vol3: 4.5, }
+- name: bruiser
+  stats: { health: 145, exp: 23, attack: 25, defense: 15,  attackSpeed: 6 }
+  lootTable: { large_bone: 20, thick_bone: 20, strange_powder: 20, helmet_scraps: 35, armor_scraps: 45, boot_scraps: 20,
+    recipe_alchemy_vol3: 4.5, recipe_prayer_vol3: 4.5, recipe_cooking_vol3: 4.5,
+    recipe_enchanting_vol3: 4.5, recipe_inscription_vol3: 4.5, recipe_enchanting_vol4: 4.5, }
+- name: soldier
+  stats: { health: 160, exp: 26, attack: 27, defense: 18, attackSpeed: 4 }
+  lootTable: {large_bone: 20, thick_bone: 20, strange_powder: 20, helmet_scraps: 30, armor_scraps: 40, metal_scraps: 35, weapon_fragments_3: 30,
+    recipe_alchemy_vol4: 4.5, recipe_smithing_vol3: 4.5, recipe_jewelcrafting_vol3: 4.5, recipe_cooking_vol3: 4.5,
+    recipe_enchanting_vol3: 4.5, recipe_inscription_vol4: 4.5, recipe_enchanting_vol4: 4.5,
+    bandit_stronghold_key: 4, temple_key: 0.5 }
+#####
+## temple
+#####  steel
+- name: monk
+  stats: { health: 220, exp: 1, attack: 30, defense: 22,  attackSpeed: 5 }
+  lootTable: { thick_bone: 15, hardened_bone: 25, strange_powder: 35, magic_cloth: 20, armor_scraps: 10, boot_scraps: 30,
+    recipe_alchemy_vol4: 4.5, recipe_cooking_vol3: 4.5,
+    recipe_smithing_vol4: 4.5, recipe_prayer_vol4: 4.5,
+    recipe_enchanting_vol4: 4.5, recipe_jewelcrafting_vol4: 4.5,
+    recipe_inscription_vol4: 4.5,
+  }
+- name: priest
+  stats: { health: 245, exp: 1, attack: 34, defense: 22,  attackSpeed: 4 }
+  lootTable: { thick_bone: 15, hardened_bone: 25, strange_powder: 35, magic_cloth: 20, metal_scraps: 20, boot_scraps: 20,
+    recipe_alchemy_vol4: 4.5, recipe_cooking_vol3: 4.5,
+    recipe_smithing_vol4: 4.5, recipe_prayer_vol4: 4.5,
+    recipe_enchanting_vol4: 4.5, recipe_jewelcrafting_vol4: 4.5,
+    recipe_inscription_vol4: 4.5,
+  }
+- name: templar
+  stats: { health: 225, exp: 1, attack: 35, defense: 28,  attackSpeed: 3 }
+  lootTable: { thick_bone: 15, hardened_bone: 25, strange_powder: 25, magic_cloth: 20, metal_scraps: 35, helmet_scraps: 30,
+    recipe_alchemy_vol4: 4.5,
+    recipe_smithing_vol4: 4.5, recipe_prayer_vol4: 4.5,
+    recipe_enchanting_vol4: 4.5, recipe_jewelcrafting_vol4: 4.5,
+    recipe_inscription_vol4: 4.5,
+  }
+- name: crusader
+  stats: { health: 250, exp: 1, attack: 38, defense: 30,  attackSpeed: 6 }
+  lootTable: { hardened_bone: 35, strange_powder: 30, magic_cloth: 35, helmet_scraps: 30, armor_scraps: 40, metal_scraps: 25,
+    recipe_alchemy_vol5: 4.5, recipe_prayer_vol4: 4.5,
+    recipe_smithing_vol4: 4.5, recipe_smithing_vol5: 4.5,
+    recipe_enchanting_vol4: 4.5,
+    recipe_enchanting_vol5: 4.5, recipe_jewelcrafting_vol4: 4.5,
+    recipe_inscription_vol5: 4.5,
+  }
+- name: paladin
+  stats: { health: 300, exp: 1, attack: 42, defense: 34, attackSpeed: 4 }
+  lootTable: { hardened_bone: 35, strange_powder: 25, magic_cloth: 35, helmet_scraps: 30, armor_scraps: 35, metal_scraps: 35,  weapon_fragments_4: 30,
+    recipe_alchemy_vol5: 4.5,
+    recipe_smithing_vol4: 4.5, recipe_smithing_vol5: 4.5,
+    recipe_enchanting_vol4: 4.5,
+    recipe_enchanting_vol5: 4.5, recipe_jewelcrafting_vol4: 4.5,
+    recipe_inscription_vol5: 4.5,
+    catacombs_key: 4, graveyard_key: 0.5,
+  }
+#####
+## graveyard
+#####  mithril
+- name: skeleton
+  stats: { health: 420, exp: 1, attack: 50, defense: 32,  attackSpeed: 5 }
+  lootTable: { hardened_bone: 15, unholy_bone: 25, ghastly_substance: 35, magic_cloth: 20,
+    armor_scraps: 10, boot_scraps: 30,
+    recipe_alchemy_vol5: 4.5,
+    recipe_smithing_vol6: 4.5, 
+    recipe_cooking_vol4: 4.5,
+    recipe_inscription_vol6: 4.5,
+    recipe_jewelcrafting_vol5: 4.5,
+    recipe_enchanting_vol6: 4.5,
+  }
+- name: zombie
+  stats: { health: 485, exp: 1, attack: 57, defense: 34,  attackSpeed: 4 }
+  lootTable: { hardened_bone: 15, unholy_bone: 25, ghastly_substance: 35, magic_cloth: 20,
+    metal_scraps: 20, boot_scraps: 20,
+    recipe_alchemy_vol6: 4.5,
+    recipe_smithing_vol6: 4.5, 
+    recipe_cooking_vol4: 4.5,
+    recipe_inscription_vol6: 4.5,
+    recipe_jewelcrafting_vol5: 4.5,
+    recipe_enchanting_vol6: 4.5,
+  }
+- name: ghoul
+  stats: { health: 555, exp: 1, attack: 61, defense: 40,  attackSpeed: 3 }
+  lootTable: { hardened_bone: 15, unholy_bone: 25, ghastly_substance: 30, magic_cloth: 15,
+    metal_scraps: 35, helmet_scraps: 30,
+    recipe_alchemy_vol6: 4.5,
+    recipe_smithing_vol6: 4.5, 
+    recipe_smithing_vol7: 4.5, 
+    recipe_cooking_vol4: 4.5,
+    recipe_prayer_vol5: 4.5,
+    recipe_inscription_vol6: 4.5,
+    recipe_jewelcrafting_vol5: 4.5,
+    recipe_enchanting_vol6: 4.5,
+  }
+- name: banshee
+  stats: { health: 690, exp: 1, attack: 65, defense: 43,  attackSpeed: 6 }
+  lootTable: { unholy_bone: 35, ghastly_substance: 35, magic_cloth: 25,
+    helmet_scraps: 30, armor_scraps: 40, metal_scraps: 25,
+    recipe_alchemy_vol6: 4.5,
+    recipe_smithing_vol7: 4.5, 
+    recipe_prayer_vol5: 4.5,
+    recipe_inscription_vol7: 4.5,
+    recipe_jewelcrafting_vol6: 4.5,
+    recipe_enchanting_vol7: 4.5,
+  }
+- name: lich
+  stats: { health: 850, exp: 1, attack: 72, defense: 50, attackSpeed: 4 }
+  lootTable: { unholy_bone: 35, ghastly_substance: 35, magic_cloth: 25,
+    helmet_scraps: 30, armor_scraps: 35, metal_scraps: 35,  weapon_fragments_4: 30,
+    recipe_alchemy_vol5: 4.5,
+    recipe_smithing_vol7: 4.5, 
+    recipe_prayer_vol5: 4.5,
+    recipe_inscription_vol7: 4.5,
+    recipe_jewelcrafting_vol6: 4.5,
+    recipe_enchanting_vol7: 4.5,
+    crypt_key: 4, castle_key: 0.5,
+  }
+
+#####
+## castle
+#####  ???
+- name: archer
+  stats: { health: 420, exp: 1, attack: 50, defense: 32,  attackSpeed: 5 }
+  lootTable: { thick_bone: 15, hardened_bone: 25, ghastly_substance: 35, magic_cloth: 20,
+    armor_scraps: 10, boot_scraps: 30,
+    #recipe_alchemy_vol5: 4.5,
+    #recipe_smithing_vol6: 4.5, 
+    #recipe_cooking_vol4: 4.5,
+    #recipe_inscription_vol6: 4.5,
+    #recipe_jewelcrafting_vol5: 4.5,
+    #recipe_enchanting_vol6: 4.5,
+  }
+- name: footman
+  stats: { health: 485, exp: 1, attack: 57, defense: 34,  attackSpeed: 4 }
+  lootTable: { thick_bone: 15, hardened_bone: 25, ghastly_substance: 35, magic_cloth: 20,
+    metal_scraps: 20, boot_scraps: 20,
+    #recipe_alchemy_vol6: 4.5,
+    #recipe_smithing_vol6: 4.5, 
+    #recipe_cooking_vol4: 4.5,
+    #recipe_inscription_vol6: 4.5,
+    #recipe_jewelcrafting_vol5: 4.5,
+    #recipe_enchanting_vol6: 4.5,
+  }
+- name: knight
+  stats: { health: 555, exp: 1, attack: 61, defense: 40,  attackSpeed: 3 }
+  lootTable: { thick_bone: 15, hardened_bone: 25, ghastly_substance: 30, magic_cloth: 15,
+    metal_scraps: 35, helmet_scraps: 30,
+    #recipe_alchemy_vol6: 4.5,
+    #recipe_smithing_vol6: 4.5, 
+    #recipe_smithing_vol7: 4.5, 
+    #recipe_cooking_vol4: 4.5,
+    #recipe_prayer_vol5: 4.5,
+    #recipe_inscription_vol6: 4.5,
+    #recipe_jewelcrafting_vol5: 4.5,
+    #recipe_enchanting_vol6: 4.5,
+  }
+- name: mage
+  stats: { health: 690, exp: 1, attack: 65, defense: 43,  attackSpeed: 6 }
+  lootTable: { hardened_bone: 35, ghastly_substance: 35, magic_cloth: 25,
+    helmet_scraps: 30, armor_scraps: 40, metal_scraps: 25,
+    #recipe_alchemy_vol6: 4.5,
+    #recipe_smithing_vol7: 4.5, 
+    #recipe_prayer_vol5: 4.5,
+    #recipe_inscription_vol7: 4.5,
+    #recipe_jewelcrafting_vol6: 4.5,
+    #recipe_enchanting_vol7: 4.5,
+  }
+- name: royal_guard
+  stats: { health: 850, exp: 1, attack: 72, defense: 50, attackSpeed: 4 }
+  lootTable: { hardened_bone: 35, ghastly_substance: 35, magic_cloth: 25,
+    helmet_scraps: 30, armor_scraps: 35, metal_scraps: 35,  weapon_fragments_4: 30,
+    #recipe_alchemy_vol5: 4.5,
+    #recipe_smithing_vol7: 4.5, 
+    #recipe_prayer_vol5: 4.5,
+    #recipe_inscription_vol7: 4.5,
+    #recipe_jewelcrafting_vol6: 4.5,
+    #recipe_enchanting_vol7: 4.5,
+    castle_tower_key: 5, #castle_key: 0.5,
+  }
+- name: king
+  stats: { health: 850, exp: 1, attack: 72, defense: 50, attackSpeed: 4 }
+  lootTable: {}

@@ -1,0 +1,79 @@
+@mainFont: 18px;
+@commonRadius: 2px;
+@commonColor: #fafafa;
+@commonBg: #252525;
+@commonBorder: 1px solid @commonColor;
+@commonBoxShadow: 1px 1px @commonColor;
+
+@junkColor: #aeacac;
+@junkColorBorder: #71706d;
+@uncommonColor: #7adf98;
+@uncommonColorBorder: #7adf98b5;
+@rareColor: #84a4ee;
+@rareColorBorder: #84a4eea6;
+@epicColor: #ca91f0;
+@epicColorBorder: #ca91f09e;
+
+
+.rarityBorder(@color; @width: 2px;) {
+    border: @width solid @color;
+}
+.rarityText(@color) {
+    color: @color;
+}
+
+.junk(@width: 2px; @text: all) {
+    .rarityBorder(@junkColorBorder, @width);
+    & when (@text = all){ .rarityText(@junkColor) }
+    .junk when (@text = title){ .rarityText(@junkColor) }
+}
+.uncommon(@width: 2px; @text: all) {
+    .rarityBorder(@uncommonColorBorder, @width);
+    & when (@text = all){ .rarityText(@uncommonColor) }
+    .uncommon when (@text = title){ .rarityText(@uncommonColor) }
+}
+.rare(@width: 2px; @text: all) {
+    .rarityBorder(@rareColorBorder, @width);
+    & when (@text = all){ .rarityText(@rareColor) }
+    .rare when (@text = title){ .rarityText(@rareColor) }
+}
+.epic(@width: 2px; @text: all) {
+    .rarityBorder(@epicColorBorder, @width);
+    & when (@text = all){ .rarityText(@epicColor) }
+    .epic when (@text = title){ .rarityText(@epicColor) }
+}
+
+.bagBorder() {
+    border: 8px solid;
+    border-image: url("bgs/bag_border.jpg");;
+    border-image-repeat: repeat;
+    border-image-slice: 6%;
+    mask-image: radial-gradient(black 98%, transparent 99.5%);
+}
+
+.background() {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.bagBackground() {
+    .background();
+    background-image: url("bgs/bag_bg.jpg");
+}
+.equipBackground() {
+    .background();
+    background-image: url("bgs/equip_bg.jpg");
+}
+.shopBackground() {
+    .background();
+    background-image: url("bgs/shop.jpg");
+}
+.denBackground() {
+    .background();
+    background-image: url("bgs/den.jpg");
+}
+.healthBackground() {
+    background-attachment: fixed;
+    background-size: 1%;
+    background-image: url("bgs/healthbar.jpg");
+}

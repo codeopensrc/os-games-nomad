@@ -41,9 +41,9 @@ module.exports = [{
         //unsafeCache: true,
         rules: [
             {test: /\.(svg|png|jpe?g|ico)/, type: "asset", generator: {filename: "assets/images/[name][ext][query]"}},
-            {test: /\.(svg|png|jpe?g|ico)/, type: "asset", generator: {filename: "style/images/[name][ext][query]"}},
             {test: /\.less/, use: ["style-loader", "css-loader", "less-loader"] },
             {test: /\.json/, use: ["json-loader"] },
+            {test: /\.yaml/, use: ["yaml-loader"] },
             {test: /\.jsx/, use: {loader: "babel-loader",  options: {presets: ["@babel/preset-react"], plugins: ["react-hot-loader/babel"] }}},
             {test: /\.js/, use: {loader: "babel-loader", options: {presets: ["@babel/preset-react"] }}},
         ]
@@ -64,7 +64,7 @@ module.exports = [{
             { directory: path.resolve(__dirname, '../../server/static') },
             { directory: path.resolve(__dirname, '../../pub') }
         ],
-        client: { webSocketURL: `auto://0.0.0.0:0/ws` },
+        client: { webSocketURL: `auto://0.0.0.0:0/ws`, logging: "none" },
         // Uncomment to reload page on changes to server/
         //watchFiles: {
         //    paths: ["server"],

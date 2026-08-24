@@ -1,10 +1,11 @@
 {
-    "name": "Nomad",
+    "name": "Nomad Idle",
     "version": "0.0.0",
     "dependencies": {},
     "devDependencies": {
         "@babel/core": "^7.15.5",
         "@babel/preset-react": "^7.14.5",
+        "@js-temporal/polyfill": "*",
         "html-webpack-plugin": "^5.3.2",
         "less": "^4.1.2",
         "less-loader": "^10.0.1",
@@ -18,14 +19,15 @@
         "webpack": "^5.56.1",
         "webpack-cli": "^4.8.0",
         "webpack-dev-server": "^4.3.1",
-        "json-loader": "^0.5.4"
+        "json-loader": "^0.5.4",
+        "yaml-loader": "*"
     },
     "scripts": {
         "reloader": "webpack serve --config='src/config/webpack.config.js' --color",
         "watch": "webpack --config='src/config/webpack.config.js' --color --watch",
         "release": "webpack --config='src/config/webpack.config.js' --color --optimization-minimize"
     },
-    "description": "Nomad - Coming Soon",
+    "description": "Nomad Idle",
     "repository": "",
-    "license": "MIT"
+    "license": "Private Use Source-Available"
 }

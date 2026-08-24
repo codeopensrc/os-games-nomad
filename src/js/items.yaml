@@ -1,0 +1,1932 @@
+item_catalog:
+- name: coin
+  stats: { icon: "coin" }
+## Zone Keys
+- name: cave_key
+  stats: { icon: "zone_key", description: "Grants access to the 'Cave' zone"}
+- name: bandit_camp_key
+  stats: { icon: "zone_key", description: "Grants access to the 'Bandit Camp' zone"}
+- name: temple_key
+  stats: { icon: "zone_key", description: "Grants access to the 'Temple' zone"}
+- name: graveyard_key
+  stats: { icon: "zone_key", description: "Grants access to the 'Graveyard' zone"}
+- name: castle_key
+  stats: { icon: "zone_key", description: "*Coming Soon™* Grants access to the 'Castle' zone"}
+## Dungeon Keys
+- name: forgotten_cellar_key
+  stats: { icon: "dungeon_key", description: "Grants access to the 'Forgotten Cellar' dungeon"}
+- name: eerie_caverns_key
+  stats: { icon: "dungeon_key", description: "Grants access to the 'Eerie Caverns' dungeon"}
+- name: bandit_stronghold_key
+  stats: { icon: "dungeon_key", description: "Grants access to the 'Bandit Stronghold' dungeon"}
+- name: catacombs_key
+  stats: { icon: "dungeon_key", description: "Grants access to the 'Catacombs' dungeon"}
+- name: crypt_key
+  stats: { icon: "dungeon_key", description: "Grants access to the 'Crypt' dungeon"}
+- name: castle_tower_key
+  stats: { icon: "dungeon_key", description: "Grants access to the 'Castle Tower' dungeon"}
+## WorldBuffs
+- name: warrior
+  stats: { icon: null, attack: 5, defense: 5, maxhealth: 40, description: "Provides powerful boost to combat stats." }
+- name: scholar
+  stats: { icon: null, exp: 0.10, description: "Provides experience boost." }
+
+#### Raw Gathering
+# 2.5s for 2c. General guideline each additional .5s += 2c
+#####
+## Farming
+#####
+- name: carrot
+  stats: { icon: "carrot", price: 2, description: "Obtained from farming. Useful in various crafting recipes" }
+- name: pumpkin
+  stats: { icon: "pumpkin", price: 4, description: "Obtained from farming. Useful in various crafting recipes" }
+- name: tomato
+  stats: { icon: "tomato", price: 8, description: "Obtained from farming. Useful in various crafting recipes" }
+- name: corn
+  stats: { icon: "corn", price: 12, description: "Obtained from farming. Useful in various crafting recipes" }
+- name: wheat
+  stats: { icon: "wheat", price: 16, description: "Obtained from farming. Useful in various crafting recipes" }
+- name: grapes
+  stats: { icon: "grapes", price: 20, description: "Obtained from farming. Useful in various crafting recipes" }
+- name: onion
+  stats: { icon: "onion", price: 22, description: "Obtained from farming. Useful in various crafting recipes" }
+#####
+## Forestry
+#####
+- name: birch
+  stats: { icon: "birch", price: 2, description: "Obtained from forestry. Useful in various crafting recipes" }
+- name: maple
+  stats: { icon: "maple", price: 6, description: "Obtained from forestry. Useful in various crafting recipes" }
+- name: oak
+  stats: { icon: "log", price: 12, description: "Obtained from forestry. Useful in various crafting recipes" }
+- name: pine
+  stats: { icon: "pine", price: 16, description: "Obtained from forestry. Useful in various crafting recipes" }
+- name: mahogony
+  stats: { icon: "mahogony", price: 20, description: "Obtained from forestry. Useful in various crafting recipes" }
+#####
+## Herbalism
+#####
+- name: root
+  stats: { icon: "root", price: 2, description: "Obtained from herbalism. Useful in various crafting recipes" }
+- name: berry
+  stats: { icon: "berry", price: 4, description: "Obtained from herbalism. Useful in various crafting recipes" }
+- name: sage
+  stats: { icon: "sage", price: 6, description: "Obtained from herbalism. Useful in various crafting recipes" }
+- name: mushroom
+  stats: { icon: "mushroom", price: 8, description: "Obtained from herbalism. Useful in various crafting recipes" }
+- name: ginger
+  stats: { icon: "ginger", price: 10, description: "Obtained from herbalism. Useful in various crafting recipes" }
+#####
+## Mining
+#####
+- name: stone
+  stats: { icon: "stone", price: 2, description: "Useful in various crafting recipes" }
+- name: copper
+  stats: { icon: "copper", price: 4, description: "Can be prospected for gems" }
+- name: tin
+  stats: { icon: "tin", price: 6, description: "Can be prospected for gems" }
+- name: silver
+  stats: { icon: "tin", price: 8, description: "Used to craft jewelry" }
+- name: coal
+  stats: { icon: "coal", price: 10, description: "Used for smelting" }
+- name: iron
+  stats: { icon: "iron", price: 12, description: "Can be prospected for gems" }
+- name: gold
+  stats: { icon: "gold", price: 14, description: "Used to craft jewelry" }
+- name: mithril
+  stats: { icon: "mithril", price: 18, description: "Can be prospected for gems" }
+- name: diamond
+  stats: { icon: "diamond", price: 22, description: "Used to craft jewelry" }
+#####
+## Enchanting
+#####
+## TODO: Price essence and crystals
+- name: minor_essence
+  stats: { icon: "minor_essence", price: 25, description: "Obtained from disenchanting gear" }
+- name: lesser_essence
+  stats: { icon: "lesser_essence", price: 75, description: "Obtained from disenchanting gear" }
+- name: major_essence
+  stats: { icon: "major_essence", price: 0, description: "Obtained from disenchanting gear"}
+- name: superior_essence
+  stats: { icon: "superior_essence", price: 0, description: "Obtained from disenchanting gear"}
+- name: glorious_essence
+  stats: { icon: "glorious_essence", price: 0, description: "Obtained from disenchanting gear"}
+- name: illustrious_essence
+  stats: { icon: "illustrious_essence", price: 0, description: "Obtained from disenchanting gear"}
+
+- name: minor_crystal
+  stats: { icon: "minor_crystal", price: 35, description: "Obtained from disenchanting gear" }
+- name: lesser_crystal
+  stats: { icon: "lesser_crystal", price: 105, description: "Obtained from disenchanting gear" }
+- name: major_crystal
+  stats: { icon: "major_crystal", price: 0, description: "Obtained from disenchanting gear" }
+- name: superior_crystal
+  stats: { icon: "superior_crystal", price: 0, description: "Obtained from disenchanting gear" }
+- name: glorious_crystal
+  stats: { icon: "glorious_crystal", price: 0, description: "Obtained from disenchanting gear" }
+- name: illustrious_crystal
+  stats: { icon: "illustrious_crystal", price: 0, description: "Obtained from disenchanting gear" }
+
+#####
+## Jewelcrafting
+#####
+- name: red_crystal
+  stats: { icon: "uncut_red", price: 85, description: "Obtained from prospecting raw ore"}
+- name: blue_crystal
+  stats: { icon: "uncut_blue", price: 85, description: "Obtained from prospecting raw ore" }
+- name: green_crystal
+  stats: { icon: "uncut_green", price: 85, description: "Obtained from prospecting raw ore" }
+- name: yellow_crystal
+  stats: { icon: "uncut_yellow", price: 85, description: "Obtained from prospecting raw ore" }
+- name: purple_crystal
+  stats: { icon: "uncut_purple", price: 85, description: "Obtained from prospecting raw ore" }
+
+
+#####
+## Misc/Mobs
+#####
+- name: fang
+  stats: { icon: "fang", price: 10, description: "Useful in various crafting recipes" }
+- name: bone
+  stats: { icon: "bone", price: 5, description: "Bury to gain 'prayer' exp" }
+- name: large_bone
+  stats: { icon: "bone", price: 10, description: "Bury to gain 'prayer' exp" }
+- name: thick_bone
+  stats: { icon: "bone", price: 15, description: "Bury to gain 'prayer' exp" }
+- name: hardened_bone
+  stats: { icon: "bone", price: 20, description: "Bury to gain 'prayer' exp" }
+- name: unholy_bone
+  stats: { icon: "bone", price: 25, description: "Bury to gain 'prayer' exp" }
+- name: meat
+  stats: { icon: "meat", slot: "food", price: 4, health: 10, description: "Automatically heals when taking non-fatal damage below 40% health" }
+
+- name: horn
+  stats: { icon: "tusk", price: 15, description: "Useful in various crafting recipes" }
+- name: beak
+  stats: { icon: "beak", price: 15, description: "Useful in various crafting recipes" }
+- name: cloth
+  stats: { icon: "cloth", price: 20, description: "Useful in various crafting recipes" }
+- name: claw
+  stats: { icon: "claw", price: 25, description: "Useful in various crafting recipes" }
+- name: wing
+  stats: { icon: "wing", price: 30, description: "Useful in various crafting recipes" }
+#- name: leather
+#  stats: { icon: null, price: 10 }
+- name: light_fur
+  stats: { icon: "light_fur", price: 10, description: "Useful in various crafting recipes" }
+- name: heavy_fur
+  stats: { icon: "heavy_fur", price: 20, description: "Useful in various crafting recipes" }
+- name: light_hide
+  stats: { icon: "light_hide", price: 15, description: "Useful in various crafting recipes" }
+- name: heavy_hide
+  stats: { icon: "heavy_hide", price: 30, description: "Useful in various crafting recipes" }
+- name: golden_goblet
+  stats: { icon: "golden_goblet", price: 200, junk: true, description: "Not useful, but sells for a pretty penny"}
+- name: weapon_fragments
+  stats: { icon: "weapon_fragments", price: 25, description: "Useful to craft weapons" }
+- name: weapon_fragments_2
+  stats: { icon: "weapon_fragments", price: 35, description: "Useful to craft weapons" }
+- name: weapon_fragments_3
+  stats: { icon: "weapon_fragments", price: 45, description: "Useful to craft weapons" }
+- name: weapon_fragments_4
+  stats: { icon: "weapon_fragments", price: 55, description: "Useful to craft weapons" }
+
+#bandit
+- name: leather_scraps
+  stats: { icon: "leather_scraps", price: 30, description: "Useful in various crafting recipes" }
+- name: boot_scraps
+  stats: { icon: "boot_scraps", price: 30, description: "Useful in various crafting recipes" }
+- name: metal_scraps
+  stats: { icon: "metal_scraps", price: 35, description: "Useful in various crafting recipes" }
+- name: helmet_scraps
+  stats: { icon: "helmet_scraps", price: 35, description: "Useful in various crafting recipes" }
+- name: armor_scraps
+  stats: { icon: "armor_scraps", price: 40, description: "Useful in various crafting recipes" }
+- name: strange_powder
+  stats: { icon: "minor_essence", price: 35, description: "Useful in various crafting recipes" }
+#temple
+- name: magic_cloth
+  stats: { icon: "magic_cloth", price: 55, description: "Useful in various crafting recipes" }
+#- name: _powder
+#  stats: { icon: "minor_essence", price: 30, description: "" }
+#graveyard
+- name: ghastly_substance
+  stats: { icon: "ghastly_substance", price: 75, description: "Useful in various crafting recipes" }
+
+
+## Tiered runes and higher tier gear requires higher tier runes
+## Can also 3-5 tier1 rune = tier2 rune recipe later
+- name: misc_rune_1
+  stats: { icon: "unknown_rune", description: "List of runes that may drop", teaches: [rune_of_rarity_1, rune_of_enhancement_1, rune_of_chance_1]}
+- name: stat_rune_1
+  stats: { icon: "unknown_rune", description: "List of runes that may drop", teaches: [rune_of_striking_1, rune_of_protection_1, rune_of_fortitude_1, rune_of_strength_1] }
+  #stats: { icon: "unknown_rune", description: "List of runes that may drop", teaches: [rune_of_striking_1, rune_of_protection_1, rune_of_fortitude_1, rune_of_strength_1, rune_of_agility_1, rune_of_intellect_1] }
+
+- name: rune_of_rarity_1
+  stats: { icon: "rune_of_rarity", category: "misc", price: 300, description: "Useful in crafting. Upgrades rarity on craft (up to epic)" }
+- name: rune_of_enhancement_1
+  stats: { icon: "rune_of_enhancement", category: "misc", price: 300, description: "Useful in crafting. Enhances all affix bonuses on craft" }
+- name: rune_of_chance_1
+  stats: { icon: "rune_of_chance", category: "misc", price: 300, description: "Useful in crafting. Adds random stat bonus at twice the effectiveness" }
+- name: rune_of_striking_1
+  stats: { icon: "rune_of_striking", category: "stat", price: 200, description: "Useful in crafting. Adds additional attack to crafted item" }
+- name: rune_of_protection_1
+  stats: { icon: "rune_of_protection", category: "stat", price: 200, description: "Useful in crafting. Adds additional defense to crafted item" }
+- name: rune_of_fortitude_1
+  stats: { icon: "rune_of_fortitude", category: "stat", price: 200, description: "Useful in crafting. Adds additional health to crafted item" }
+- name: rune_of_strength_1
+  stats: { icon: "rune_of_strength", category: "stat", price: 200, description: "Useful in crafting. Adds additional strength to crafted item" }
+- name: rune_of_agility_1
+  stats: { icon: "rune_of_agility", category: "stat", price: 200, description: "Useful in crafting. Adds additional agility to crafted item" }
+- name: rune_of_intellect_1
+  stats: { icon: "rune_of_intellect", category: "stat", price: 200, description: "Useful in crafting. Adds additional intellect to crafted item" }
+
+- name: misc_rune_2
+  stats: { icon: "unknown_rune", description: "List of runes that may drop", teaches: [rune_of_rarity_2, rune_of_enhancement_2, rune_of_chance_2]}
+- name: stat_rune_2
+  stats: { icon: "unknown_rune", description: "List of runes that may drop", teaches: [rune_of_striking_2, rune_of_protection_2, rune_of_fortitude_2, rune_of_strength_2] }
+  #stats: { icon: "unknown_rune", description: "List of runes that may drop", teaches: [rune_of_striking_2, rune_of_protection_2, rune_of_fortitude_2, rune_of_strength_2, rune_of_agility_2, rune_of_intellect_2] }
+
+- name: rune_of_rarity_2
+  stats: { icon: "rune_of_rarity", category: "misc", price: 500, description: "Useful in crafting. Upgrades rarity on craft (up to epic)" }
+- name: rune_of_enhancement_2
+  stats: { icon: "rune_of_enhancement", category: "misc", price: 500, description: "Useful in crafting. Enhances all affix bonuses on craft" }
+- name: rune_of_chance_2
+  stats: { icon: "rune_of_chance", category: "misc", price: 500, description: "Useful in crafting. Adds random stat bonus at twice the effectiveness" }
+- name: rune_of_striking_2
+  stats: { icon: "rune_of_striking", category: "stat", price: 400, description: "Useful in crafting. Adds additional attack to crafted item" }
+- name: rune_of_protection_2
+  stats: { icon: "rune_of_protection", category: "stat", price: 400, description: "Useful in crafting. Adds additional defense to crafted item" }
+- name: rune_of_fortitude_2
+  stats: { icon: "rune_of_fortitude", category: "stat", price: 400, description: "Useful in crafting. Adds additional health to crafted item" }
+- name: rune_of_strength_2
+  stats: { icon: "rune_of_strength", category: "stat", price: 400, description: "Useful in crafting. Adds additional strength to crafted item" }
+- name: rune_of_agility_2
+  stats: { icon: "rune_of_agility", category: "stat", price: 400, description: "Useful in crafting. Adds additional agility to crafted item" }
+- name: rune_of_intellect_2
+  stats: { icon: "rune_of_intellect", category: "stat", price: 400, description: "Useful in crafting. Adds additional intellect to crafted item" }
+
+## TODO: Tiered orbs maybe
+- name: orb_of_choice
+  stats: { icon: "orb_1", category: "", price: 250, description: "Useful in enchanting. Ingredient to reroll 1 affix of choice" }
+- name: orb_of_absolute
+  stats: { icon: "orb_3", category: "", price: 250, description: "Useful in enchanting. Ingredient to reroll all affixes" }
+- name: orb_of_jewelry
+  stats: { icon: "orb_2", category: "misc", price: 250, description: "Useful in jewelcrafting. Ingredient to reroll sockets" }
+
+###TODO: Unique/End of dungeon only drops
+## Maybe even recipe drops for for them
+#- name: swift_dagger
+#  stats: { attack: 5, defense: 0, health: 4, str: 1, int: 0, agi: 0, attackSpeed: 8.5, slot: "weapon", price: 20, icon: "dagger",}
+
+
+
+#####
+##  Recipes
+#####
+
+####
+## Training/Leveling/Talents
+####
+#- name: recipe_training_intro
+#  stats: { icon: "recipe_1", teaches: [attack, defense, health], price: 0}
+#  skill: "training"
+#- name: attack
+#  stats: { statName: "attack", statAmount: 0.01, description: "Increase attack per point" }
+#  recipe: { lvl: 1, exp: 0, category: "", ingredients: { minor_essence: 8, minor_crystal: 7 } }
+#  skill: "training"
+
+####
+## Alchemy
+####
+- name: recipe_alchemy_intro
+  stats: { icon: "recipe_1", teaches: [ink, healing_potion_1], price: 0}
+  skill: "alchemy"
+- name: recipe_alchemy_vol1  #fieldsx2
+  stats: { icon: "recipe_2", teaches: [health_potion_1, def_potion_1, str_potion_1, spd_potion_1], price: 200}
+  skill: "alchemy"
+- name: recipe_alchemy_vol2  #cavex2
+  stats: { icon: "recipe_3", teaches: [def_flask_1, str_flask_1, spd_flask_1, potent_elixir_1, lingering_elixir_1], price: 250}
+  skill: "alchemy"
+- name: recipe_alchemy_vol3 #banditx4
+  stats: { icon: "recipe_4", teaches: [healing_potion_2, health_potion_2, def_potion_2, str_potion_2, spd_potion_2], price: 300}
+  skill: "alchemy"
+- name: recipe_alchemy_vol4 #banditx1 shrinex3
+  stats: { icon: "recipe_5", teaches: [healing_potion_3, health_potion_3, def_potion_3, str_potion_3, spd_potion_3], price: 350}
+  skill: "alchemy"
+- name: recipe_alchemy_vol5 #shrinex2 cryptx1
+  stats: { icon: "recipe_6", teaches: [def_flask_2, str_flask_2, spd_flask_2, potent_elixir_2, lingering_elixir_2], price: 400}
+  skill: "alchemy"
+- name: recipe_alchemy_vol6 #graveyardx3
+  stats: { icon: "recipe_7", teaches: [healing_potion_4, health_potion_4, def_potion_4, str_potion_4, spd_potion_4], price: 450}
+  skill: "alchemy"
+
+####
+## Smithing
+####
+- name: recipe_smithing_intro
+  stats: { icon: "recipe_1", teaches: [copper_bar, dagger_handle_1, tool_handle_1, bone_dagger, hide_chest, hide_helm, hide_boots, copper_dagger, copper_boots, copper_helm,
+    copper_hoe, copper_pickaxe, copper_axe, copper_shovel, copper_pot], price: 0}
+  skill: "smithing"
+- name: recipe_smithing_vol1 #fieldsx2
+  stats: { icon: "recipe_2", teaches: [sword_hilt_1, mace_shaft_1, wooden_rod_1, copper_sword, copper_mace, copper_chest,
+    copper_mortar, copper_rod, copper_hammer, copper_gemcutter], price: 200}
+  skill: "smithing"
+- name: recipe_smithing_vol2 #cavex2
+  stats: { icon: "recipe_3", teaches: [bronze_bar, silver_bar, dagger_handle_2, tool_handle_2, bronze_dagger, bronze_boots, bronze_helm,
+    bronze_hoe, bronze_pickaxe, bronze_axe, bronze_shovel, bronze_pot], price: 250}
+  skill: "smithing"
+- name: recipe_smithing_vol3 #banditx4
+  stats: { icon: "recipe_4", teaches: [gold_bar, sword_hilt_2, mace_shaft_2, wooden_rod_2, bronze_sword, bronze_mace, bronze_chest,
+    bronze_mortar, bronze_rod, bronze_hammer, bronze_gemcutter], price: 300}
+  skill: "smithing"
+- name: recipe_smithing_vol4 #shrinex4
+  stats: { icon: "recipe_5", teaches: [iron_bar, dagger_handle_3, tool_handle_3, iron_dagger, iron_boots, iron_helm,
+    iron_hoe, iron_pickaxe, iron_axe, iron_shovel, iron_pot], price: 350}
+  skill: "smithing"
+- name: recipe_smithing_vol5 #shrinex2
+  stats: { icon: "recipe_6", teaches: [sword_hilt_3, mace_shaft_3, wooden_rod_3, iron_sword, iron_mace, iron_chest,
+    iron_mortar, iron_rod, iron_hammer, iron_gemcutter], price: 400}
+  skill: "smithing"
+- name: recipe_smithing_vol6 #graveyardx3
+  stats: { icon: "recipe_7", teaches: [steel_bar, dagger_handle_4, tool_handle_4, steel_dagger, steel_boots, steel_helm,
+    steel_hoe, steel_pickaxe, steel_axe, steel_shovel, steel_pot], price: 450}
+  skill: "smithing"
+- name: recipe_smithing_vol7 #graveyardx3
+  stats: { icon: "recipe_8", teaches: [sword_hilt_4, mace_shaft_4, wooden_rod_4, steel_sword, steel_mace, steel_chest,
+    steel_mortar, steel_rod, steel_hammer, steel_gemcutter], price: 500}
+  skill: "smithing"
+- name: recipe_smithing_vol8 #cryptx1  last dungeon drop for now
+  stats: { icon: "recipe_8", teaches: [mithril_bar, dagger_handle_5, tool_handle_5, mithril_dagger, mithril_boots, mithril_helm,
+    mithril_hoe, mithril_pickaxe, mithril_axe, mithril_shovel, mithril_pot], price: 550}
+  skill: "smithing"
+- name: recipe_smithing_vol9 #cryptx1  last dungeon drop for now
+  stats: { icon: "recipe_8", teaches: [sword_hilt_5, mace_shaft_5, wooden_rod_5, mithril_sword, mithril_mace, mithril_chest,
+    mithril_mortar, mithril_rod, mithril_hammer, mithril_gemcutter], price: 600}
+  skill: "smithing"
+
+####
+## Cooking
+####
+- name: recipe_cooking_intro
+  stats: { icon: "recipe_1", teaches: [carrot_soup, cooked_meat], price: 0}
+  skill: "cooking"
+- name: recipe_cooking_vol1 #fieldsx2
+  stats: { icon: "recipe_2", teaches: [pumpkin_soup, simple_stew, tomato_soup, tasty_stew], price: 200}
+  skill: "cooking"
+- name: recipe_cooking_vol2 #cavex2
+  stats: { icon: "recipe_3", teaches: [berry_pie, pleasant_stew, roasted_corn, hearty_stew], price: 250}
+  skill: "cooking"
+- name: recipe_cooking_vol3 #banditx2 shrinex2
+  stats: { icon: "recipe_4", teaches: [bread, sandwich, pumpkin_bread, grape_juice, grape_toast], price: 300}
+  skill: "cooking"
+- name: recipe_cooking_vol4 #graveyardx3
+  stats: { icon: "recipe_5", teaches: [onion, onion_soup], price: 350}
+  skill: "cooking"
+
+####
+## Enchanting
+####
+- name: recipe_enchanting_intro
+  stats: { icon: "recipe_1", teaches: [weapon_attack_1, weapon_speed_1, boot_defense_1, helm_defense_1, chest_defense_1, boot_attack_1, helm_attack_1], price: 0}
+  skill: "enchanting"
+- name: recipe_enchanting_vol1 #fieldsx2
+  stats: { icon: "recipe_2", teaches: [ring_health_1, neck_health_1, chest_attack_1, ring_defense_1, neck_defense_1, ring_attack_1, neck_attack_1], price: 200}
+  skill: "enchanting"
+- name: recipe_enchanting_vol2 #cavex2
+  stats: { icon: "recipe_3", teaches: [weapon_attack_2, weapon_speed_2, boot_defense_2, helm_defense_2, chest_defense_2, boot_attack_2, helm_attack_2], price: 250}
+  skill: "enchanting"
+- name: recipe_enchanting_vol3 #banditx5
+  stats: { icon: "recipe_4", teaches: [ring_health_2, neck_health_2, chest_attack_2, ring_defense_2, neck_defense_2, ring_attack_2, neck_attack_2, reroll_all_affix, reroll_one_affix], price: 300}
+  skill: "enchanting"
+- name: recipe_enchanting_vol4 #banditx2 shrinex5
+  stats: { icon: "recipe_5", teaches: [weapon_attack_3, weapon_speed_3, boot_defense_3, helm_defense_3, chest_defense_3, boot_attack_3, helm_attack_3], price: 350}
+  skill: "enchanting"
+- name: recipe_enchanting_vol5 #shrinex2
+  stats: { icon: "recipe_6", teaches: [ring_health_3, neck_health_3, chest_attack_3, ring_defense_3, neck_defense_3, ring_attack_3, neck_attack_3], price: 400}
+  skill: "enchanting"
+- name: recipe_enchanting_vol6 #graveyardx3
+  stats: { icon: "recipe_7", teaches: [weapon_attack_4, weapon_speed_4, boot_defense_4, helm_defense_4, chest_defense_4, boot_attack_4, helm_attack_4], price: 450}
+  skill: "enchanting"
+- name: recipe_enchanting_vol7 #graveyardx2
+  stats: { icon: "recipe_8", teaches: [ring_health_4, neck_health_4, chest_attack_4, ring_defense_4, neck_defense_4, ring_attack_4, neck_attack_4], price: 500}
+  skill: "enchanting"
+
+####
+## Prayer
+####
+## TODO: Exp prayer
+- name: recipe_prayer_intro
+  stats: { icon: "recipe_1", teaches: [health_prayer_1], price: 0}
+  skill: "prayer"
+- name: recipe_prayer_vol1 #fieldsx2
+  stats: { icon: "recipe_2", teaches: [def_prayer_1, atk_prayer_1, spd_prayer_1], price: 200}
+  skill: "prayer"
+- name: recipe_prayer_vol2 #cavex2
+  stats: { icon: "recipe_3", teaches: [health_prayer_2, def_prayer_2, atk_prayer_2, spd_prayer_2], price: 250}
+  skill: "prayer"
+- name: recipe_prayer_vol3 #banditx4
+  stats: { icon: "recipe_4", teaches: [health_prayer_3, def_prayer_3, atk_prayer_3, spd_prayer_3], price: 300}
+  skill: "prayer"
+- name: recipe_prayer_vol4 #shrinex4
+  stats: { icon: "recipe_5", teaches: [health_prayer_4, def_prayer_4, atk_prayer_4, spd_prayer_4], price: 350}
+  skill: "prayer"
+- name: recipe_prayer_vol5 #graveyardx3
+  stats: { icon: "recipe_6", teaches: [health_prayer_5, def_prayer_5, atk_prayer_5, spd_prayer_5], price: 400}
+  skill: "prayer"
+
+####
+## Inscription
+####
+- name: recipe_inscription_intro
+  stats: { icon: "recipe_1", teaches: [scroll, health_scroll_1, def_scroll_1, str_scroll_1], price: 0}
+  skill: "inscription"
+- name: recipe_inscription_vol1 #fieldsx2
+  stats: { icon: "recipe_2", teaches: [spd_scroll_1, atk_scroll_1, leather_bible_1, calligraphy_set_1, exp_scroll_1], price: 200}
+  skill: "inscription"
+- name: recipe_inscription_vol2 #cavex2
+  stats: { icon: "recipe_3", teaches: [health_scroll_2, def_scroll_2, str_scroll_2], price: 250}
+  skill: "inscription"
+- name: recipe_inscription_vol3 #banditx4
+  stats: { icon: "recipe_4", teaches: [spd_scroll_2, atk_scroll_2, leather_bible_2, calligraphy_set_2, exp_scroll_2], price: 300}
+  skill: "inscription"
+- name: recipe_inscription_vol4 #banditx1 shrinex3
+  stats: { icon: "recipe_5", teaches: [health_scroll_3, def_scroll_3, str_scroll_3], price: 350}
+  skill: "inscription"
+- name: recipe_inscription_vol5 #shrinex2
+  stats: { icon: "recipe_6", teaches: [spd_scroll_3, atk_scroll_3, leather_bible_3, calligraphy_set_3, exp_scroll_3], price: 400}
+  skill: "inscription"
+- name: recipe_inscription_vol6 #graveyardx3
+  stats: { icon: "recipe_7", teaches: [health_scroll_4, def_scroll_4, str_scroll_4], price: 450}
+  skill: "inscription"
+- name: recipe_inscription_vol7 #graveyardx2
+  stats: { icon: "recipe_8", teaches: [spd_scroll_4, atk_scroll_4, leather_bible_4, calligraphy_set_4, exp_scroll_4], price: 500}
+  skill: "inscription"
+
+####
+## Jewelcrafting
+####
+- name: recipe_jewelcrafting_intro
+  stats: { icon: "recipe_1", teaches: [socket, health_gem_1, def_gem_1, attack_gem_1, spd_gem_1], price: 0}
+  skill: "jewelcrafting"
+- name: recipe_jewelcrafting_vol1 #fieldsx2
+  stats: { icon: "recipe_2", teaches: [simple_ring, simple_necklace, health_gem_2, def_gem_2, attack_gem_2, spd_gem_2], price: 200}
+  skill: "jewelcrafting"
+- name: recipe_jewelcrafting_vol2 #cavex2
+  stats: { icon: "recipe_3", teaches: [stalwart_gem_1, resolute_gem_1, stout_gem_1, quick_gem_1, nice_ring, nice_necklace, reroll_sockets], price: 250}
+  skill: "jewelcrafting"
+- name: recipe_jewelcrafting_vol3 #banditx4
+  stats: { icon: "recipe_4", teaches: [health_gem_3, def_gem_3, attack_gem_3, spd_gem_3], price: 300}
+  skill: "jewelcrafting"
+- name: recipe_jewelcrafting_vol4 #shrinex5
+  stats: { icon: "recipe_5", teaches: [stalwart_gem_2, resolute_gem_2, stout_gem_2, quick_gem_2, fancy_ring, fancy_necklace], price: 350}
+  skill: "jewelcrafting"
+- name: recipe_jewelcrafting_vol5 #graveyardx3
+  stats: { icon: "recipe_6", teaches: [health_gem_4, def_gem_4, attack_gem_4, spd_gem_4], price: 400}
+  skill: "jewelcrafting"
+- name: recipe_jewelcrafting_vol6 #graveyardx2
+  stats: { icon: "recipe_7", teaches: [stalwart_gem_3, resolute_gem_3, stout_gem_3, quick_gem_3, exquisite_ring, exquisite_necklace], price: 450}
+  skill: "jewelcrafting"
+
+#####
+## Cooking
+#####
+- name: cooked_meat
+  stats: { slot: "food", price: 6, health: 15, icon: "cooked_meat", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 1,  exp: 2, craftTime: 1.5, category: "", ingredients: { meat: 1 } }
+  skill: "cooking"
+- name: carrot_soup
+  stats: { slot: "food", price: 5, health: 30, icon: "carrot_soup", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 1,  exp: 4, craftTime: 2, category: "", ingredients: { carrot: 2 } }
+  skill: "cooking"
+- name: pumpkin_soup
+  stats: { slot: "food", price: 10, health: 45, icon: "pumpkin_soup", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 5,  exp: 10, craftTime: 2, category: "", ingredients: { pumpkin: 2 } }
+  skill: "cooking"
+- name: simple_stew
+  stats: { slot: "food", price: 15, health: 65, icon: "simple_stew", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 7,  exp: 15, craftTime: 4, category: "", ingredients: { cooked_meat: 1, carrot: 1, pumpkin: 1 } }
+  skill: "cooking"
+- name: berry_pie
+  stats: { slot: "food", price: 10, health: 60, icon: "berry_pie", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 15, exp: 20, craftTime: 2, category: "", ingredients: { berry: 2 } }
+  skill: "cooking"
+- name: tasty_stew
+  stats: { slot: "food", price: 18, health: 80, icon: "tasty_stew", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 17, exp: 25, craftTime: 4, category: "", ingredients: { cooked_meat: 1, pumpkin: 1, berry: 1 } }
+  skill: "cooking"
+- name: tomato_soup
+  stats: { slot: "food", price: 19, health: 75, icon: "tomato_soup", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 25, exp: 40, craftTime: 2, category: "", ingredients: { tomato: 2 } }
+  skill: "cooking"
+- name: pleasant_stew
+  stats: { slot: "food", price: 20, health: 95, icon: "pleasant_stew", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 27, exp: 45, craftTime: 4, category: "", ingredients: { cooked_meat: 1, berry: 1, tomato: 1 } }
+  skill: "cooking"
+- name: roasted_corn
+  stats: { slot: "food", price: 30, health: 90, icon: "roasted_corn", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 30, exp: 80, craftTime: 2, category: "", ingredients: { corn: 2 } }
+  skill: "cooking"
+- name: hearty_stew
+  stats: { slot: "food", price: 32, health: 110, icon: "hearty_stew", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 32, exp: 85, craftTime: 4, category: "", ingredients: { cooked_meat: 1, tomato: 1, corn: 1 } }
+  skill: "cooking"
+- name: bread
+  stats: { slot: "food", price: 37, health: 105, icon: "bread", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 35, exp: 120, craftTime: 2, category: "", ingredients: { wheat: 2 } }
+  skill: "cooking"
+- name: sandwich
+  stats: { slot: "food", price: 40, health: 125, icon: "sandwich", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 37, exp: 125, craftTime: 4, category: "", ingredients: { cooked_meat: 1, corn: 1, wheat: 1 } }
+  skill: "cooking"
+- name: pumpkin_bread
+  stats: { slot: "food", price: 38, health: 125, icon: "pumpkin_bread", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 37, exp: 125, craftTime: 4, category: "", ingredients: { wheat: 1, pumpkin: 4 } }
+  skill: "cooking"
+- name: grape_juice
+  stats: { slot: "food", price: 45, health: 120, icon: "grape_juice", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 40, exp: 200, craftTime: 2, category: "", ingredients: { grapes: 2 } }
+  skill: "cooking"
+- name: grape_toast
+  stats: { slot: "food", price: 60, health: 140, icon: "grape_toast", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 42, exp: 235, craftTime: 4, category: "", ingredients: { wheat: 1, grapes: 2 } }
+  skill: "cooking"
+- name: onion_soup
+  stats: { slot: "food", price: 50, health: 135, icon: "onion_soup", description: "Automatically heals when taking non-fatal damage below 40% health" }
+  recipe: { lvl: 45, exp: 285, craftTime: 2, category: "", ingredients: { onion: 2 } }
+  skill: "cooking"
+
+#####
+## Enchanting
+#####
+- name: reroll_all_affix
+  stats: { icon: "enchant_defense", slot: "any", statName: "affix", statAmount: "Up to 3", description: "Reroll all affixes on an item" }
+  recipe: { lvl: 1, exp: 1, category: "affix", ingredients: { orb_of_absolute: 1 } }
+  skill: "enchanting"
+- name: reroll_one_affix
+  stats: { icon: "enchant_defense", slot: "any", statName: "affix", statAmount: 1, description: "Reroll one affix on an item" }
+  recipe: { lvl: 1, exp: 1, category: "affix", ingredients: { orb_of_choice: 1 } }
+  skill: "enchanting"
+
+- name: weapon_attack_1
+  stats: { icon: "enchant_str", slot: "weapon", statName: "attack", statAmount: 2, description: "Adds attack to weapons" }
+  recipe: { lvl: 1, exp: 25, category: "", ingredients: { minor_essence: 8, minor_crystal: 7 } }
+  skill: "enchanting"
+- name: weapon_speed_1
+  stats: { icon: "enchant_str", slot: "weapon", statName: "spd", statAmount: 0.10, description: "Adds speed to weapons" }
+  recipe: { lvl: 1, exp: 25, category: "", ingredients: { minor_essence: 8, minor_crystal: 7 } }
+  skill: "enchanting"
+
+- name: boot_defense_1
+  stats: { icon: "enchant_defense", slot: "feet", statName: "defense", statAmount: 1, description: "Adds defense to boots" }
+  recipe: { lvl: 1, exp: 20, category: "", ingredients: { minor_essence: 7, minor_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_defense_1
+  stats: { icon: "enchant_defense", slot: "head", statName: "defense", statAmount: 2, description: "Adds defense to helm" }
+  recipe: { lvl: 3, exp: 30, category: "", ingredients: { minor_essence: 10, minor_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_defense_1
+  stats: { icon: "enchant_defense", slot: "chest", statName: "defense", statAmount: 3, description: "Adds defense to chest" }
+  recipe: { lvl: 5, exp: 40, category: "", ingredients: { minor_essence: 13, minor_crystal: 10 } }
+  skill: "enchanting"
+
+- name: boot_attack_1
+  stats: { icon: "enchant_str", slot: "feet", statName: "attack", statAmount: 1, description: "Adds attack to boots" }
+  recipe: { lvl: 7, exp: 25, category: "", ingredients: { minor_essence: 7, minor_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_attack_1
+  stats: { icon: "enchant_str", slot: "head", statName: "attack", statAmount: 2, description: "Adds attack to helm" }
+  recipe: { lvl: 9, exp: 35, category: "", ingredients: { minor_essence: 10, minor_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_attack_1
+  stats: { icon: "enchant_str", slot: "chest", statName: "attack", statAmount: 3, description: "Adds attack to chest" }
+  recipe: { lvl: 12, exp: 45, category: "", ingredients: { minor_essence: 13, minor_crystal: 10 } }
+  skill: "enchanting"
+
+- name: ring_health_1
+  stats: { icon: "enchant_defense", slot: "ring", statName: "health", statAmount: 30, description: "Adds health to ring" }
+  recipe: { lvl: 10, exp: 55, category: "", ingredients: { minor_essence: 15, minor_crystal: 12 } }
+  skill: "enchanting"
+- name: ring_defense_1
+  stats: { icon: "enchant_defense", slot: "ring", statName: "defense", statAmount: 1, description: "Adds defense to ring" }
+  recipe: { lvl: 12, exp: 55, category: "", ingredients: { minor_essence: 16, minor_crystal: 11 } }
+  skill: "enchanting"
+- name: ring_attack_1
+  stats: { icon: "enchant_defense", slot: "ring", statName: "attack", statAmount: 1, description: "Adds attack to ring" }
+  recipe: { lvl: 14, exp: 55, category: "", ingredients: { minor_essence: 14, minor_crystal: 13 } }
+  skill: "enchanting"
+
+- name: neck_health_1
+  stats: { icon: "enchant_defense", slot: "neck", statName: "health", statAmount: 30, description: "Adds health to neck" }
+  recipe: { lvl: 10, exp: 55, category: "", ingredients: { minor_essence: 15, minor_crystal: 12 } }
+  skill: "enchanting"
+- name: neck_defense_1
+  stats: { icon: "enchant_defense", slot: "neck", statName: "defense", statAmount: 1, description: "Adds defense to neck" }
+  recipe: { lvl: 12, exp: 55, category: "", ingredients: { minor_essence: 16, minor_crystal: 11 } }
+  skill: "enchanting"
+- name: neck_attack_1
+  stats: { icon: "enchant_defense", slot: "neck", statName: "attack", statAmount: 1, description: "Adds attack to neck" }
+  recipe: { lvl: 14, exp: 55, category: "", ingredients: { minor_essence: 14, minor_crystal: 13 } }
+  skill: "enchanting"
+
+### 2
+- name: weapon_attack_2
+  stats: { icon: "enchant_str", slot: "weapon", statName: "attack", statAmount: 4, description: "Adds attack to weapons" }
+  recipe: { lvl: 15, exp: 75, category: "", ingredients: { lesser_essence: 8, lesser_crystal: 7 } }
+  skill: "enchanting"
+- name: weapon_speed_2
+  stats: { icon: "enchant_str", slot: "weapon", statName: "spd", statAmount: 0.15, description: "Adds speed to weapons" }
+  recipe: { lvl: 15, exp: 75, category: "", ingredients: { lesser_essence: 8, lesser_crystal: 7 } }
+  skill: "enchanting"
+
+- name: boot_defense_2
+  stats: { icon: "enchant_defense", slot: "feet", statName: "defense", statAmount: 2, description: "Adds defense to boots" }
+  recipe: { lvl: 15, exp: 60, category: "", ingredients: { lesser_essence: 7, lesser_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_defense_2
+  stats: { icon: "enchant_defense", slot: "head", statName: "defense", statAmount: 4, description: "Adds defense to helm" }
+  recipe: { lvl: 17, exp: 90, category: "", ingredients: { lesser_essence: 10, lesser_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_defense_2
+  stats: { icon: "enchant_defense", slot: "chest", statName: "defense", statAmount: 6, description: "Adds defense to chest" }
+  recipe: { lvl: 19, exp: 120, category: "", ingredients: { lesser_essence: 13, lesser_crystal: 10 } }
+  skill: "enchanting"
+
+- name: boot_attack_2
+  stats: { icon: "enchant_str", slot: "feet", statName: "attack", statAmount: 2, description: "Adds attack to boots" }
+  recipe: { lvl: 21, exp: 75, category: "", ingredients: { lesser_essence: 7, lesser_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_attack_2
+  stats: { icon: "enchant_str", slot: "head", statName: "attack", statAmount: 4, description: "Adds attack to helm" }
+  recipe: { lvl: 23, exp: 110, category: "", ingredients: { lesser_essence: 10, lesser_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_attack_2
+  stats: { icon: "enchant_str", slot: "chest", statName: "attack", statAmount: 6, description: "Adds attack to chest" }
+  recipe: { lvl: 25, exp: 145, category: "", ingredients: { lesser_essence: 13, lesser_crystal: 10 } }
+  skill: "enchanting"
+
+- name: ring_health_2
+  stats: { icon: "enchant_defense", slot: "ring", statName: "health", statAmount: 60, description: "Adds health to ring" }
+  recipe: { lvl: 23, exp: 175, category: "", ingredients: { lesser_essence: 15, lesser_crystal: 12 } }
+  skill: "enchanting"
+- name: ring_defense_2
+  stats: { icon: "enchant_defense", slot: "ring", statName: "defense", statAmount: 2, description: "Adds defense to ring" }
+  recipe: { lvl: 25, exp: 175, category: "", ingredients: { lesser_essence: 16, lesser_crystal: 11 } }
+  skill: "enchanting"
+- name: ring_attack_2
+  stats: { icon: "enchant_defense", slot: "ring", statName: "attack", statAmount: 2, description: "Adds attack to ring" }
+  recipe: { lvl: 27, exp: 175, category: "", ingredients: { lesser_essence: 14, lesser_crystal: 13 } }
+  skill: "enchanting"
+
+- name: neck_health_2
+  stats: { icon: "enchant_defense", slot: "neck", statName: "health", statAmount: 60, description: "Adds health to neck" }
+  recipe: { lvl: 23, exp: 175, category: "", ingredients: { lesser_essence: 15, lesser_crystal: 12 } }
+  skill: "enchanting"
+- name: neck_defense_2
+  stats: { icon: "enchant_defense", slot: "neck", statName: "defense", statAmount: 2, description: "Adds defense to neck" }
+  recipe: { lvl: 25, exp: 175, category: "", ingredients: { lesser_essence: 16, lesser_crystal: 11 } }
+  skill: "enchanting"
+- name: neck_attack_2
+  stats: { icon: "enchant_defense", slot: "neck", statName: "attack", statAmount: 2, description: "Adds attack to neck" }
+  recipe: { lvl: 27, exp: 175, category: "", ingredients: { lesser_essence: 14, lesser_crystal: 13 } }
+  skill: "enchanting"
+
+### 3
+- name: weapon_attack_3
+  stats: { icon: "enchant_str", slot: "weapon", statName: "attack", statAmount: 6, description: "Adds attack to weapons" }
+  recipe: { lvl: 28, exp: 250, category: "", ingredients: { major_essence: 8, major_crystal: 7 } }
+  skill: "enchanting"
+- name: weapon_speed_3
+  stats: { icon: "enchant_str", slot: "weapon", statName: "spd", statAmount: 0.20, description: "Adds speed to weapons" }
+  recipe: { lvl: 28, exp: 250, category: "", ingredients: { major_essence: 8, major_crystal: 7 } }
+  skill: "enchanting"
+
+- name: boot_defense_3
+  stats: { icon: "enchant_defense", slot: "feet", statName: "defense", statAmount: 3, description: "Adds defense to boots" }
+  recipe: { lvl: 28, exp: 200, category: "", ingredients: { major_essence: 7, major_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_defense_3
+  stats: { icon: "enchant_defense", slot: "head", statName: "defense", statAmount: 6, description: "Adds defense to helm" }
+  recipe: { lvl: 30, exp: 300, category: "", ingredients: { major_essence: 10, major_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_defense_3
+  stats: { icon: "enchant_defense", slot: "chest", statName: "defense", statAmount: 9, description: "Adds defense to chest" }
+  recipe: { lvl: 32, exp: 400, category: "", ingredients: { major_essence: 13, major_crystal: 10 } }
+  skill: "enchanting"
+
+- name: boot_attack_3
+  stats: { icon: "enchant_str", slot: "feet", statName: "attack", statAmount: 3, description: "Adds attack to boots" }
+  recipe: { lvl: 34, exp: 250, category: "", ingredients: { major_essence: 7, major_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_attack_3
+  stats: { icon: "enchant_str", slot: "head", statName: "attack", statAmount: 6, description: "Adds attack to helm" }
+  recipe: { lvl: 36, exp: 350, category: "", ingredients: { major_essence: 10, major_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_attack_3
+  stats: { icon: "enchant_str", slot: "chest", statName: "attack", statAmount: 9, description: "Adds attack to chest" }
+  recipe: { lvl: 38, exp: 460, category: "", ingredients: { major_essence: 13, major_crystal: 10 } }
+  skill: "enchanting"
+
+- name: ring_health_3
+  stats: { icon: "enchant_defense", slot: "ring", statName: "health", statAmount: 100, description: "Adds health to ring" }
+  recipe: { lvl: 36, exp: 560, category: "", ingredients: { major_essence: 15, major_crystal: 12 } }
+  skill: "enchanting"
+- name: ring_defense_3
+  stats: { icon: "enchant_defense", slot: "ring", statName: "defense", statAmount: 4, description: "Adds defense to ring" }
+  recipe: { lvl: 38, exp: 560, category: "", ingredients: { major_essence: 16, major_crystal: 11 } }
+  skill: "enchanting"
+- name: ring_attack_3
+  stats: { icon: "enchant_defense", slot: "ring", statName: "attack", statAmount: 4, description: "Adds attack to ring" }
+  recipe: { lvl: 40, exp: 560, category: "", ingredients: { major_essence: 14, major_crystal: 13 } }
+  skill: "enchanting"
+
+- name: neck_health_3
+  stats: { icon: "enchant_defense", slot: "neck", statName: "health", statAmount: 100, description: "Adds health to neck" }
+  recipe: { lvl: 36, exp: 560, category: "", ingredients: { major_essence: 15, major_crystal: 12 } }
+  skill: "enchanting"
+- name: neck_defense_3
+  stats: { icon: "enchant_defense", slot: "neck", statName: "defense", statAmount: 4, description: "Adds defense to neck" }
+  recipe: { lvl: 38, exp: 560, category: "", ingredients: { major_essence: 16, major_crystal: 11 } }
+  skill: "enchanting"
+- name: neck_attack_3
+  stats: { icon: "enchant_defense", slot: "neck", statName: "attack", statAmount: 4, description: "Adds attack to neck" }
+  recipe: { lvl: 40, exp: 560, category: "", ingredients: { major_essence: 14, major_crystal: 13 } }
+  skill: "enchanting"
+
+### 4
+- name: weapon_attack_4
+  stats: { icon: "enchant_str", slot: "weapon", statName: "attack", statAmount: 9, description: "Adds attack to weapons" }
+  recipe: { lvl: 38, exp: 1250, category: "", ingredients: { superior_essence: 8, superior_crystal: 7 } }
+  skill: "enchanting"
+- name: weapon_speed_4
+  stats: { icon: "enchant_str", slot: "weapon", statName: "spd", statAmount: 0.25, description: "Adds speed to weapons" }
+  recipe: { lvl: 38, exp: 1250, category: "", ingredients: { superior_essence: 8, superior_crystal: 7 } }
+  skill: "enchanting"
+
+- name: boot_defense_4
+  stats: { icon: "enchant_defense", slot: "feet", statName: "defense", statAmount: 5, description: "Adds defense to boots" }
+  recipe: { lvl: 38, exp: 1000, category: "", ingredients: { superior_essence: 7, superior_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_defense_4
+  stats: { icon: "enchant_defense", slot: "head", statName: "defense", statAmount: 8, description: "Adds defense to helm" }
+  recipe: { lvl: 40, exp: 1500, category: "", ingredients: { superior_essence: 10, superior_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_defense_4
+  stats: { icon: "enchant_defense", slot: "chest", statName: "defense", statAmount: 11, description: "Adds defense to chest" }
+  recipe: { lvl: 42, exp: 2000, category: "", ingredients: { superior_essence: 13, superior_crystal: 10 } }
+  skill: "enchanting"
+
+- name: boot_attack_4
+  stats: { icon: "enchant_str", slot: "feet", statName: "attack", statAmount: 5, description: "Adds attack to boots" }
+  recipe: { lvl: 44, exp: 1250, category: "", ingredients: { superior_essence: 7, superior_crystal: 5 } }
+  skill: "enchanting"
+- name: helm_attack_4
+  stats: { icon: "enchant_str", slot: "head", statName: "attack", statAmount: 8, description: "Adds attack to helm" }
+  recipe: { lvl: 46, exp: 1750, category: "", ingredients: { superior_essence: 10, superior_crystal: 8 } }
+  skill: "enchanting"
+- name: chest_attack_4
+  stats: { icon: "enchant_str", slot: "chest", statName: "attack", statAmount: 11, description: "Adds attack to chest" }
+  recipe: { lvl: 48, exp: 2250, category: "", ingredients: { superior_essence: 13, superior_crystal: 10 } }
+  skill: "enchanting"
+
+- name: ring_health_4
+  stats: { icon: "enchant_defense", slot: "ring", statName: "health", statAmount: 150, description: "Adds health to ring" }
+  recipe: { lvl: 46, exp: 2750, category: "", ingredients: { superior_essence: 15, superior_crystal: 12 } }
+  skill: "enchanting"
+- name: ring_defense_4
+  stats: { icon: "enchant_defense", slot: "ring", statName: "defense", statAmount: 7, description: "Adds defense to ring" }
+  recipe: { lvl: 48, exp: 2750, category: "", ingredients: { superior_essence: 16, superior_crystal: 11 } }
+  skill: "enchanting"
+- name: ring_attack_4
+  stats: { icon: "enchant_defense", slot: "ring", statName: "attack", statAmount: 7, description: "Adds attack to ring" }
+  recipe: { lvl: 50, exp: 2750, category: "", ingredients: { superior_essence: 14, superior_crystal: 13 } }
+  skill: "enchanting"
+
+- name: neck_health_4
+  stats: { icon: "enchant_defense", slot: "neck", statName: "health", statAmount: 150, description: "Adds health to neck" }
+  recipe: { lvl: 46, exp: 2750, category: "", ingredients: { superior_essence: 15, superior_crystal: 12 } }
+  skill: "enchanting"
+- name: neck_defense_4
+  stats: { icon: "enchant_defense", slot: "neck", statName: "defense", statAmount: 7, description: "Adds defense to neck" }
+  recipe: { lvl: 48, exp: 2750, category: "", ingredients: { superior_essence: 16, superior_crystal: 11 } }
+  skill: "enchanting"
+- name: neck_attack_4
+  stats: { icon: "enchant_defense", slot: "neck", statName: "attack", statAmount: 7, description: "Adds attack to neck" }
+  recipe: { lvl: 50, exp: 2750, category: "", ingredients: { superior_essence: 14, superior_crystal: 13 } }
+  skill: "enchanting"
+
+
+#####
+## Jewelcrafting
+#####
+- name: socket
+  stats: { icon: "socket", color: "grey", statName: "empty socket", statAmount: 1, description: "Adds an empty socket to a piece of gear. Max varies per slot" }
+  recipe: { lvl: 1, exp: 30, category: "misc", ingredients: { blue_crystal: 1, red_crystal: 1, yellow_crystal: 1 } }
+  skill: "jewelcrafting"
+- name: reroll_sockets
+  stats: { icon: "socket", color: "grey", statName: "Reroll sockets", statAmount: "Up to 3", description: "Reroll all sockets" }
+  recipe: { lvl: 1, exp: 1, category: "misc", ingredients: { blue_crystal: 1, red_crystal: 1, yellow_crystal: 1, orb_of_jewelry: 1 } }
+  skill: "jewelcrafting"
+
+- name: simple_ring
+  stats: { attack: 1, defense: 0, health: 20, str: 1, int: 1, agi: 1, slot: "ring", price: 155, icon: "ring",}
+  recipe: { lvl: 5, exp: 30, craftTime: 3, category: "misc", ingredients: { silver_bar: 5, craftOptions: {red_crystal: 1, yellow_crystal: 1, blue_crystal: 1}, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "jewelcrafting"
+- name: simple_necklace
+  stats: { attack: 0, defense: 1, health: 20, str: 1, int: 1, agi: 1, slot: "neck", price: 215, icon: "necklace",}
+  recipe: { lvl: 5, exp: 30, craftTime: 3, category: "misc", ingredients: { silver_bar: 10, craftOptions: {red_crystal: 1, yellow_crystal: 1, blue_crystal: 1}, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "jewelcrafting"
+
+- name: nice_ring
+  stats: { attack: 3, defense: 0, health: 40, str: 2, int: 2, agi: 2, slot: "ring", price: 340, icon: "ring",}
+  recipe: { lvl: 20, exp: 120, craftTime: 3, category: "misc", ingredients: { gold_bar: 5, silver_bar: 5, craftOptions: {red_crystal: 2, yellow_crystal: 2, blue_crystal: 2}, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "jewelcrafting"
+- name: nice_necklace
+  stats: { attack: 0, defense: 3, health: 40, str: 2, int: 2, agi: 2, slot: "neck", price: 475, icon: "necklace",}
+  recipe: { lvl: 20, exp: 120, craftTime: 3, category: "misc", ingredients: { gold_bar: 10, silver_bar: 10, craftOptions: {red_crystal: 2, yellow_crystal: 2, blue_crystal: 2}, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "jewelcrafting"
+
+- name: fancy_ring
+  stats: { attack: 5, defense: 0, health: 60, str: 3, int: 3, agi: 3, slot: "ring", price: 550, icon: "ring",}
+  recipe: { lvl: 30, exp: 250, craftTime: 3, category: "misc", ingredients: { gold_bar: 15, craftOptions: {red_crystal: 3, yellow_crystal: 3, blue_crystal: 3}, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "jewelcrafting"
+- name: fancy_necklace
+  stats: { attack: 0, defense: 5, health: 60, str: 3, int: 3, agi: 3, slot: "neck", price: 700, icon: "necklace",}
+  recipe: { lvl: 30, exp: 250, craftTime: 3, category: "misc", ingredients: { gold_bar: 15, silver_bar: 15, craftOptions: {red_crystal: 3, yellow_crystal: 3, blue_crystal: 3}, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "jewelcrafting"
+
+- name: exquisite_ring #no markup
+  stats: { attack: 7, defense: 0, health: 100, str: 4, int: 4, agi: 4, slot: "ring", price: 785, icon: "ring",}
+  recipe: { lvl: 40, exp: 850, craftTime: 3, category: "misc", ingredients: { gold_bar: 15, diamond: 10, craftOptions: {red_crystal: 4, yellow_crystal: 4, blue_crystal: 4}, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "jewelcrafting"
+- name: exquisite_necklace #no markup
+  stats: { attack: 0, defense: 7, health: 100, str: 4, int: 4, agi: 4, slot: "neck", price: 920, icon: "necklace",}
+  recipe: { lvl: 40, exp: 1000, craftTime: 3, category: "misc", ingredients: { gold_bar: 15, silver_bar: 15, diamond: 10, craftOptions: {red_crystal: 4, yellow_crystal: 4, blue_crystal: 4}, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "jewelcrafting"
+
+
+- name: health_gem_1
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health"], statAmount: [15], description: "Adds health. Matches yellow sockets" }
+  recipe: { lvl: 1, exp: 30, category: "", ingredients: { yellow_crystal: 1 } }
+  skill: "jewelcrafting"
+- name: def_gem_1
+  stats: { icon: "cut_blue", color: "blue", statName: ["defense"], statAmount: [1], description: "Adds defense. Matches blue sockets" }
+  recipe: { lvl: 1, exp: 30, category: "", ingredients: { blue_crystal: 1 } }
+  skill: "jewelcrafting"
+- name: attack_gem_1
+  stats: { icon: "cut_red", color: "red", statName: ["attack"], statAmount: [1], description: "Adds attack. Matches red sockets" }
+  recipe: { lvl: 1, exp: 30, category: "", ingredients: { red_crystal: 1 } }
+  skill: "jewelcrafting"
+- name: spd_gem_1
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["spd"], statAmount: [0.04], description: "Adds attack speed. Matches yellow sockets" }
+  recipe: { lvl: 5, exp: 30, category: "", ingredients: { yellow_crystal: 1 } }
+  skill: "jewelcrafting"
+
+- name: health_gem_2
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health"], statAmount: [30], description: "Adds health. Matches yellow sockets" }
+  recipe: { lvl: 10, exp: 80, category: "", ingredients: { yellow_crystal: 2 } }
+  skill: "jewelcrafting"
+- name: def_gem_2
+  stats: { icon: "cut_blue", color: "blue", statName: ["defense"], statAmount: [2], description: "Adds defense. Matches blue sockets" }
+  recipe: { lvl: 10, exp: 80, category: "", ingredients: { blue_crystal: 2 } }
+  skill: "jewelcrafting"
+- name: attack_gem_2
+  stats: { icon: "cut_red", color: "red", statName: ["attack"], statAmount: [2], description: "Adds attack. Matches red sockets" }
+  recipe: { lvl: 10, exp: 80, category: "", ingredients: { red_crystal: 2 } }
+  skill: "jewelcrafting"
+- name: spd_gem_2
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["spd"], statAmount: [0.08], description: "Adds speed. Matches yellow sockets" }
+  recipe: { lvl: 10, exp: 80, category: "", ingredients: { yellow_crystal: 2 } }
+  skill: "jewelcrafting"
+
+- name: health_gem_3
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health"], statAmount: [45], description: "Adds health. Matches yellow sockets" }
+  recipe: { lvl: 20, exp: 150, category: "", ingredients: { yellow_crystal: 3 } }
+  skill: "jewelcrafting"
+- name: def_gem_3
+  stats: { icon: "cut_blue", color: "blue", statName: ["defense"], statAmount: [3], description: "Adds defense. Matches blue sockets" }
+  recipe: { lvl: 20, exp: 150, category: "", ingredients: { blue_crystal: 3 } }
+  skill: "jewelcrafting"
+- name: attack_gem_3
+  stats: { icon: "cut_red", color: "red", statName: ["attack"], statAmount: [3], description: "Adds attack. Matches red sockets" }
+  recipe: { lvl: 20, exp: 150, category: "", ingredients: { red_crystal: 3 } }
+  skill: "jewelcrafting"
+- name: spd_gem_3
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["spd"], statAmount: [0.10], description: "Adds speed. Matches yellow sockets" }
+  recipe: { lvl: 20, exp: 150, category: "", ingredients: { yellow_crystal: 3 } }
+  skill: "jewelcrafting"
+
+- name: health_gem_4
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health"], statAmount: [75], description: "Adds health. Matches yellow sockets" }
+  recipe: { lvl: 30, exp: 450, category: "", ingredients: { yellow_crystal: 4 } }
+  skill: "jewelcrafting"
+- name: def_gem_4
+  stats: { icon: "cut_blue", color: "blue", statName: ["defense"], statAmount: [5], description: "Adds defense. Matches blue sockets" }
+  recipe: { lvl: 30, exp: 450, category: "", ingredients: { blue_crystal: 4 } }
+  skill: "jewelcrafting"
+- name: attack_gem_4
+  stats: { icon: "cut_red", color: "red", statName: ["attack"], statAmount: [5], description: "Adds attack. Matches red sockets" }
+  recipe: { lvl: 30, exp: 450, category: "", ingredients: { red_crystal: 4 } }
+  skill: "jewelcrafting"
+- name: spd_gem_4
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["spd"], statAmount: [0.12], description: "Adds speed. Matches yellow sockets" }
+  recipe: { lvl: 30, exp: 450, category: "", ingredients: { yellow_crystal: 4 } }
+  skill: "jewelcrafting"
+
+
+- name: stalwart_gem_1
+  stats: { icon: "cut_green", color: "green", statName: ["defense", "health"], statAmount: [1, 15], description: "Adds defense and health. Matches blue and yellow sockets" }
+  recipe: { lvl: 15, exp: 80, category: "", ingredients: { green_crystal: 2 } }
+  skill: "jewelcrafting"
+- name: resolute_gem_1
+  stats: { icon: "cut_green", color: "green", statName: ["defense", "spd"], statAmount: [1, 0.04], description: "Adds defense and speed. Matches blue and yellow sockets" }
+  recipe: { lvl: 15, exp: 80, category: "", ingredients: { green_crystal: 2 } }
+  skill: "jewelcrafting"
+- name: stout_gem_1
+  stats: { icon: "cut_purple", color: "purple", statName: ["defense", "attack"], statAmount: [1, 1], description: "Adds defense and attack. Matches blue and red sockets" }
+  recipe: { lvl: 15, exp: 80, category: "", ingredients: { purple_crystal: 2 } }
+  skill: "jewelcrafting"
+- name: quick_gem_1
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health", "spd"], statAmount: [15, 0.04], description: "Adds health and speed. Matches yellow sockets" }
+  recipe: { lvl: 15, exp: 80, category: "", ingredients: { yellow_crystal: 2 } }
+  skill: "jewelcrafting"
+
+- name: stalwart_gem_2
+  stats: { icon: "cut_green", color: "green", statName: ["defense", "health"], statAmount: [2, 15], description: "Adds defense and health. Matches blue and yellow sockets" }
+  recipe: { lvl: 25, exp: 150, category: "", ingredients: { green_crystal: 3 } }
+  skill: "jewelcrafting"
+- name: resolute_gem_2
+  stats: { icon: "cut_green", color: "green", statName: ["defense", "spd"], statAmount: [2, 0.04], description: "Adds defense and speed. Matches blue and yellow sockets" }
+  recipe: { lvl: 25, exp: 150, category: "", ingredients: { green_crystal: 3 } }
+  skill: "jewelcrafting"
+- name: stout_gem_2
+  stats: { icon: "cut_purple", color: "purple", statName: ["defense", "attack"], statAmount: [1, 2], description: "Adds defense and attack. Matches blue and red sockets" }
+  recipe: { lvl: 25, exp: 150, category: "", ingredients: { purple_crystal: 3 } }
+  skill: "jewelcrafting"
+- name: quick_gem_2
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health", "spd"], statAmount: [15, 0.08], description: "Adds health and speed. Matches yellow sockets" }
+  recipe: { lvl: 25, exp: 150, category: "", ingredients: { yellow_crystal: 3 } }
+  skill: "jewelcrafting"
+
+- name: stalwart_gem_3
+  stats: { icon: "cut_green", color: "green", statName: ["defense", "health"], statAmount: [3, 30], description: "Adds defense and health. Matches blue and yellow sockets" }
+  recipe: { lvl: 35, exp: 450, category: "", ingredients: { green_crystal: 4 } }
+  skill: "jewelcrafting"
+- name: resolute_gem_3
+  stats: { icon: "cut_green", color: "green", statName: ["defense", "spd"], statAmount: [3, 0.08], description: "Adds defense and speed. Matches blue and yellow sockets" }
+  recipe: { lvl: 35, exp: 450, category: "", ingredients: { green_crystal: 4 } }
+  skill: "jewelcrafting"
+- name: stout_gem_3
+  stats: { icon: "cut_purple", color: "purple", statName: ["defense", "attack"], statAmount: [2, 3], description: "Adds defense and attack. Matches blue and red sockets" }
+  recipe: { lvl: 35, exp: 450, category: "", ingredients: { purple_crystal: 4 } }
+  skill: "jewelcrafting"
+- name: quick_gem_3
+  stats: { icon: "cut_yellow", color: "yellow", statName: ["health", "spd"], statAmount: [30, 0.10], description: "Adds health and speed. Matches yellow sockets" }
+  recipe: { lvl: 35, exp: 450, category: "", ingredients: { yellow_crystal: 4 } }
+  skill: "jewelcrafting"
+
+## TODO: Orange
+### # health + str
+### - name: rugged_gem_1
+###   stats: { icon: "cut_green", color: "green", statName: ["health"], statAmount: 60, description: "Adds health + str" }
+###   recipe: { lvl: 1, exp: 30, category: "", ingredients: { green_crystal: 1 } }
+###   skill: "jewelcrafting"
+### # spd + str
+### - name: sharp_gem_1
+###   stats: { icon: "cut_green", color: "green", statName: ["health"], statAmount: 60, description: "Adds spd + str" }
+###   recipe: { lvl: 1, exp: 30, category: "", ingredients: { green_crystal: 1 } }
+###   skill: "jewelcrafting"
+
+
+#####
+## Prayer
+#####
+## TODO: Exp prayer
+- name: health_prayer_1
+  stats: { icon: "enchant_str", slot: "prayer", maxhealth: 40, description: "Increase MaxHealth when prayer active. Fades on death" }
+  recipe: { lvl: 1, exp: 15, category: "", ingredients: { ink: 1, scroll: 2, bone: 10 } }
+  skill: "prayer"
+- name: def_prayer_1
+  stats: { icon: "enchant_defense", slot: "prayer", defense: 2, description: "Increase Defense when prayer active. Fades on death" }
+  recipe: { lvl: 4, exp: 30, category: "", ingredients: { ink: 1, scroll: 2, bone: 10, light_hide: 2 } }
+  skill: "prayer"
+- name: atk_prayer_1
+  stats: { icon: "enchant_defense", slot: "prayer", attack: 2, description: "Increase Attack when prayer active. Fades on death" }
+  recipe: { lvl: 7, exp: 50, category: "", ingredients: { ink: 1, scroll: 2, bone: 10, horn: 2 } }
+  skill: "prayer"
+- name: spd_prayer_1
+  stats: { icon: "enchant_defense", slot: "prayer", spd: 0.05, description: "Increase AttackSpeed when prayer active. Fades on death" }
+  recipe: { lvl: 10, exp: 70, category: "", ingredients: { ink: 1, scroll: 2, bone: 10, beak: 2 } }
+  skill: "prayer"
+
+- name: health_prayer_2
+  stats: { icon: "enchant_str", slot: "prayer", maxhealth: 80, description: "Increase MaxHealth when prayer active. Fades on death" }
+  recipe: { lvl: 12, exp: 80, category: "", ingredients: { ink: 1, scroll: 2, large_bone: 10 } }
+  skill: "prayer"
+- name: def_prayer_2
+  stats: { icon: "enchant_defense", slot: "prayer", defense: 4, description: "Increase Defense when prayer active. Fades on death" }
+  recipe: { lvl: 14, exp: 105, category: "", ingredients: { ink: 1, scroll: 2, large_bone: 10, heavy_fur: 2 } }
+  skill: "prayer"
+- name: atk_prayer_2
+  stats: { icon: "enchant_defense", slot: "prayer", attack: 4, description: "Increase Attack when prayer active. Fades on death" }
+  recipe: { lvl: 17, exp: 135, category: "", ingredients: { ink: 1, scroll: 2, large_bone: 10, claw: 2 } }
+  skill: "prayer"
+- name: spd_prayer_2
+  stats: { icon: "enchant_defense", slot: "prayer", spd: 0.08, description: "Increase AttackSpeed when prayer active. Fades on death" }
+  recipe: { lvl: 20, exp: 170, category: "", ingredients: { ink: 1, scroll: 2, large_bone: 10, heavy_fur: 2 } }
+  skill: "prayer"
+
+- name: health_prayer_3
+  stats: { icon: "enchant_str", slot: "prayer", maxhealth: 120, description: "Increase MaxHealth when prayer active. Fades on death" }
+  recipe: { lvl: 22, exp: 250, category: "", ingredients: { ink: 1, scroll: 2, thick_bone: 10 } }
+  skill: "prayer"
+- name: def_prayer_3
+  stats: { icon: "enchant_defense", slot: "prayer", defense: 6, description: "Increase Defense when prayer active. Fades on death" }
+  recipe: { lvl: 24, exp: 250, category: "", ingredients: { ink: 1, scroll: 2, thick_bone: 10, strange_powder: 3 } }
+  skill: "prayer"
+- name: atk_prayer_3
+  stats: { icon: "enchant_defense", slot: "prayer", attack: 6, description: "Increase Attack when prayer active. Fades on death" }
+  recipe: { lvl: 27, exp: 250, category: "", ingredients: { ink: 1, scroll: 2, thick_bone: 10, strange_powder: 3 } }
+  skill: "prayer"
+- name: spd_prayer_3
+  stats: { icon: "enchant_defense", slot: "prayer", spd: 0.10, description: "Increase AttackSpeed when prayer active. Fades on death" }
+  recipe: { lvl: 30, exp: 250, category: "", ingredients: { ink: 1, scroll: 2, thick_bone: 10, strange_powder: 3 } }
+  skill: "prayer"
+
+- name: health_prayer_4
+  stats: { icon: "enchant_str", slot: "prayer", maxhealth: 160, description: "Increase MaxHealth when prayer active. Fades on death" }
+  recipe: { lvl: 32, exp: 550, category: "", ingredients: { ink: 1, scroll: 2, hardened_bone: 10 } }
+  skill: "prayer"
+- name: def_prayer_4
+  stats: { icon: "enchant_defense", slot: "prayer", defense: 8, description: "Increase Defense when prayer active. Fades on death" }
+  recipe: { lvl: 34, exp: 550, category: "", ingredients: { ink: 1, scroll: 2, hardened_bone: 10, strange_powder: 6 } }
+  skill: "prayer"
+- name: atk_prayer_4
+  stats: { icon: "enchant_defense", slot: "prayer", attack: 8, description: "Increase Attack when prayer active. Fades on death" }
+  recipe: { lvl: 37, exp: 550, category: "", ingredients: { ink: 1, scroll: 2, hardened_bone: 10, strange_powder: 6 } }
+  skill: "prayer"
+- name: spd_prayer_4
+  stats: { icon: "enchant_defense", slot: "prayer", spd: 0.12, description: "Increase AttackSpeed when prayer active. Fades on death" }
+  recipe: { lvl: 40, exp: 550, category: "", ingredients: { ink: 1, scroll: 2, hardened_bone: 10, strange_powder: 6 } }
+  skill: "prayer"
+
+- name: health_prayer_5
+  stats: { icon: "enchant_str", slot: "prayer", maxhealth: 250, description: "Increase MaxHealth when prayer active. Fades on death" }
+  recipe: { lvl: 42, exp: 1250, category: "", ingredients: { ink: 1, scroll: 2, unholy_bone: 10 } }
+  skill: "prayer"
+- name: def_prayer_5
+  stats: { icon: "enchant_defense", slot: "prayer", defense: 12, description: "Increase Defense when prayer active. Fades on death" }
+  recipe: { lvl: 44, exp: 1250, category: "", ingredients: { ink: 1, scroll: 2, unholy_bone: 10, ghastly_substance: 4 } }
+  skill: "prayer"
+- name: atk_prayer_5
+  stats: { icon: "enchant_defense", slot: "prayer", attack: 12, description: "Increase Attack when prayer active. Fades on death" }
+  recipe: { lvl: 47, exp: 1250, category: "", ingredients: { ink: 1, scroll: 2, unholy_bone: 10, ghastly_substance: 4 } }
+  skill: "prayer"
+- name: spd_prayer_5
+  stats: { icon: "enchant_defense", slot: "prayer", spd: 0.15, description: "Increase AttackSpeed when prayer active. Fades on death" }
+  recipe: { lvl: 50, exp: 1250, category: "", ingredients: { ink: 1, scroll: 2, unholy_bone: 10, ghastly_substance: 4 } }
+  skill: "prayer"
+
+#####
+## Alchemy
+#####
+- name: ink
+  stats: { icon: "ink", price: 14, description: "Used to record magical words of wisdom" }
+  recipe: { lvl: 3, exp: 3, craftTime: 2, category: "", ingredients: { sage: 2 } }
+  skill: "alchemy"
+- name: healing_potion_1
+  stats: { icon: "potion", slot: "potion", price: 18, health: 120, description: "Use to heal. Automatically triggers when taking non-fatal damage below 15% health" }
+  recipe: { lvl: 1, exp: 5, category: "", ingredients: { root: 2, carrot: 6, craftEnhancements: { potent_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: health_potion_1
+  stats: { icon: "health_potion", slot: "potion", price: 34, maxhealth: 30, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 1, exp: 10, category: "", ingredients: { root: 3, bone: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: def_potion_1
+  stats: { icon: "def_potion", slot: "potion", price: 42, defense: 2, description: "Boosts Defense stat" }
+  recipe: { lvl: 3, exp: 15, category: "", ingredients: { root: 3, pumpkin: 5, light_fur: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: str_potion_1
+  stats: { icon: "str_potion", slot: "potion", price: 42, str: 3, description: "Boosts Str stat" }
+  recipe: { lvl: 5, exp: 18, category: "", ingredients: { root: 3, berry: 5, fang: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: spd_potion_1
+  stats: { icon: "spd_potion", slot: "potion", price: 69, spd: 0.05, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 8, exp: 22, category: "", ingredients: { root: 3, tomato: 5, horn: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+
+- name: potent_elixir_1
+  stats: { icon: "elixir", price: 50, description: "Increases effectiveness of potions and flasks" }
+  recipe: { lvl: 10, exp: 25, category: "elixir", ingredients: { root: 2, mushroom: 5 } }
+  skill: "alchemy"
+- name: lingering_elixir_1
+  stats: { icon: "elixir", price: 50, description: "Increases duration of potions and flasks" }
+  recipe: { lvl: 10, exp: 25, category: "elixir", ingredients: { root: 2, mushroom: 5 } }
+  skill: "alchemy"
+
+- name: def_flask_1
+  stats: { icon: "def_flask", slot: "flask", price: 100, defense: 3, description: "Boosts Defense stat. Persists through death. Only 1 flask active at a time" }
+  recipe: { lvl: 10, craftTime: 10, exp: 40, category: "", ingredients: { root: 6, pumpkin: 10, light_fur: 2, sage: 2, craftEnhancements: { potent_elixir_1: 2, lingering_elixir_1: 2 } } }
+  skill: "alchemy"
+- name: str_flask_1
+  stats: { icon: "str_flask", slot: "flask", price: 100, str: 4, description: "Boosts Str stat. Persists through death. Only 1 flask active at a time" }
+  recipe: { lvl: 12, craftTime: 10, exp: 50, category: "", ingredients: { root: 6, berry: 10, fang: 2, sage: 2, craftEnhancements: { potent_elixir_1: 2, lingering_elixir_1: 2 } } }
+  skill: "alchemy"
+- name: spd_flask_1
+  stats: { icon: "spd_flask", slot: "flask", price: 155, spd: 0.05, description: "Boosts AttackSpeed. Persists through death. Only 1 flask active at a time" }
+  recipe: { lvl: 15, craftTime: 10, exp: 60, category: "", ingredients: { root: 6, tomato: 10, horn: 2, sage: 2, craftEnhancements: { potent_elixir_1: 2, lingering_elixir_1: 2 } } }
+  skill: "alchemy"
+
+- name: healing_potion_2
+  stats: { icon: "potion", slot: "potion", price: 40, health: 240, description: "Use to heal. Automatically triggers when taking non-fatal damage below 15% health"}
+  recipe: { lvl: 12, exp: 35, category: "", ingredients: { root: 6, carrot: 12, craftEnhancements: { potent_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: health_potion_2
+  stats: { icon: "health_potion", slot: "potion", price: 68, maxhealth: 60, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 12, exp: 42, category: "", ingredients: { root: 9, large_bone: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: def_potion_2
+  stats: { icon: "def_potion", slot: "potion", price: 90, defense: 4, description: "Boosts Defense stat" }
+  recipe: { lvl: 15, exp: 49, category: "", ingredients: { root: 9, pumpkin: 10, heavy_fur: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: str_potion_2
+  stats: { icon: "str_potion", slot: "potion", price: 95, str: 5, description: "Boosts Str stat" }
+  recipe: { lvl: 17, exp: 57, category: "", ingredients: { root: 9, berry: 10, claw: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: spd_potion_2
+  stats: { icon: "spd_potion", slot: "potion", price: 135, spd: 0.08, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 20, exp: 65, category: "", ingredients: { root: 9, tomato: 10, heavy_fur: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+
+- name: healing_potion_3
+  stats: { icon: "potion", slot: "potion", price: 80, health: 360, description: "Use to heal. Automatically triggers when taking non-fatal damage below 15% health"}
+  recipe: { lvl: 22, exp: 100, category: "", ingredients: { root: 6, carrot: 12, strange_powder: 1, craftEnhancements: { potent_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: health_potion_3
+  stats: { icon: "health_potion", slot: "potion", price: 95, maxhealth: 90, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 22, exp: 110, category: "", ingredients: { root: 9, thick_bone: 2, strange_powder: 1, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: def_potion_3
+  stats: { icon: "def_potion", slot: "potion", price: 145, defense: 6, description: "Boosts Defense stat" }
+  recipe: { lvl: 25, exp: 135, category: "", ingredients: { root: 9, pumpkin: 10, strange_powder: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: str_potion_3
+  stats: { icon: "str_potion", slot: "potion", price: 145, str: 7, description: "Boosts Str stat" }
+  recipe: { lvl: 27, exp: 160, category: "", ingredients: { root: 9, berry: 10, strange_powder: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+- name: spd_potion_3
+  stats: { icon: "spd_potion", slot: "potion", price: 190, spd: 0.10, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 30, exp: 195, category: "", ingredients: { root: 9, tomato: 10, strange_powder: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+  skill: "alchemy"
+
+- name: potent_elixir_2 #no markup
+  stats: { icon: "elixir", price: 165, description: "Increases effectiveness of potions and flasks" }
+  recipe: { lvl: 30, exp: 225, category: "elixir", ingredients: { ginger: 5, mushroom: 10, strange_powder: 1 } }
+  skill: "alchemy"
+- name: lingering_elixir_2 #no markup
+  stats: { icon: "elixir", price: 165, description: "Increases duration of potions and flasks" }
+  recipe: { lvl: 30, exp: 225, category: "elixir", ingredients: { ginger: 5, mushroom: 10, strange_powder: 1 } }
+  skill: "alchemy"
+
+- name: def_flask_2 #no markup
+  stats: { icon: "def_flask", slot: "flask", price: 280, defense: 7, description: "Boosts Defense stat. Persists through death. Only 1 flask active at a time" }
+  recipe: { lvl: 30, craftTime: 10, exp: 300, category: "", ingredients: { ginger: 7, strange_powder: 5, craftEnhancements: { potent_elixir_2: 2, lingering_elixir_2: 2 } } }
+  skill: "alchemy"
+- name: str_flask_2 #no markup
+  stats: { icon: "str_flask", slot: "flask", price: 280, str: 8, description: "Boosts Str stat. Persists through death. Only 1 flask active at a time" }
+  recipe: { lvl: 32, craftTime: 10, exp: 300, category: "", ingredients: { ginger: 7, strange_powder: 5, craftEnhancements: { potent_elixir_2: 2, lingering_elixir_2: 2 } } }
+  skill: "alchemy"
+- name: spd_flask_2 #no markup
+  stats: { icon: "spd_flask", slot: "flask", price: 280, spd: 0.10, description: "Boosts AttackSpeed. Persists through death. Only 1 flask active at a time" }
+  recipe: { lvl: 35, craftTime: 10, exp: 300, category: "", ingredients: { ginger: 7, strange_powder: 5, craftEnhancements: { potent_elixir_2: 2, lingering_elixir_2: 2 } } }
+  skill: "alchemy"
+
+- name: healing_potion_4 #no markup
+  stats: { icon: "potion", slot: "potion", price: 195, health: 480, description: "Use to heal. Automatically triggers when taking non-fatal damage below 15% health"}
+  recipe: { lvl: 32, exp: 320, category: "", ingredients: { ginger: 5, strange_powder: 2, ghastly_substance: 1, craftEnhancements: { potent_elixir_2: 1 } } }
+  skill: "alchemy"
+- name: health_potion_4 #no markup
+  stats: { icon: "health_potion", slot: "potion", price: 200, maxhealth: 150, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 32, exp: 320, category: "", ingredients: { ginger: 5, hardened_bone: 2, strange_powder: 1, ghastly_substance: 1, craftEnhancements: { potent_elixir_2: 1, lingering_elixir_2: 1 } } }
+  skill: "alchemy"
+- name: def_potion_4 #no markup
+  stats: { icon: "def_potion", slot: "potion", price: 290, defense: 9, description: "Boosts Defense stat" }
+  recipe: { lvl: 35, exp: 350, category: "", ingredients: { ginger: 5, hardened_bone: 1, strange_powder: 2, ghastly_substance: 2, craftEnhancements: { potent_elixir_2: 1, lingering_elixir_2: 1 } } }
+  skill: "alchemy"
+- name: str_potion_4 #no markup
+  stats: { icon: "str_potion", slot: "potion", price: 306, str: 10, description: "Boosts Str stat" }
+  recipe: { lvl: 37, exp: 400, category: "", ingredients: { ginger: 5, corn: 3, strange_powder: 2, ghastly_substance: 2, craftEnhancements: { potent_elixir_2: 1, lingering_elixir_2: 1 } } }
+  skill: "alchemy"
+- name: spd_potion_4 #no markup
+  stats: { icon: "spd_potion", slot: "potion", price: 318, spd: 0.12, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 40, exp: 450, category: "", ingredients: { ginger: 5, wheat: 3, strange_powder: 2, ghastly_substance: 2, craftEnhancements: { potent_elixir_2: 1, lingering_elixir_2: 1 } } }
+  skill: "alchemy"
+
+
+#- name: agi_potion_1
+#  stats: { icon: "strength", slot: "potion", price: 10, agi: 3, description: "Boosts Agi stat" }
+#  recipe: { lvl: 1, exp: 3, category: "", ingredients: { root: 2, pumpkin: 2, berry: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+#  skill: "alchemy"
+#- name: int_potion_1
+#  stats: { icon: "strength", slot: "potion", price: 10, int: 3, description: "Boosts Int stat" }
+#  recipe: { lvl: 1, exp: 3, category: "", ingredients: { root: 2, pumpkin: 1, berry: 2, craftEnhancements: { potent_elixir_1: 1, lingering_elixir_1: 1 } } }
+#  skill: "alchemy"
+
+#####
+## Smithing
+#####
+### TODO: Making an item using interchangable mats - copper_blade_tip, mithril_blade_tip
+## Ideally the materials create tier of item but we cant require tier in recipes yet
+
+## Smelting
+- name: copper_bar
+  stats: { icon: "copper_bar", price: 5, description: "Used to forge equipment" }
+  recipe: { lvl: 1, exp: 1, craftTime: 1, category: "smelting", ingredients: { copper: 1 } }
+  skill: "smithing"
+- name: bronze_bar
+  stats: { icon: "bronze_bar", price: 11, description: "Used to forge equipment" }
+  recipe: { lvl: 10, exp: 2, craftTime: 1, category: "smelting", ingredients: { copper: 1, tin: 1 } }
+  skill: "smithing"
+- name: silver_bar
+  stats: { icon: "silver_bar", price: 9, description: "Used to craft jewelery" }
+  recipe: { lvl: 10, exp: 2, craftTime: 1, category: "smelting", ingredients: { silver: 1 } }
+  skill: "smithing"
+- name: iron_bar
+  stats: { icon: "iron_bar", price: 24, description: "Used to forge equipment" }
+  recipe: { lvl: 20, exp: 6, craftTime: 1, category: "smelting", ingredients: { iron: 1, coal: 1 } }
+  skill: "smithing"
+- name: gold_bar
+  stats: { icon: "gold_bar", price: 15, description: "Used to craft jewelery" }
+  recipe: { lvl: 20, exp: 6, craftTime: 1, category: "smelting", ingredients: { gold: 1 } }
+  skill: "smithing"
+- name: steel_bar
+  stats: { icon: "steel_bar", price: 64, description: "Used to forge equipment" }
+  recipe: { lvl: 30, exp: 10, craftTime: 1, category: "smelting", ingredients: { iron_bar: 2, coal: 1 } }
+  skill: "smithing"
+- name: mithril_bar
+  stats: { icon: "mithril_bar", price: 90, description: "Used to forge equipment" }
+  recipe: { lvl: 40, exp: 15, craftTime: 1, category: "smelting", ingredients: { mithril: 2, coal: 4 } }
+  skill: "smithing"
+
+#- name: arrow_tip
+#  stats: { icon: null, slot: null, price: 10, description: "Tip of arrow" }
+#  recipe: { lvl: 1, exp: 3, category: "", ingredients: { stick: 1, copper: 2 } }
+#  skill: "smithing"
+#- name: metal_shield
+#  stats: { icon: null, slot: null, price: 10, description: "Shield made of metal" }
+#  recipe: { lvl: 1, exp: 3, category: "", ingredients: { stick: 1, copper: 2 } }
+#  skill: "smithing"
+
+## Misc
+- name: dagger_handle_1
+  stats: { icon: "dagger_handle", price: 11, description: "Handle for dagger" }
+  recipe: { lvl: 1, exp: 2, category: "misc_parts", ingredients: { birch: 5 } }
+  skill: "smithing"
+- name: tool_handle_1
+  stats: { icon: "mace_shaft", price: 11, description: "Handle for various tools" }
+  recipe: { lvl: 1, exp: 2, category: "misc_parts", ingredients: { birch: 5 } }
+  skill: "smithing"
+- name: sword_hilt_1
+  stats: { icon: "sword_hilt", price: 18, description: "Hilt for a sword" }
+  recipe: { lvl: 3, exp: 3, category: "misc_parts", ingredients: { birch: 8 } }
+  skill: "smithing"
+- name: mace_shaft_1
+  stats: { icon: "mace_shaft", price: 22, description: "Shaft for a mace" }
+  recipe: { lvl: 3, exp: 4, category: "misc_parts", ingredients: { birch: 10 } }
+  skill: "smithing"
+- name: wooden_rod_1
+  stats: { icon: "wooden_rod", price: 22, description: "Base for an enchanting rod" }
+  recipe: { lvl: 3, exp: 4, category: "misc_parts", ingredients: { birch: 10 } }
+  skill: "smithing"
+
+- name: dagger_handle_2
+  stats: { icon: "dagger_handle", price: 34, description: "Handle for dagger" }
+  recipe: { lvl: 10, exp: 4, category: "misc_parts", ingredients: { maple: 5 } }
+  skill: "smithing"
+- name: tool_handle_2
+  stats: { icon: "mace_shaft", price: 34, description: "Handle for various tools" }
+  recipe: { lvl: 10, exp: 4, category: "misc_parts", ingredients: { maple: 5 } }
+  skill: "smithing"
+- name: sword_hilt_2
+  stats: { icon: "sword_hilt", price: 54, description: "Hilt for a sword" }
+  recipe: { lvl: 12, exp: 6, category: "misc_parts", ingredients: { maple: 8 } }
+  skill: "smithing"
+- name: mace_shaft_2
+  stats: { icon: "mace_shaft", price: 68, description: "Shaft for a mace" }
+  recipe: { lvl: 12, exp: 8, category: "misc_parts", ingredients: { maple: 10 } }
+  skill: "smithing"
+- name: wooden_rod_2
+  stats: { icon: "wooden_rod", price: 68, description: "Base for an enchanting rod" }
+  recipe: { lvl: 12, exp: 8, category: "misc_parts", ingredients: { maple: 10 } }
+  skill: "smithing"
+
+- name: dagger_handle_3
+  stats: { icon: "dagger_handle", price: 66, description: "Handle for dagger" }
+  recipe: { lvl: 20, exp: 22, category: "misc_parts", ingredients: { oak: 5 } }
+  skill: "smithing"
+- name: tool_handle_3
+  stats: { icon: "mace_shaft", price: 66, description: "Handle for various tools" }
+  recipe: { lvl: 20, exp: 22, category: "misc_parts", ingredients: { oak: 5 } }
+  skill: "smithing"
+- name: sword_hilt_3
+  stats: { icon: "sword_hilt", price: 105, description: "Hilt for a sword" }
+  recipe: { lvl: 22, exp: 30, category: "misc_parts", ingredients: { oak: 8 } }
+  skill: "smithing"
+- name: mace_shaft_3
+  stats: { icon: "mace_shaft", price: 132, description: "Shaft for a mace" }
+  recipe: { lvl: 22, exp: 40, category: "misc_parts", ingredients: { oak: 10 } }
+  skill: "smithing"
+- name: wooden_rod_3
+  stats: { icon: "wooden_rod", price: 132, description: "Base for an enchanting rod" }
+  recipe: { lvl: 22, exp: 40, category: "misc_parts", ingredients: { oak: 10 } }
+  skill: "smithing"
+
+- name: dagger_handle_4
+  stats: { icon: "dagger_handle", price: 90, description: "Handle for dagger" }
+  recipe: { lvl: 30, exp: 80, category: "misc_parts", ingredients: { pine: 5 } }
+  skill: "smithing"
+- name: tool_handle_4
+  stats: { icon: "mace_shaft", price: 90, description: "Handle for various tools" }
+  recipe: { lvl: 30, exp: 80, category: "misc_parts", ingredients: { pine: 5 } }
+  skill: "smithing"
+- name: sword_hilt_4
+  stats: { icon: "sword_hilt", price: 145, description: "Hilt for a sword" }
+  recipe: { lvl: 32, exp: 115, category: "misc_parts", ingredients: { pine: 8 } }
+  skill: "smithing"
+- name: mace_shaft_4
+  stats: { icon: "mace_shaft", price: 180, description: "Shaft for a mace" }
+  recipe: { lvl: 32, exp: 155, category: "misc_parts", ingredients: { pine: 10 } }
+  skill: "smithing"
+- name: wooden_rod_4
+  stats: { icon: "wooden_rod", price: 180, description: "Base for an enchanting rod" }
+  recipe: { lvl: 32, exp: 155, category: "misc_parts", ingredients: { pine: 10 } }
+  skill: "smithing"
+
+- name: dagger_handle_5
+  stats: { icon: "dagger_handle", price: 120, description: "Handle for dagger" }
+  recipe: { lvl: 40, exp: 215, category: "misc_parts", ingredients: { mahogony: 5 } }
+  skill: "smithing"
+- name: tool_handle_5
+  stats: { icon: "mace_shaft", price: 120, description: "Handle for various tools" }
+  recipe: { lvl: 40, exp: 215, category: "misc_parts", ingredients: { mahogony: 5 } }
+  skill: "smithing"
+- name: sword_hilt_5
+  stats: { icon: "sword_hilt", price: 185, description: "Hilt for a sword" }
+  recipe: { lvl: 42, exp: 300, category: "misc_parts", ingredients: { mahogony: 8 } }
+  skill: "smithing"
+- name: mace_shaft_5
+  stats: { icon: "mace_shaft", price: 230, description: "Shaft for a mace" }
+  recipe: { lvl: 42, exp: 375, category: "misc_parts", ingredients: { mahogony: 10 } }
+  skill: "smithing"
+- name: wooden_rod_5
+  stats: { icon: "wooden_rod", price: 230, description: "Base for an enchanting rod" }
+  recipe: { lvl: 42, exp: 375, category: "misc_parts", ingredients: { mahogony: 10 } }
+  skill: "smithing"
+
+
+## Tools
+- name: copper_hoe
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Farming", tier: 1, icon: "hoe", description: "Tool for farming"}
+  recipe: { lvl: 3, exp: 5, category: "tool", ingredients: { copper_bar: 10, tool_handle_1: 1 } }
+  skill: "smithing"
+- name: copper_pickaxe
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Mining", tier: 1, icon: "pickaxe", description: "Tool for mining"}
+  recipe: { lvl: 3, exp: 5, category: "tool", ingredients: { copper_bar: 10, tool_handle_1: 1 } }
+  skill: "smithing"
+- name: copper_axe
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Forestry", tier: 1, icon: "axe", description: "Tool for forestry"}
+  recipe: { lvl: 3, exp: 5, category: "tool", ingredients: { copper_bar: 10, tool_handle_1: 1 } }
+  skill: "smithing"
+- name: copper_shovel
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Herbalism", tier: 1, icon: "shovel", description: "Tool for herbalism"}
+  recipe: { lvl: 3, exp: 5, category: "tool", ingredients: { copper_bar: 10, tool_handle_1: 1 } }
+  skill: "smithing"
+- name: copper_pot
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Cooking", tier: 1, icon: "pot", description: "Tool for cooking"}
+  recipe: { lvl: 3, exp: 5, category: "tool", ingredients: { copper_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+- name: copper_hammer
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Smithing", tier: 1, icon: "hammer", description: "Tool for smithing"}
+  recipe: { lvl: 5, exp: 6, category: "tool", ingredients: { copper_bar: 10, tool_handle_1: 1 } }
+  skill: "smithing"
+- name: copper_mortar
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Alchemy", tier: 1, icon: "mortar", description: "Tool for alchemy"}
+  recipe: { lvl: 5, exp: 6, category: "tool", ingredients: { copper_bar: 10, stone: 15 } }
+  skill: "smithing"
+- name: copper_rod
+  stats: { extraExp: 0.05, extraYield: 0.05, skill: "Enchanting", tier: 1, icon: "rod", description: "Tool for enchanting"}
+  recipe: { lvl: 5, exp: 6, category: "tool", ingredients: { copper_bar: 10, wooden_rod_1: 1 } }
+  skill: "smithing"
+- name: copper_gemcutter
+  stats: { extraExp: 0.05, extraYield: 0.05, skill: "Jewelcrafting", tier: 1, icon: "chisel", description: "Tool for jewelcrafting"}
+  recipe: { lvl: 5, exp: 6, category: "tool", ingredients: { copper_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+
+- name: bronze_hoe
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Farming", tier: 2, icon: "hoe", description: "Tool for farming"}
+  recipe: { lvl: 10, exp: 12, category: "tool", ingredients: { bronze_bar: 10, tool_handle_2: 1 } }
+  skill: "smithing"
+- name: bronze_pickaxe
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Mining", tier: 2, icon: "pickaxe", description: "Tool for mining"}
+  recipe: { lvl: 10, exp: 12, category: "tool", ingredients: { bronze_bar: 10, tool_handle_2: 1 } }
+  skill: "smithing"
+- name: bronze_axe
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Forestry", tier: 2, icon: "axe", description: "Tool for forestry"}
+  recipe: { lvl: 10, exp: 12, category: "tool", ingredients: { bronze_bar: 10, tool_handle_2: 1 } }
+  skill: "smithing"
+- name: bronze_shovel
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Herbalism", tier: 2, icon: "shovel", description: "Tool for herbalism"}
+  recipe: { lvl: 10, exp: 12, category: "tool", ingredients: { bronze_bar: 10, tool_handle_2: 1 } }
+  skill: "smithing"
+- name: bronze_pot
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Cooking", tier: 2, icon: "pot", description: "Tool for cooking"}
+  recipe: { lvl: 10, exp: 12, category: "tool", ingredients: { bronze_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+- name: bronze_hammer
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Smithing", tier: 2, icon: "hammer", description: "Tool for smithing"}
+  recipe: { lvl: 12, exp: 14, category: "tool", ingredients: { bronze_bar: 10, tool_handle_2: 1 } }
+  skill: "smithing"
+- name: bronze_mortar
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Alchemy", tier: 2, icon: "mortar", description: "Tool for alchemy"}
+  recipe: { lvl: 12, exp: 14, category: "tool", ingredients: { bronze_bar: 10, stone: 15 } }
+  skill: "smithing"
+- name: bronze_rod
+  stats: { extraExp: 0.10, extraYield: 0.10, skill: "Enchanting", tier: 2, icon: "rod", description: "Tool for enchanting"}
+  recipe: { lvl: 12, exp: 14, category: "tool", ingredients: { bronze_bar: 10, wooden_rod_2: 1 } }
+  skill: "smithing"
+- name: bronze_gemcutter
+  stats: { extraExp: 0.10, extraYield: 0.10, skill: "Jewelcrafting", tier: 2, icon: "chisel", description: "Tool for jewelcrafting"}
+  recipe: { lvl: 12, exp: 14, category: "tool", ingredients: { bronze_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+
+- name: iron_hoe
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Farming", tier: 3, icon: "hoe", description: "Tool for farming"}
+  recipe: { lvl: 20, exp: 60, category: "tool", ingredients: { iron_bar: 10, tool_handle_3: 1 } }
+  skill: "smithing"
+- name: iron_pickaxe
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Mining", tier: 3, icon: "pickaxe", description: "Tool for mining"}
+  recipe: { lvl: 20, exp: 60, category: "tool", ingredients: { iron_bar: 10, tool_handle_3: 1 } }
+  skill: "smithing"
+- name: iron_axe
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Forestry", tier: 3, icon: "axe", description: "Tool for forestry"}
+  recipe: { lvl: 20, exp: 60, category: "tool", ingredients: { iron_bar: 10, tool_handle_3: 1 } }
+  skill: "smithing"
+- name: iron_shovel
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Herbalism", tier: 3, icon: "shovel", description: "Tool for herbalism"}
+  recipe: { lvl: 20, exp: 60, category: "tool", ingredients: { iron_bar: 10, tool_handle_3: 1 } }
+  skill: "smithing"
+- name: iron_pot
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Cooking", tier: 3, icon: "pot", description: "Tool for cooking"}
+  recipe: { lvl: 20, exp: 60, category: "tool", ingredients: { iron_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+- name: iron_hammer
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Smithing", tier: 3, icon: "hammer", description: "Tool for smithing"}
+  recipe: { lvl: 22, exp: 65, category: "tool", ingredients: { iron_bar: 10, tool_handle_3: 1 } }
+  skill: "smithing"
+- name: iron_mortar
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Alchemy", tier: 3, icon: "mortar", description: "Tool for alchemy"}
+  recipe: { lvl: 22, exp: 65, category: "tool", ingredients: { iron_bar: 10, stone: 15 } }
+  skill: "smithing"
+- name: iron_rod
+  stats: { extraExp: 0.15, extraYield: 0.15, skill: "Enchanting", tier: 3, icon: "rod", description: "Tool for enchanting"}
+  recipe: { lvl: 22, exp: 65, category: "tool", ingredients: { iron_bar: 10, wooden_rod_3: 1 } }
+  skill: "smithing"
+- name: iron_gemcutter
+  stats: { extraExp: 0.15, extraYield: 0.15, skill: "Jewelcrafting", tier: 3, icon: "chisel", description: "Tool for jewelcrafting"}
+  recipe: { lvl: 22, exp: 65, category: "tool", ingredients: { iron_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+
+- name: steel_hoe
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Farming", tier: 4, icon: "hoe", description: "Tool for farming"}
+  recipe: { lvl: 30, exp: 200, category: "tool", ingredients: { steel_bar: 10, tool_handle_4: 1 } }
+  skill: "smithing"
+- name: steel_pickaxe
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Mining", tier: 4, icon: "pickaxe", description: "Tool for mining"}
+  recipe: { lvl: 30, exp: 200, category: "tool", ingredients: { steel_bar: 10, tool_handle_4: 1 } }
+  skill: "smithing"
+- name: steel_axe
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Forestry", tier: 4, icon: "axe", description: "Tool for forestry"}
+  recipe: { lvl: 30, exp: 200, category: "tool", ingredients: { steel_bar: 10, tool_handle_4: 1 } }
+  skill: "smithing"
+- name: steel_shovel
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Herbalism", tier: 4, icon: "shovel", description: "Tool for herbalism"}
+  recipe: { lvl: 30, exp: 200, category: "tool", ingredients: { steel_bar: 10, tool_handle_4: 1 } }
+  skill: "smithing"
+- name: steel_pot
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Cooking", tier: 4, icon: "pot", description: "Tool for cooking"}
+  recipe: { lvl: 30, exp: 200, category: "tool", ingredients: { steel_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+- name: steel_hammer
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Smithing", tier: 4, icon: "hammer", description: "Tool for smithing"}
+  recipe: { lvl: 32, exp: 210, category: "tool", ingredients: { steel_bar: 10, tool_handle_4: 1 } }
+  skill: "smithing"
+- name: steel_mortar
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Alchemy", tier: 4, icon: "mortar", description: "Tool for alchemy"}
+  recipe: { lvl: 32, exp: 210, category: "tool", ingredients: { steel_bar: 10, stone: 15 } }
+  skill: "smithing"
+- name: steel_rod
+  stats: { extraExp: 0.20, extraYield: 0.20, skill: "Enchanting", tier: 4, icon: "rod", description: "Tool for enchanting"}
+  recipe: { lvl: 32, exp: 210, category: "tool", ingredients: { steel_bar: 10, wooden_rod_4: 1 } }
+  skill: "smithing"
+- name: steel_gemcutter
+  stats: { extraExp: 0.20, extraYield: 0.20, skill: "Jewelcrafting", tier: 4, icon: "chisel", description: "Tool for jewelcrafting"}
+  recipe: { lvl: 32, exp: 210, category: "tool", ingredients: { steel_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+
+- name: mithril_hoe
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Farming", tier: 5, icon: "hoe", description: "Tool for farming"}
+  recipe: { lvl: 40, exp: 580, category: "tool", ingredients: { mithril_bar: 10, tool_handle_5: 1 } }
+  skill: "smithing"
+- name: mithril_pickaxe
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Mining", tier: 5, icon: "pickaxe", description: "Tool for mining"}
+  recipe: { lvl: 40, exp: 580, category: "tool", ingredients: { mithril_bar: 10, tool_handle_5: 1 } }
+  skill: "smithing"
+- name: mithril_axe
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Forestry", tier: 5, icon: "axe", description: "Tool for forestry"}
+  recipe: { lvl: 40, exp: 580, category: "tool", ingredients: { mithril_bar: 10, tool_handle_5: 1 } }
+  skill: "smithing"
+- name: mithril_shovel
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Herbalism", tier: 5, icon: "shovel", description: "Tool for herbalism"}
+  recipe: { lvl: 40, exp: 580, category: "tool", ingredients: { mithril_bar: 10, tool_handle_5: 1 } }
+  skill: "smithing"
+- name: mithril_pot
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Cooking", tier: 5, icon: "pot", description: "Tool for cooking"}
+  recipe: { lvl: 40, exp: 580, category: "tool", ingredients: { mithril_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+- name: mithril_hammer
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Smithing", tier: 5, icon: "hammer", description: "Tool for smithing"}
+  recipe: { lvl: 42, exp: 600, category: "tool", ingredients: { mithril_bar: 10, tool_handle_5: 1 } }
+  skill: "smithing"
+- name: mithril_mortar
+  stats: { extraSpeed: 0.25, extraYield: 0.25, skill: "Alchemy", tier: 5, icon: "mortar", description: "Tool for alchemy"}
+  recipe: { lvl: 42, exp: 600, category: "tool", ingredients: { mithril_bar: 10, stone: 15 } }
+  skill: "smithing"
+- name: mithril_rod
+  stats: { extraExp: 0.25, extraYield: 0.25, skill: "Enchanting", tier: 5, icon: "rod", description: "Tool for enchanting"}
+  recipe: { lvl: 42, exp: 600, category: "tool", ingredients: { mithril_bar: 10, wooden_rod_5: 1 } }
+  skill: "smithing"
+- name: mithril_gemcutter
+  stats: { extraExp: 0.25, extraYield: 0.25, skill: "Jewelcrafting", tier: 5, icon: "chisel", description: "Tool for jewelcrafting"}
+  recipe: { lvl: 42, exp: 600, category: "tool", ingredients: { mithril_bar: 10, stone: 15 } }
+  skill: "smithing"
+
+## Weapons
+- name: bone_dagger
+  stats: { attack: 3, defense: 0, health: 8, str: 1, int: 0, agi: 0, slot: "weapon", price: 40, icon: "dagger",}
+  recipe: { lvl: 1, exp: 5, category: "", ingredients: { bone: 5, dagger_handle_1: 1 } }
+  skill: "smithing"
+- name: copper_dagger
+  stats: { attack: 5, defense: 0, health: 8, str: 1, int: 0, agi: 0, slot: "weapon", price: 62, icon: "dagger",}
+  recipe: { lvl: 2, exp: 8, category: "", ingredients: { horn: 2, copper_bar: 5, dagger_handle_1: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: copper_sword
+  stats: { attack: 8, defense: 0, health: 6, str: 1, int: 0, agi: 0, slot: "weapon", price: 84, icon: "sword"}
+  recipe: { lvl: 5, exp: 10, category: "", ingredients: { beak: 2, copper_bar: 5, sword_hilt_1: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: copper_mace
+  stats: { attack: 7, defense: 1, health: 6, str: 1, int: 0, agi: 0, slot: "weapon", price: 90, icon: "mace"}
+  recipe: { lvl: 8, exp: 12, category: "", ingredients: { horn: 1, beak: 1, copper_bar: 10, mace_shaft_1: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+
+- name: bronze_dagger
+  stats: { attack: 9, defense: 0, health: 15, str: 2, int: 0, agi: 0, slot: "weapon", price: 175, icon: "dagger"}
+  recipe: { lvl: 10, exp: 14, category: "", ingredients: { weapon_fragments: 1, heavy_fur: 2, bronze_bar: 5, dagger_handle_2: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: bronze_sword
+  stats: { attack: 15, defense: 0, health: 12, str: 2, int: 0, agi: 0, slot: "weapon", price: 220, icon: "sword"}
+  recipe: { lvl: 13, exp: 18, category: "", ingredients: { weapon_fragments: 1, claw: 2, bronze_bar: 5, sword_hilt_2: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: bronze_mace
+  stats: { attack: 13, defense: 3, health: 10, str: 2, int: 0, agi: 0, slot: "weapon", price: 230, icon: "mace"}
+  recipe: { lvl: 15, exp: 21, category: "", ingredients: { weapon_fragments: 1, claw: 1, heavy_fur: 1, bronze_bar: 5, mace_shaft_2: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+
+- name: iron_dagger #nomarkup
+  stats: { attack: 15, defense: 1, health: 34, str: 3, int: 0, agi: 0, slot: "weapon", price: 256, icon: "dagger" }
+  recipe: { lvl: 20, exp: 70, category: "", ingredients: { weapon_fragments_2: 1, metal_scraps: 2, iron_bar: 5, dagger_handle_3: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: iron_sword #nomarkup
+  stats: { attack: 21, defense: 2, health: 20, str: 3, int: 0, agi: 0, slot: "weapon", price: 365, icon: "sword" }
+  recipe: { lvl: 23, exp: 80, category: "", ingredients: { weapon_fragments_2: 1, metal_scraps: 3, iron_bar: 5, sword_hilt_3: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: iron_mace #nomarkup
+  stats: { attack: 19, defense: 5, health: 18, str: 3, int: 0, agi: 0, slot: "weapon", price: 392, icon: "mace" }
+  recipe: { lvl: 25, exp: 90, category: "", ingredients: { weapon_fragments_2: 1, metal_scraps: 3, iron_bar: 5, mace_shaft_3: 1, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+
+- name: steel_dagger #nomarkup
+  stats: { attack: 25, defense: 2, health: 48, str: 4, int: 0, agi: 0, slot: "weapon", price: 660, icon: "dagger"}
+  recipe: { lvl: 30, exp: 220, category: "", ingredients: { weapon_fragments_3: 1, metal_scraps: 4, magic_cloth: 1, steel_bar: 5, dagger_handle_4: 1, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: steel_sword #nomarkup
+  stats: { attack: 33, defense: 4, health: 32, str: 4, int: 0, agi: 0, slot: "weapon", price: 755, icon: "sword" }
+  recipe: { lvl: 33, exp: 235, category: "", ingredients: { weapon_fragments_3: 1, metal_scraps: 5, magic_cloth: 1, steel_bar: 5, sword_hilt_4: 1, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: steel_mace #nomarkup
+  stats: { attack: 31, defense: 7, health: 28, str: 4, int: 0, agi: 0, slot: "weapon", price: 815, icon: "mace" }
+  recipe: { lvl: 35, exp: 250, category: "", ingredients: { weapon_fragments_3: 1, metal_scraps: 4, magic_cloth: 2, steel_bar: 5, mace_shaft_4: 1, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+
+- name: mithril_dagger #nomarkup
+  stats: { attack: 35, defense: 3, health: 75, str: 5, int: 0, agi: 0, slot: "weapon", price: 915, icon: "dagger"}
+  recipe: { lvl: 40, exp: 610, category: "", ingredients: { weapon_fragments_4: 1, metal_scraps: 5, ghastly_substance: 1, mithril_bar: 5, dagger_handle_5: 1, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: mithril_sword #nomarkup
+  stats: { attack: 45, defense: 6, health: 55, str: 5, int: 0, agi: 0, slot: "weapon", price: 1040, icon: "sword" }
+  recipe: { lvl: 43, exp: 650, category: "", ingredients: { weapon_fragments_4: 1, metal_scraps: 6, ghastly_substance: 1, mithril_bar: 5, sword_hilt_5: 1, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: mithril_mace #nomarkup
+  stats: { attack: 42, defense: 10, health: 50, str: 5, int: 0, agi: 0, slot: "weapon", price: 1140, icon: "mace" }
+  recipe: { lvl: 45, exp: 700, category: "", ingredients: { weapon_fragments_4: 1, metal_scraps: 5, ghastly_substance: 2, mithril_bar: 5, mace_shaft_5: 1, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+
+## Gear
+- name: hide_boots
+  stats: { attack: 0, defense: 1, health: 2, str: 0, int: 0, agi: 0, slot: "feet", price: 16, icon: "boots",}
+  recipe: { lvl: 1, exp: 2, category: "", ingredients: { light_hide: 1 } }
+  skill: "smithing"
+- name: copper_boots
+  stats: { attack: 0, defense: 1, health: 4, str: 1, int: 0, agi: 0, slot: "feet", price: 41, icon: "boots",}
+  recipe: { lvl: 2, exp: 4, category: "", ingredients: { light_hide: 1, copper_bar: 4, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: bronze_boots
+  stats: { attack: 1, defense: 3, health: 12, str: 2, int: 0, agi: 0, slot: "feet", price: 100, icon: "boots",}
+  recipe: { lvl: 10, exp: 15, category: "", ingredients: { heavy_fur: 1, bronze_bar: 6, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: iron_boots #nomarkup
+  stats: { attack: 3, defense: 6, health: 20, str: 3, int: 0, agi: 0, slot: "feet", price: 282, icon: "boots" }
+  recipe: { lvl: 20, exp: 60, category: "", ingredients: { leather_scraps: 2, boot_scraps: 1, iron_bar: 8, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: steel_boots #nomarkup
+  stats: { attack: 5, defense: 10, health: 30, str: 4, int: 0, agi: 0, slot: "feet", price: 915, icon: "boots" }
+  recipe: { lvl: 30, exp: 230, category: "", ingredients: { magic_cloth: 2, boot_scraps: 2, metal_scraps: 3, steel_bar: 10, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: mithril_boots #nomarkup
+  stats: { attack: 7, defense: 15, health: 42, str: 5, int: 0, agi: 0, slot: "feet", price: 1525, icon: "boots" }
+  recipe: { lvl: 40, exp: 650, category: "", ingredients: { ghastly_substance: 2, boot_scraps: 4, metal_scraps: 5, mithril_bar: 12, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+
+- name: hide_helm
+  stats: { attack: 0, defense: 1, health: 4, str: 1, int: 0, agi: 0, slot: "head", price: 32, icon: "helmet",}
+  recipe: { lvl: 1, exp: 3, category: "", ingredients: { light_hide: 2 } }
+  skill: "smithing"
+- name: copper_helm
+  stats: { attack: 0, defense: 2, health: 8, str: 1, int: 0, agi: 0, slot: "head", price: 64, icon: "helmet",}
+  recipe: { lvl: 4, exp: 7, category: "", ingredients: { light_hide: 2, copper_bar: 5, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: bronze_helm
+  stats: { attack: 2, defense: 4, health: 15, str: 2, int: 0, agi: 0, slot: "head", price: 150, icon: "helmet",}
+  recipe: { lvl: 13, exp: 19, category: "", ingredients: { heavy_fur: 2, bronze_bar: 8, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: iron_helm #nomarkup
+  stats: { attack: 4, defense: 8, health: 25, str: 3, int: 0, agi: 0, slot: "head", price: 317, icon: "helmet" }
+  recipe: { lvl: 23, exp: 80, category: "", ingredients: { leather_scraps: 3, helmet_scraps: 1, iron_bar: 8, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: steel_helm #nomarkup
+  stats: { attack: 6, defense: 14, health: 38, str: 4, int: 0, agi: 0, slot: "head", price: 1079, icon: "helmet" }
+  recipe: { lvl: 33, exp: 250, category: "", ingredients: { magic_cloth: 3, helmet_scraps: 2, metal_scraps: 4, steel_bar: 11, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: mithril_helm #nomarkup
+  stats: { attack: 9, defense: 20, health: 57, str: 5, int: 0, agi: 0, slot: "head", price: 1745, icon: "helmet" }
+  recipe: { lvl: 43, exp: 715, category: "", ingredients: { ghastly_substance: 3, helmet_scraps: 4, metal_scraps: 6, mithril_bar: 13, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+
+- name: hide_chest
+  stats: { attack: 0, defense: 2, health: 8, str: 1, int: 0, agi: 0, slot: "chest", price: 48, icon: "chestplate",}
+  recipe: { lvl: 1, exp: 4, category: "", ingredients: { light_hide: 3 } }
+  skill: "smithing"
+- name: copper_chest
+  stats: { attack: 0, defense: 4, health: 12, str: 1, int: 0, agi: 0, slot: "chest", price: 90, icon: "chestplate",}
+  recipe: { lvl: 8, exp: 9, category: "", ingredients: { light_hide: 2, cloth: 1, copper_bar: 5, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: bronze_chest
+  stats: { attack: 3, defense: 8, health: 24, str: 3, int: 0, agi: 0, slot: "chest", price: 190, icon: "chestplate",}
+  recipe: { lvl: 15, exp: 20, category: "", ingredients: { heavy_fur: 2, wing: 1, bronze_bar: 8, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: iron_chest #nomarkup
+  stats: { attack: 6, defense: 14, health: 40, str: 6, int: 0, agi: 0, slot: "chest", price: 400, icon: "chestplate", }
+  recipe: { lvl: 25, exp: 90, category: "", ingredients: { leather_scraps: 4, armor_scraps: 1, iron_bar: 10, craftEnhancements: { rune_of_chance_1: 1, rune_of_rarity_1: 1, rune_of_enhancement_1: 1, rune_of_striking_1: 1, rune_of_protection_1: 1, rune_of_fortitude_1: 1, rune_of_strength_1: 1 } } }
+  skill: "smithing"
+- name: steel_chest #nomarkup
+  stats: { attack: 10, defense: 22, health: 60, str: 10, int: 0, agi: 0, slot: "chest", price: 1179, icon: "chestplate", }
+  recipe: { lvl: 35, exp: 270, category: "", ingredients: { magic_cloth: 4, armor_scraps: 2, metal_scraps: 5, steel_bar: 11, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+- name: mithril_chest #nomarkup
+  stats: { attack: 15, defense: 32, health: 85, str: 15, int: 0, agi: 0, slot: "chest", price: 1875, icon: "chestplate", }
+  recipe: { lvl: 45, exp: 780, category: "", ingredients: { ghastly_substance: 4, armor_scraps: 4, metal_scraps: 7, mithril_bar: 13, craftEnhancements: { rune_of_chance_2: 1, rune_of_rarity_2: 1, rune_of_enhancement_2: 1, rune_of_striking_2: 1, rune_of_protection_2: 1, rune_of_fortitude_2: 1, rune_of_strength_2: 1 } } }
+  skill: "smithing"
+
+#####
+## Inscription
+#####
+- name: scroll
+  stats: { icon: "scroll", price: 5, description: "Used to store magical and spiritial energy" }
+  recipe: { lvl: 1, exp: 3, craftTime: 2, category: "misc", ingredients: { birch: 2 } }
+  skill: "inscription"
+- name: health_scroll_1
+  stats: { icon: "scroll", price: 41, maxhealth: 25, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 1,  exp: 3,  category: "", ingredients: { ink: 1, scroll: 2, light_fur: 1 } }
+  skill: "inscription"
+- name: def_scroll_1
+  stats: { icon: "scroll", price: 41, defense: 2, description: "Boosts Defense stat" }
+  recipe: { lvl: 1,  exp: 3,  category: "", ingredients: { ink: 1, scroll: 2, light_fur: 1 } }
+  skill: "inscription"
+- name: str_scroll_1
+  stats: { icon: "scroll", price: 41, str: 2, description: "Boosts Str stat" }
+  recipe: { lvl: 3,  exp: 6,  category: "", ingredients: { ink: 1, scroll: 2, fang: 1 } }
+  skill: "inscription"
+- name: spd_scroll_1
+  stats: { icon: "scroll", price: 47, spd: 0.05, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 5,  exp: 10, category: "", ingredients: { ink: 1, scroll: 2, horn: 1 } }
+  skill: "inscription"
+- name: atk_scroll_1
+  stats: { icon: "scroll", price: 47, attack: 2, description: "Boosts Attack stat" }
+  recipe: { lvl: 5, exp: 10, category: "", ingredients: { ink: 1, scroll: 2, horn: 1 } }
+  skill: "inscription"
+- name: leather_bible_1
+  stats: { extraExp: 0.05, skill: "Prayer", tier: 1, icon: "bible", description: "Tool for prayer"}
+  recipe: { lvl: 5,  exp: 20, category: "tool", ingredients: { copper_bar: 2, ink: 4, scroll: 10, light_hide: 3 } }
+  skill: "inscription"
+- name: calligraphy_set_1
+  stats: { extraSpeed: 0.05, extraYield: 0.05, skill: "Inscription", tier: 1, icon: "calligraphy_set", description: "Tool for inscription"}
+  recipe: { lvl: 5,  exp: 20, category: "tool", ingredients: { copper_bar: 2, ink: 4, scroll: 10, beak: 3 } }
+  skill: "inscription"
+- name: exp_scroll_1
+  stats: { icon: "scroll", price: 52, exp: 0.10, description: "Boosts all experience gained" }
+  recipe: { lvl: 10, exp: 25, category: "", ingredients: { ink: 1, scroll: 2, cloth: 1 } }
+  skill: "inscription"
+
+- name: health_scroll_2
+  stats: { icon: "scroll", price: 93, maxhealth: 50, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 10, exp: 25, category: "", ingredients: { ink: 1, scroll: 2, light_fur: 2, heavy_fur: 1, light_hide: 1 } }
+  skill: "inscription"
+- name: def_scroll_2
+  stats: { icon: "scroll", price: 98, defense: 4, description: "Boosts Defense stat" }
+  recipe: { lvl: 11, exp: 25, category: "", ingredients: { ink: 1, scroll: 2, light_fur: 1, heavy_fur: 1, heavy_hide: 1 } }
+  skill: "inscription"
+- name: str_scroll_2
+  stats: { icon: "scroll", price: 103, str: 4, description: "Boosts Str stat" }
+  recipe: { lvl: 13, exp: 40, category: "", ingredients: { ink: 1, scroll: 2, fang: 4, claw: 1 } }
+  skill: "inscription"
+- name: spd_scroll_2
+  stats: { icon: "scroll", price: 123, spd: 0.08, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 15, exp: 55, category: "", ingredients: { ink: 1, scroll: 2, horn: 4, heavy_fur: 1 } }
+  skill: "inscription"
+- name: atk_scroll_2
+  stats: { icon: "scroll", price: 123, attack: 4, description: "Boosts Attack stat" }
+  recipe: { lvl: 15, exp: 55, category: "", ingredients: { ink: 1, scroll: 2, horn: 4, heavy_fur: 1 } }
+  skill: "inscription"
+- name: leather_bible_2
+  stats: { extraExp: 0.10, skill: "Prayer", tier: 2, icon: "bible", description: "Tool for prayer"}
+  recipe: { lvl: 15, exp: 80, category: "tool", ingredients: { bronze_bar: 2, ink: 4, scroll: 10, heavy_fur: 3 } }
+  skill: "inscription"
+- name: calligraphy_set_2
+  stats: { extraSpeed: 0.10, extraYield: 0.10, skill: "Inscription", tier: 2, icon: "calligraphy_set", description: "Tool for inscription"}
+  recipe: { lvl: 15, exp: 80, category: "tool", ingredients: { bronze_bar: 2, ink: 4, scroll: 10, claw: 3 } }
+  skill: "inscription"
+- name: exp_scroll_2
+  stats: { icon: "scroll", price: 155, exp: 0.15, description: "Boosts all experience gained" }
+  recipe: { lvl: 20, exp: 85, category: "", ingredients: { ink: 1, scroll: 2, cloth: 4, wing: 1 } }
+  skill: "inscription"
+
+- name: health_scroll_3
+  stats: { icon: "scroll", price: 185, maxhealth: 75, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 20, exp: 110, category: "", ingredients: { ink: 1, scroll: 2, strange_powder: 4 } }
+  skill: "inscription"
+- name: def_scroll_3
+  stats: { icon: "scroll", price: 185, defense: 6, description: "Boosts Defense stat" }
+  recipe: { lvl: 21, exp: 130, category: "", ingredients: { ink: 1, scroll: 2, strange_powder: 4 } }
+  skill: "inscription"
+- name: str_scroll_3
+  stats: { icon: "scroll", price: 185, str: 6, description: "Boosts Str stat" }
+  recipe: { lvl: 23, exp: 150, category: "", ingredients: { ink: 1, scroll: 2, strange_powder: 4 } }
+  skill: "inscription"
+- name: spd_scroll_3
+  stats: { icon: "scroll", price: 205, spd: 0.10, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 25, exp: 180, category: "", ingredients: { ink: 1, scroll: 2, strange_powder: 3, magic_cloth: 1 } }
+  skill: "inscription"
+- name: atk_scroll_3
+  stats: { icon: "scroll", price: 205, attack: 6, description: "Boosts Attack stat" }
+  recipe: { lvl: 25, exp: 180, category: "", ingredients: { ink: 1, scroll: 2, strange_powder: 3, magic_cloth: 1 } }
+  skill: "inscription"
+- name: leather_bible_3
+  stats: { extraExp: 0.15, skill: "Prayer", tier: 3, icon: "bible", description: "Tool for prayer"}
+  recipe: { lvl: 25, exp: 210, category: "tool", ingredients: { iron_bar: 2, ink: 4, scroll: 10, strange_powder: 9 } }
+  skill: "inscription"
+- name: calligraphy_set_3
+  stats: { extraSpeed: 0.15, extraYield: 0.15, skill: "Inscription", tier: 3, icon: "calligraphy_set", description: "Tool for inscription"}
+  recipe: { lvl: 25, exp: 210, category: "tool", ingredients: { iron_bar: 2, ink: 4, scroll: 10, strange_powder: 9 } }
+  skill: "inscription"
+- name: exp_scroll_3
+  stats: { icon: "scroll", price: 245, exp: 0.20, description: "Boosts all experience gained" }
+  recipe: { lvl: 30, exp: 230, category: "", ingredients: { ink: 1, scroll: 2, strange_powder: 4, magic_cloth: 1 } }
+  skill: "inscription"
+
+
+- name: health_scroll_4 #no markup
+  stats: { icon: "scroll", price: 245, maxhealth: 120, description: "Boosts MaxHealth stat" }
+  recipe: { lvl: 30, exp: 300, category: "", ingredients: { ink: 1, scroll: 2, ghastly_substance: 3 } }
+  skill: "inscription"
+- name: def_scroll_4 #no markup
+  stats: { icon: "scroll", price: 245, defense: 9, description: "Boosts Defense stat" }
+  recipe: { lvl: 31, exp: 300, category: "", ingredients: { ink: 1, scroll: 2, ghastly_substance: 3 } }
+  skill: "inscription"
+- name: str_scroll_4 #no markup
+  stats: { icon: "scroll", price: 245, str: 9, description: "Boosts Str stat" }
+  recipe: { lvl: 33, exp: 300, category: "", ingredients: { ink: 1, scroll: 2, ghastly_substance: 3 } }
+  skill: "inscription"
+- name: spd_scroll_4 #no markup
+  stats: { icon: "scroll", price: 320, spd: 0.12, description: "Boosts AttackSpeed" }
+  recipe: { lvl: 35, exp: 400, category: "", ingredients: { ink: 1, scroll: 2, ghastly_substance: 4 } }
+  skill: "inscription"
+- name: atk_scroll_4 #no markup
+  stats: { icon: "scroll", price: 320, attack: 9, description: "Boosts Attack stat" }
+  recipe: { lvl: 35, exp: 400, category: "", ingredients: { ink: 1, scroll: 2, ghastly_substance: 4 } }
+  skill: "inscription"
+- name: leather_bible_4
+  stats: { extraExp: 0.20, skill: "Prayer", tier: 4, icon: "bible", description: "Tool for prayer"}
+  recipe: { lvl: 35, exp: 800, category: "tool", ingredients: { steel_bar: 2, ink: 4, scroll: 10, ghastly_substance: 9 } }
+  skill: "inscription"
+- name: calligraphy_set_4
+  stats: { extraSpeed: 0.20, extraYield: 0.20, skill: "Inscription", tier: 4, icon: "calligraphy_set", description: "Tool for inscription"}
+  recipe: { lvl: 35, exp: 800, category: "tool", ingredients: { steel_bar: 2, ink: 4, scroll: 10, ghastly_substance: 9 } }
+  skill: "inscription"
+- name: exp_scroll_4 #no markup
+  stats: { icon: "scroll", price: 430, exp: 0.25, description: "Boosts all experience gained" }
+  recipe: { lvl: 40, exp: 500, category: "", ingredients: { ink: 1, scroll: 2, ghastly_substance: 4, magic_cloth: 2 } }
+  skill: "inscription"
+
+
+#- name: agi_scroll_1
+#  stats: { icon: "scroll", price: 10, agi: 2, description: "Boosts Agi stat" }
+#  recipe: { lvl: 1, exp: 3, category: "", ingredients: { ink: 1, scroll: 2, ??: 1 } }
+#  skill: "inscription"
+#- name: int_scroll_1
+#  stats: { icon: "scroll", price: 10, int: 2, description: "Boosts Int stat" }
+#  recipe: { lvl: 1, exp: 3, category: "", ingredients: { ink: 1, scroll: 2, ??: 1 } }
+#  skill: "inscription"
+
+
+
+skills:
+    ##TODO: Talents/leveling
+    #training:
+
+    ## Raw/Gathering
+    farming:
+        plots:
+        - {name: Carrot,  lvl: 1,  baseExp: 1,   cleartime: 2.5, lootTable: {carrot: 80}}
+        - {name: Pumpkin, lvl: 5,  baseExp: 3,   cleartime: 3,   lootTable: {pumpkin: 80}}
+        - {name: Tomato,  lvl: 15, baseExp: 15,  cleartime: 4,   lootTable: {tomato: 80}}
+        - {name: Corn,    lvl: 25, baseExp: 50,  cleartime: 5,   lootTable: {corn: 80}}
+        - {name: Wheat,   lvl: 35, baseExp: 75,  cleartime: 6,   lootTable: {wheat: 80}}
+        - {name: Grapes,  lvl: 45, baseExp: 110, cleartime: 7,   lootTable: {grapes: 80}}
+        - {name: Onion,   lvl: 50, baseExp: 130, cleartime: 7.5, lootTable: {onion: 80}}
+    forestry:
+        plots:
+        - {name: Birch,    lvl: 1,  baseExp: 1,   cleartime: 2.5, lootTable: {birch: 85}}
+        - {name: Maple,    lvl: 10, baseExp: 9,   cleartime: 3.5, lootTable: {maple: 80}}
+        - {name: Oak,      lvl: 25, baseExp: 50,  cleartime: 5,   lootTable: {oak: 75}}
+        - {name: Pine,     lvl: 35, baseExp: 75,  cleartime: 6,   lootTable: {pine: 70}}
+        - {name: Mahogony, lvl: 45, baseExp: 110, cleartime: 7,   lootTable: {mahogony: 65}}
+        #- {name: Mahogony, lvl: 65, baseExp: 150, cleartime: 9,   lootTable: {mahogony: 65}}
+        #trees: ["redwood", "sycamore", "fir", "cedar", "hickory"]
+    herbalism:
+        plots:
+        #- {name: Stick, lvl: 1,  baseExp: 1,  cleartime: 2.5, lootTable: {stick: 80}}
+        - {name: Root,      lvl: 1,  baseExp: 1,  cleartime: 2.5, lootTable: {root: 70}}
+        - {name: Berry,     lvl: 5,  baseExp: 3,  cleartime: 3,   lootTable: {berry: 75}}
+        - {name: Sage,      lvl: 10, baseExp: 9,  cleartime: 3.5, lootTable: {sage: 70}}
+        - {name: Mushroom,  lvl: 15, baseExp: 15, cleartime: 4,   lootTable: {mushroom: 70}}
+        - {name: Ginger,    lvl: 20, baseExp: 40, cleartime: 4.5, lootTable: {ginger: 70}}
+        #  items: ["peppermint", "cinnamon", "garlic"]
+    mining:
+        plots: 
+        - {name: Stone,      lvl: 1,  baseExp: 1,  cleartime: 2.5, lootTable: {stone: 85}}
+        - {name: Copper,     lvl: 5,  baseExp: 3,  cleartime: 3,   lootTable: {copper: 75}}
+        - {name: Tin,        lvl: 10, baseExp: 9,  cleartime: 3.5, lootTable: {tin: 70}}
+        - {name: Silver,     lvl: 15, baseExp: 15, cleartime: 4,   lootTable: {silver: 70}}
+        - {name: Coal,       lvl: 20, baseExp: 40, cleartime: 4.5, lootTable: {coal: 75}}
+        - {name: Iron,       lvl: 25, baseExp: 50, cleartime: 5,   lootTable: {iron: 65}}
+        - {name: Gold,       lvl: 30, baseExp: 60, cleartime: 5.5, lootTable: {gold: 60}}
+        - {name: Mithril,    lvl: 40, baseExp: 95, cleartime: 6.5, lootTable: {mithril: 60}}
+        - {name: Diamond,    lvl: 50, baseExp: 130,cleartime: 7.5, lootTable: {diamond: 50}}
+
+
+    ## Crafting
+    alchemy:
+    smithing:
+    cooking:
+    enchanting:
+    prayer:
+    inscription:
+    jewelcrafting:

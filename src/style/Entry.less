@@ -1,9 +1,13 @@
-@import "Globals.less";
+@import (once) "Vars.less";
+@import (once) "Common.less";
 
 html, body, #main {
     position: relative;
     height: 100%;
     width: 100%;
+}
+html {
+    background-color: #272727;
 }
 * {
     margin: 0;
@@ -11,7 +15,6 @@ html, body, #main {
 }
 
 #component-entry {
-    //height: 85.5%;
     height: 100%;
     font-size: @mainFont;
     color: white;
@@ -19,6 +22,7 @@ html, body, #main {
 
     #component-header {
         display: flex;
+        height: 2.5vh;
         flex-flow: row;
         justify-content: center;
         .headerButton {
@@ -29,13 +33,10 @@ html, body, #main {
         }
     }
     #mid {
-        height: 87vh;
+        height: 94.5vh;
+        width: 99.9%;
         display: flex;
-        // align-items: center;
-        // justify-content: center;
         flex-flow: row;
-    }
-    #test {
-        color: black;
+        overflow-y: clip;
     }
 }

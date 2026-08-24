@@ -1,0 +1,403 @@
+@import (once) "Vars.less";
+
+#battlePage {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+
+    #player .barContainer {
+        width: 85%;
+        align-self: flex-start;
+    }
+    #enemy .barContainer {
+        width: 85%;
+        align-self: flex-end;
+    }
+
+    #battleTitle {
+        margin: 10px;
+        font-size: @mainFont + 10px;
+    }
+    #battleground {
+        display: flex;
+        flex-flow: row wrap;
+        align-content: start;
+        justify-content: center;
+        width: 100%;
+        height: 92%;
+        border-radius: 8px;
+        margin: 4px auto;
+
+        .commonButton {
+            width: 4.5rem;
+            margin: 5px 10px;
+            position: absolute;
+            top: max(35%, 270px);
+            &.debug {
+                top: 30%;
+            }
+        }
+        #restart, #rest {
+            display: flex;
+            width: 8rem;
+            position: absolute;
+            top: max(27%, 215px);
+            background: @commonBg;
+            border: @commonBorder;
+            border-radius: @commonRadius;
+            margin: 0px 10px;
+            padding: 2px;
+            font-size: 13px;
+            input { margin: 0 5px }
+        }
+        #rest {
+            top: max(31%, 245px);
+        }
+
+        #enemyPortrait {
+            right: 27%;
+        }
+        .portrait {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            width: 12rem;
+            height: 13rem;
+            position: absolute;
+            top: 49%;
+            right: 53%;
+            border-radius: 10px;
+            #miniplayerHealth, #minienemyHealth {
+                height: 0.2rem;
+                font-size: 0;
+                .bar {
+                    background: green;
+                }
+            }
+
+            .hitIcon {
+                position: absolute;
+                top: -100px;
+                background: #574b07d1;
+                border-radius: 5px;
+                color: #ff5757;
+                padding: 3px;
+                font-size: @mainFont + 2px;
+                font-weight: bold;
+                visibility: hidden;
+                opacity: 0;
+                transition: top 2000ms linear, visibility 3000ms linear, opacity 3000ms;
+
+                &.blocked { color: #53e153; }
+                &.show {
+                    visibility: visible;
+                    opacity: 1;
+                    top: -2rem;
+                    transition: top 0ms linear, visibility 0ms linear, opacity 0ms;
+                }
+            }
+
+            @keyframes attack {
+                from { translate: 0vw; }
+                to { translate: 2.5vw; }
+            }
+            @keyframes enemyattack {
+                from { translate: 0vw; }
+                to { translate: -2.5vw; }
+            }
+
+            > img {
+                height: 8rem;
+                width: 7rem;
+                &.swing {
+                  animation-duration: 200ms;
+                  animation-name: attack;
+                  animation-direction: forward;
+                }
+                &.enemyswing {
+                  animation-duration: 200ms;
+                  animation-name: enemyattack;
+                  animation-direction: forward;
+                }
+            }
+            .block {
+                position: absolute;
+                height: 5.2rem;
+                width: 5.2rem;
+                top: 2.8rem;
+                left: 3.2rem;
+                visibility: hidden;
+                opacity: 0;
+                background-size: cover;
+                background-image: url("./staticons/slash.png");
+                &.showhit {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .enemyblock {
+                &.enemyswing {
+                    z-index: 1;
+                    animation-duration: 200ms;
+                    animation-name: enemyattack;
+                    animation-direction: forward;
+                }
+            }
+            .playerblock {
+                &.swing {
+                    z-index: 1;
+                    animation-duration: 200ms;
+                    animation-name: attack;
+                    animation-direction: forward;
+                }
+            }
+        }
+
+        .unitframe {
+            display: flex;
+            flex-flow: column wrap;
+            width: 48%;
+            z-index: 1;
+            border-radius: 10px;
+            padding: 8px;
+
+            .elite, .boss {
+                position: absolute;
+                height: 32px;
+                width: 32px;
+                right: 43%;
+                background-repeat: no-repeat;
+                background-position: left;
+                background-image: url("staticons/elite.png");
+            }
+            .boss {
+                background-image: url("staticons/boss.png");
+            }
+
+            .stats {
+                display: flex;
+                flex-flow: column;
+                width: 38%;
+                .icons {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: space-evenly;
+                    background: #000c;
+                    border-radius: 10px;
+                    padding: 3px;
+                    margin: 3px 0 0 0;
+                    .icon {
+                        width: 3.4em;
+                        height: 26px;
+                        align-content: center;
+                        text-align: end;
+                        background-repeat: no-repeat;
+                        background-position: left;
+                        background-size: 40%;
+                        font-size: @mainFont - 2px;
+                        padding-left: 3px;
+                        &.attack {
+                            background-image: url("staticons/attack.png");
+                        }
+                        &.defend {
+                            background-image: url("staticons/defense.png");
+                        }
+                    }
+                }
+            }
+            &#player .actions {
+                border: 2px dashed brown;
+                position: absolute;
+            }
+            &#enemy {
+                .actions {
+                    align-self: flex-end;
+                    width: 40%;
+                    padding: 5px;
+                    .current {
+                        color: green;
+                        font-weight: bold;
+                    }
+                    .dead {
+                        color: red;
+                        text-decoration: line-through;
+                    }
+                    #enemyList {
+                        &:hover { cursor: help; }
+                    }
+                    #mobInfo {
+                        display: flex;
+                        flex-flow: column;
+                        align-items: start;
+                        color: #ecd55a;
+                        margin-top: 15px;
+                    }
+                }
+                .stats {
+                    align-self: flex-end;
+                }
+            }
+            .actions {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                align-self: flex-start;
+                width: 4.0rem;
+                max-width: 85%;
+                top: max(40%, 300px);
+                margin: 5px;
+                background: #000000a3;
+                border-radius: 15px;
+                .icon {
+                    display: flex;
+                    align-items: center;
+                    font-size: @mainFont - 5px;
+                    img {
+                        width: 1.6rem;
+                    }
+
+                    @keyframes flash {
+                        0% { background-color: #a0a045a6; }
+                        50% { background-color: #a0a0453d; }
+                        100% { background-color: #a0a045a6; }
+                    }
+                    .potionicon {
+                        display: flex;
+                        flex-flow: row;
+                        justify-content: right;
+                        align-items: center;
+                        width: 3.4rem;
+                        border-radius: 15px;
+                        border: 2px solid transparent;
+                        padding: 1px 4px 1px 1px;
+
+                        &.low {
+                            animation-name: flash;
+                            animation-duration: 2s;
+                            animation-iteration-count: infinite;
+                        }
+                        &:hover {
+                            border: 2px outset black;
+                            cursor: pointer;
+                        }
+                        &:active {
+                            border: 2px inset black;
+                            cursor: pointer;
+                        }
+                    }
+                    .potionBox {
+                        position: absolute;
+                        align-items: center;
+                        width: 65px;
+                        left: 66px;
+                        font-size: @mainFont - 8px;
+                        input { height: 11px; }
+                    }
+
+                }
+                .food {
+                    display: flex;
+                    justify-content: right;
+                    width: 3.4rem;
+                    border: 2px solid transparent;
+                    padding: 1px 4px 1px 1px;
+                    border-radius: 15px;
+                    &:hover {
+                        border: 2px outset black;
+                        cursor: pointer;
+                    }
+                    &:active {
+                        border: 2px inset black;
+                        cursor: pointer;
+                    }
+                }
+
+            }
+            
+            #scrollBook {
+                position: absolute;
+                top: max(57%, 443px);
+                margin: 5px;
+                max-width: 8.3rem;
+                //max-width: 12.3rem; //3 columns
+                background: #000000a3;
+                border-radius: 15px;
+                #scrollList {
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-items: start;
+                    border: 1px solid brown;
+                    border-radius: 15px;
+                    .scroll {
+                        font-size: @mainFont - 9px;
+                        min-width: 3.8rem;
+                        padding: 2px 1px;
+                        border: 1px solid transparent;
+                        border-radius: 15px;
+                        .amount { font-size: @mainFont - 9px; }
+                        img {
+                            width: 20px;
+                        }
+                        &:hover {
+                            border: 1px outset black;
+                            cursor: pointer;
+                        }
+                        &:active {
+                            border: 1px inset black;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        #recentNPCLootContainer {
+            display: flex;
+            flex-flow: column;
+            max-width: 75%;
+            position: absolute;
+            top: max(520px, 75%);
+            //top: clamp(min(80%, 400px), 80%, max(80%, 540px));
+            .commonButton {
+                width: 4rem;
+                top: 0px;
+                left: -4.2rem;
+                margin: 0;
+            }
+            #recentNPCLootList {
+                overflow-y: scroll;
+                max-height: 13rem;
+            }
+            .recentNPCLootHaul {
+                display: flex;
+                flex-flow: row;
+                font-size: @mainFont - 9;
+                border: solid white;
+                border-width: 1px 0px;
+                margin: -0.5px 0;
+                background: #000000a3;
+                .recentNPCLoot {
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: center;
+                    min-width: 3.8rem;
+                    max-width: 4.8rem;
+                    text-shadow: 1px 1px 2px black;
+                    padding: 2px;
+                    .junk { .rarityText(@junkColor); }
+                    .uncommon { .rarityText(@uncommonColor); }
+                    .rare { .rarityText(@rareColor); }
+                    .epic { .rarityText(@epicColor); }
+                    img {
+                        width: 22px;
+                    }
+                    &:hover {
+                        cursor: help;
+                    }
+                }
+            }
+        }
+    }
+}

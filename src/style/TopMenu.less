@@ -1,14 +1,50 @@
+@import (once) "Vars.less";
+
 #component-topmenu {
     width: 100%;
-    height: 10vh;
+    //NOTE: For now just use top as alert popup
+    height: 0px;
     display: flex;
     align-items: center;
-    justify-content: center;
     background-color: #31b3a1;
+    flex-flow: column;
 
-    img {
-        width: 200px;
-        margin: -50px;
+    .infoPopup {
         display: flex;
+        flex-flow: column;
+        justify-content: center;
+        z-index: 10;
+        background: black;
+        max-width: 40%;
+        margin-top: 10px;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 23px;
+        box-shadow: 5px 3px 3px black;
+        color: yellow;
+        font-weight: bold;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.open {
+            visibility: visible;
+            opacity: 1;
+            transition: visibility 200ms linear, opacity 200ms;
+        }
+        &.close {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 300ms linear, opacity 300ms;
+        }
+
+        .infoTitle {
+            margin: 3px;
+            font-size: @mainFont - 2px;
+            text-align: center;
+        }
+
     }
+
 }

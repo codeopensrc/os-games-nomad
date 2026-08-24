@@ -7,7 +7,7 @@ index.html
 npm-debug.log
 .DS_Store
 
-ignore/*
+ignore/
 *bundle.js
 *.env
 *.swp

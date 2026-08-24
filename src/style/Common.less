@@ -1,0 +1,505 @@
+@import (once) "Vars.less";
+
+.commonButton {
+    min-width: 20px;
+    margin: 0 2px;
+    font-size: .8rem;
+    color: @commonColor;
+    padding: 4px 5px;
+    border-radius: 2px;
+    border: @commonBorder;
+    background: #252525;
+    box-shadow: @commonBoxShadow;
+    cursor: pointer;
+    &:active {
+        box-shadow: none;
+        transform: translate(1px, 1px);
+    }
+    &:hover {
+        background: #3e3a3a;
+    }
+    &.disabled { 
+        background: grey;
+        box-shadow: none;
+        border: none;
+        &:active { transform: none }
+    }
+}
+
+.commonInput {
+    margin: 0 4px;
+    height: @mainFont + 1px;
+    width: 55px;
+    border: 1px solid #fafafa;
+    border-radius: 2px;
+    padding: 2px 8px;
+    text-align: center;
+    font-size: @mainFont;
+    &:hover {
+        border-color: #777;
+    }
+    /* WebKit and Blink */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Firefox */
+    &[type="number"] {
+        -moz-appearance: textfield;
+    }
+}
+
+//===================
+// Equipment
+//===================
+.equipSlot() {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 7em;
+    width: 9.5em;
+    border: 1px solid black;
+    background: #00000094;
+    border-radius: 8px;
+    margin: 3px;
+    font-size: 11px;
+    &.junk { .junk(@width: 1px); }
+    &.uncommon { .uncommon(@width: 1px); }
+    &.rare { .rare(@width: 1px); }
+    &.epic { .epic(@width: 1px); }
+    > div {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        text-align: center;
+    }
+    img { width: 4em; }
+    &:hover { cursor: pointer; }
+    
+    &.small {
+        height: 4.7em;
+        width: 4.4em;
+        img { width: 2rem; }
+    }
+}
+
+#inventoryPage #equipment {
+    min-height: 26.5rem;
+}
+
+#equipment {
+    display: flex;
+    flex-flow: row;
+    align-content: center;
+    margin: 4px;
+
+    #keyring, #toolbelt {
+        display: flex;
+        flex-flow: row wrap;
+        align-content: flex-start;
+        max-height: 6.1rem;
+        width: 5.8rem;
+        font-size: @mainFont - 5px;
+        margin: 5px 0 0 2px;
+        background: #00000094;
+        border-radius: 5px;
+        overflow-y: scroll;
+        span {
+            padding: 1px;
+            text-shadow: 2px 2px 2px black;
+            font-weight: bold;
+            width: 100%;
+        }
+        .key, .tool {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            height: 1.4rem;
+            border: 1px solid black;
+            background: #000c;
+            border-radius: 8px;
+            margin: 2px;
+            padding: 2px;
+            font-size: 11px;
+            &:hover {
+                cursor: help;
+            }
+            img { width: 1.3rem; }
+        }
+    }
+
+    #playerStats {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-evenly;
+        align-self: flex-start;
+        background: #000c;
+        border-radius: 10px;
+        padding: 5px;
+
+        .statIcon {
+            align-content: center;
+            width: 4.7em;
+            height: 32px;
+            text-align: end;
+            background-repeat: no-repeat;
+            background-position: left;
+
+            &.attack { background-image: url("staticons/attack.png"); }
+            &.defend { background-image: url("staticons/defense.png"); }
+            &.health { background-image: url("staticons/maxhealth.png"); }
+            &.str { background-image: url("staticons/str.png"); }
+            &.int { background-image: url("staticons/int.png"); }
+            &.agi { background-image: url("staticons/agi.png"); }
+            &.spd { background-image: url("staticons/spd.png"); }
+        }
+    }
+
+    #gear, #consumes {
+        display: flex;
+        flex-flow: column;
+        position: relative;
+        margin-left: 1rem;
+
+        .equipSlot {
+            .equipSlot();
+        }
+    }
+    #consumes { margin-left: 0.5rem; }
+}
+
+#component-rightmenu #tool {
+    .equipSlot();
+}
+
+#component-rightmenu #equipment {
+    border: none;
+    #gear, #consumes {
+        margin-left: 0.3rem;
+        .equipSlot {
+            height: 4.5rem;
+            width: 5.3rem;
+            margin: 1px;
+            font-size: @mainFont - 8px;
+            &:hover { cursor: help; }
+            img { width: 2.1rem; }
+            &.small {
+                height: 4.7em;
+                width: 4em;
+                img { width: 2rem; }
+            }
+        }
+    }
+    #gear {
+        img { width: 2.5rem; }
+        .equipSlot {
+            img { width: 2.5rem; }
+        }
+    }
+    #playerStats {
+        .statIcon {
+            font-size: @mainFont - 4px;
+            width: 4rem;
+            height: 27px;
+            background-size: 38%;
+            text-align: end;
+        }
+    }
+}
+
+
+.buff() {
+    height: 2.0rem;
+    min-width: 3.55rem;
+    font-size: @mainFont - 8px;
+    border: 1px dotted;
+    padding: 2px;
+    margin: 1px;
+    background: #000000a3;
+    &:hover { cursor: help; }
+    &.potion {
+        color: #44dcff;
+        border: 1px dashed;
+    }
+    &.flask {
+        color: #44dcff;
+        border: 1px solid;
+    }
+    &.prayer {
+        color: #ffff65;
+    }
+    &.worldbuff {
+        color: #d580f5;
+    }
+    span {
+        color: #2af92a;
+        font-size: 0.85rem;
+        margin-left: 3px;
+    }
+    > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    img { height: 18px; }
+}
+
+#rightMenu  {
+    #buffContainer {
+        #buffList {
+            display: flex;
+            flex-flow: row wrap;
+            .buff {
+                .buff();
+                font-size: @mainFont - 8px;
+                height: 2.0rem;
+                width: 2.8rem;
+                min-width: 2.5rem;
+                img {
+                    height: 20px;
+                }
+            }
+        }
+    }
+}
+
+#buffs {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin: 3px;
+    .buff {
+        .buff()
+    }
+}
+
+#inventoryPage #buffs {
+    display: flex;
+    justify-content: space-evenly;
+    align-self: center;
+    width: 90%;
+    max-width: 23rem;
+    min-height: 0;
+}
+
+.invItem {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 8.8em;
+    height: 7.1em;
+    padding: 12px 0px 0px 0px;
+    border: 2px solid #00000087;
+    margin: -0.5px;
+    background: #4f3628;
+    border-radius: 8px;
+    font-size: @mainFont - 7px;
+    &.junk { .junk(@text: title); }
+    &.uncommon { .uncommon(@text: title); }
+    &.rare { .rare(@text: title); }
+    &.epic { .epic(@text: title); }
+    &.quick {
+        background-color: #2f2119;
+        &:hover {
+            background: #624332;
+        }
+    }
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        cursor: pointer;
+        background: #624332;
+    }
+
+    .itemCount {
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        font-size: @mainFont - 5px;
+    }
+    .invImage {
+        width: 32px;
+        height: 32px;
+        align-content: center;
+    }
+}
+
+#inventoryPage, #shopPage, #craftPage {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+
+    #title {
+        margin: 10px;
+        font-size: @mainFont + 10px;
+        text-shadow: 2px 1px 3px black;
+    }
+    #invContainer {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        height: 90%;
+    }
+
+    #extraItem, #barterScreen {
+        display: flex;
+        flex-flow: column;
+        align-items: start;
+        position: absolute;
+        background: #6a6345e8;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 0 0 10px 0;
+        text-shadow: 2px 1px 3px black;
+        box-shadow: 6px 6px 6px black;
+        z-index: 1;
+        > div {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+        }
+        > div:first-child {
+            align-self: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: @mainFont + 3px; 
+        }
+    }
+    #extraItem {
+        width: 10em;
+        > div {
+            margin: 1px 6px;
+        }
+        .extraItemButtons {
+            display: flex;
+            flex-flow: column;
+            button { margin: 4px }
+            .disabled { 
+                background: grey;
+                box-shadow: none;
+                border: none;
+                &:active { transform: none }
+            }
+        }
+    }
+}
+
+#bag {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: start;
+    height: 78%;
+    width: 60%;
+    border-radius: 8px;
+    margin: 4px;
+    padding: 8px;
+    background: #6d4b37a1;
+    .bagBorder();
+    .bagBackground();
+
+    #itemContainer {
+        display: flex;
+        flex-flow: row wrap;
+        align-content: start;
+        height: 92%;
+        overflow-y: scroll;
+    }
+
+    #quickBox {
+        display: flex;
+        width: 45%;
+        margin: 4px 0 8px 0;
+        select {
+            align-self: center;
+            height: 1.3rem;
+            font-size: @mainFont - 6px;
+        }
+        #quickButton {
+            min-width: 9.0rem;
+            height: 1.5rem;
+            align-self: center;
+            &.on {
+                color: black;
+                background: white;
+                box-shadow: 1px 1px black;
+            }
+        }
+        #quickWarning {
+            align-self: center;
+            color: yellow;
+            margin-left: 5px;
+            padding: 2px;
+            background: #252525;
+            border: 1px solid #fafafa;
+            font-size: 0.7rem;
+        }
+    }
+
+    #filters {
+        display: flex;
+        flex-flow: column;
+        width: 31%;
+        margin: 4px 0 8px 0;
+        z-index: 4;
+        .commonButton {
+            width: 30%;
+            &:nth-child(2) { width: 50%; }
+            &.on {
+                color: black;
+                background: white;
+                box-shadow: 1px 1px black;
+            }
+        }
+        .filter {
+            display: flex;
+            min-width: 4.6rem;
+            justify-content: start;
+            font-size: @mainFont - 6px;
+            margin: 1px 0;
+            text-shadow: 2px 1px 1px black;
+            &.commonButton {
+                width: 100%;
+                justify-content: center;
+                background: #252525;
+                margin: 3px 0 3px 1px;
+                padding: 2px;
+            }
+            input {
+                margin-left: 2px;
+            }
+            label {
+                margin: 0.5px;
+                margin-left: 1px;
+            }
+
+        }
+    }
+
+    #currency {
+        display: flex;
+        justify-content: start;
+        width: 21%;
+        margin: 1.5% 0 4px 8px;
+        .price {
+            display: flex;
+            align-items: center;
+            position: relative;
+            bottom: 2px;
+            right: 8px;
+            font-size: @mainFont - 2px;
+            .coin {
+                width: 20px;
+                height: @mainFont + 2px;
+            }
+        }
+    }
+}
