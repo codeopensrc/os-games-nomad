@@ -2,7 +2,7 @@ Third-Party Software
 
 This project uses third-party software and libraries that are distributed under their own licenses.
 
-The license for NomadIdle does not replace, modify, or restrict the licenses or rights applicable to third-party software.
+The license for Nomad Idle does not replace, modify, or restrict the licenses or rights applicable to third-party software.
 
 The following are some of the principal third-party dependencies used by this project:
 Software	License	Source
