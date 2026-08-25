@@ -5,7 +5,7 @@ app:
   replicaCount: 1
   image:
     repository: registry.codeopensrc.com/os/games/nomad/app
-    tag: 0.2.0-cf50b84
+    tag: 0.2.0-b742b3d
   secretStringData:
     MONGO_DB_NAME: "nomad"
     SAMPLE_SECRET: "SAMPLE_SECRET_ENV_VAR"
