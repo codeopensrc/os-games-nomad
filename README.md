@@ -142,10 +142,10 @@ Feel free to [open issues on GitHub](https://github.com/codeopensrc/os-games-nom
 
 ---
 
-### License
+### License TLDR
 
-Nomad Idle is source-available software. You are welcome to view, download, fork, modify, and run the source code for private, noncommercial purposes.
-Important: Public Source Does Not Mean Public Use
+Nomad Idle is source-available software. You are welcome to view, download, fork, modify, and run the source code for private, noncommercial purposes.  
+Important: Public Source Does Not Mean Public Use  
 
 This repository is publicly visible so that people can read and inspect the source code.
 
@@ -157,46 +157,34 @@ In other words:
 
     You may fork this repository for private use. You may not publicly deploy or distribute that fork without permission.
 
-A public GitHub fork is still subject to the restrictions in the license.
+A public GitHub fork is still subject to the restrictions in the license.  
+
 What You're Allowed To Do
 
 You may:
 
     View and study the source code.
-
     Download the software for personal use.
-
     Fork the repository for private use.
-
     Modify the source code for private use.
-
     Run your own modified version privately.
-
     Run a private server for yourself and a limited group of personally invited friends.
-
     Experiment with the game and create private modifications.
 
-A private server does not have to be physically disconnected from the Internet. It can be hosted on an Internet-connected server as long as access remains limited to a small, specifically invited group and the server is not publicly advertised or generally accessible.
+A private server does not have to be physically disconnected from the Internet. It can be hosted on an Internet-connected server as long as access remains limited to a small, specifically invited group and the server is not publicly advertised or generally accessible.  
+
 What You're Not Allowed To Do
 
 Without explicit written permission from Casey Jones, you may not:
 
     Sell the game or a modified version.
-
     Use the game commercially.
-
     Publicly distribute the game or a modified version.
-
     Publish a fork for others to download.
-
     Host a publicly accessible version of the game.
-
     Launch a competing public server or game service based on the game.
-
     Offer the game or a modified version as a service to the public.
-
     Put the game in an app store, public software repository, package registry, or similar distribution platform.
-
     Use the game's name, branding, artwork, or other identifying materials to imply that an unofficial version is official.
 
 Examples  
