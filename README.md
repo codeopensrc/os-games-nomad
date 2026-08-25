@@ -1,4 +1,4 @@
-[![Gitlab pipeline status (self-hosted)](https://img.shields.io/gitlab/pipeline/os/games/nomad/master?gitlab_url=https%3A%2F%2Fgitlab.codeopensrc.com&label=CI%2FCD&logo=Azure%20Pipelines)](https://gitlab.codeopensrc.com/os/games/nomad/-/pipelines)
+[![Gitlab pipeline status (self-hosted)](https://gitlab.codeopensrc.com/os/games/nomad/badges/master/pipeline.svg?key_text=CI/CD)](https://gitlab.codeopensrc.com/os/games/nomad/-/pipelines)
 &nbsp; &nbsp; &nbsp;
 [![GitLab tag (custom instance)](https://img.shields.io/gitlab/v/tag/os/games/nomad?gitlab_url=https%3A%2F%2Fgitlab.codeopensrc.com&include_prereleases&label=Latest%20Release&logo=Gitlab)](https://gitlab.codeopensrc.com/os/games/nomad/-/tags)
 &nbsp; &nbsp; &nbsp;
@@ -142,10 +142,10 @@ Feel free to [open issues on GitHub](https://github.com/codeopensrc/os-games-nom
 
 ---
 
-### License
+### License TLDR
 
-Nomad Idle is source-available software. You are welcome to view, download, fork, modify, and run the source code for private, noncommercial purposes.
-Important: Public Source Does Not Mean Public Use
+Nomad Idle is source-available software. You are welcome to view, download, fork, modify, and run the source code for private, noncommercial purposes.  
+*Important: Public Source Does Not Mean Public Use*  
 
 This repository is publicly visible so that people can read and inspect the source code.
 
@@ -157,83 +157,75 @@ In other words:
 
     You may fork this repository for private use. You may not publicly deploy or distribute that fork without permission.
 
-A public GitHub fork is still subject to the restrictions in the license.
-What You're Allowed To Do
+A public GitHub fork is still subject to the restrictions in the license.  
+
+##### What You're Allowed To Do
 
 You may:
 
     View and study the source code.
-
     Download the software for personal use.
-
     Fork the repository for private use.
-
     Modify the source code for private use.
-
     Run your own modified version privately.
-
     Run a private server for yourself and a limited group of personally invited friends.
-
     Experiment with the game and create private modifications.
 
-A private server does not have to be physically disconnected from the Internet. It can be hosted on an Internet-connected server as long as access remains limited to a small, specifically invited group and the server is not publicly advertised or generally accessible.
-What You're Not Allowed To Do
+A private server does not have to be physically disconnected from the Internet. It can be hosted on an Internet-connected server as long as access remains limited to a small, specifically invited group and the server is not publicly advertised or generally accessible.  
+
+##### What You're Not Allowed To Do
 
 Without explicit written permission from Casey Jones, you may not:
 
     Sell the game or a modified version.
-
     Use the game commercially.
-
     Publicly distribute the game or a modified version.
-
     Publish a fork for others to download.
-
     Host a publicly accessible version of the game.
-
     Launch a competing public server or game service based on the game.
-
     Offer the game or a modified version as a service to the public.
-
     Put the game in an app store, public software repository, package registry, or similar distribution platform.
-
     Use the game's name, branding, artwork, or other identifying materials to imply that an unofficial version is official.
 
-Examples
-Use	Allowed?
-Read the source on GitHub	✅ Yes
-Clone the repository to your computer	✅ Yes
-Fork the repository for your own private development	✅ Yes
-Modify the game for yourself	✅ Yes
-Run your modified game locally	✅ Yes
-Run a private server for yourself and a few invited friends	✅ Yes
-Put your fork on a public website	❌ No
-Run a publicly accessible game server	❌ No
-Publish your modified fork for others to download	❌ No
-Sell the game or a modified version	❌ No
-Use the game commercially	❌ No
-Want To Host It Publicly?
+Examples  
+Use | Allowed?  
+--- | ---
+Read the source on GitHub | ✅ Yes  
+Clone the repository to your computer | ✅ Yes  
+Fork the repository for your own private development | ✅ Yes  
+Modify the game for yourself | ✅ Yes  
+Run your modified game locally | ✅ Yes  
+Run a private server for yourself and a few invited friends | ✅ Yes  
+Put your fork on a public website | ❌ No  
+Run a publicly accessible game server | ❌ No  
+Publish your modified fork for others to download | ❌ No  
+Sell the game or a modified version  | ❌ No  
+Use the game commercially | ❌ No  
+
+Want To Host It Publicly?  
 
 That's possible with permission.
 
-If you'd like to operate a public server, create a publicly distributed fork, or use the game commercially, contact nomad.idle@gmail.com. We may grant a separate license allowing those activities.
-Third-Party Software
+If you'd like to operate a public server, create a publicly distributed fork, or use the game commercially, contact nomad.idle@gmail.com. We may grant a separate license allowing those activities.  
+
+##### Third-Party Software
 
 This project uses third-party software and libraries that are licensed separately from this project.
 
 For example, React and other open-source dependencies retain their original licenses. The license for Nomad Idle does not replace or restrict the rights granted by those third-party licenses.
 
-See THIRD-PARTY-LICENSES.md for information about third-party components and their applicable licenses.
-In Short
+See THIRD-PARTY-LICENSES.md for information about third-party components and their applicable licenses.  
 
-Public source code? Yes.
-Private fork? Yes.
-Private modified copy? Yes.
-Private server for you and a few invited friends? Yes.
-Public fork? No.
-Public server? No.
-Commercial use? No.
-Selling the game or a fork? No.
-Want to do any of those things? Ask for permission.
+##### In Short
+
+Public source code? Yes.  
+Private fork? Yes.  
+Private modified copy? Yes.  
+Private server for you and a few invited friends? Yes.  
+Public fork? No.  
+Public server? No.  
+Commercial use? No.  
+Selling the game or a fork? No.  
+Want to do any of those things? Ask for permission.  
 
 The complete terms are in the LICENSE file.
