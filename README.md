@@ -200,18 +200,20 @@ Without explicit written permission from Casey Jones, you may not:
     Use the game's name, branding, artwork, or other identifying materials to imply that an unofficial version is official.
 
 Examples  
-Use	Allowed?  
-Read the source on GitHub	✅ Yes  
-Clone the repository to your computer	✅ Yes  
-Fork the repository for your own private development	✅ Yes  
-Modify the game for yourself	✅ Yes  
-Run your modified game locally	✅ Yes  
-Run a private server for yourself and a few invited friends	✅ Yes  
-Put your fork on a public website	❌ No  
-Run a publicly accessible game server	❌ No  
-Publish your modified fork for others to download	❌ No  
-Sell the game or a modified version	❌ No  
-Use the game commercially	❌ No  
+Use | Allowed?  
+--- | ---
+Read the source on GitHub | ✅ Yes  
+Clone the repository to your computer | ✅ Yes  
+Fork the repository for your own private development | ✅ Yes  
+Modify the game for yourself | ✅ Yes  
+Run your modified game locally | ✅ Yes  
+Run a private server for yourself and a few invited friends | ✅ Yes  
+Put your fork on a public website | ❌ No  
+Run a publicly accessible game server | ❌ No  
+Publish your modified fork for others to download | ❌ No  
+Sell the game or a modified version  | ❌ No  
+Use the game commercially | ❌ No  
+
 Want To Host It Publicly?  
 
 That's possible with permission.
