@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import DOM from 'react-dom';
 // var PropTypes = React.PropTypes;
 
+import Ads from './Ads.jsx';
+
 import "../style/TopMenu.less"
 
 
@@ -32,10 +34,17 @@ const TopMenu = function(props) {
     })
 
     //NOTE: For now just use top as alert popup
-    //Nomad
     return (
         <div id="component-topmenu">
             {popup}
+            <div id={"topDisplay"}>
+                <div id={"gameTitle"}>
+                    Nomad Idle
+                </div>
+                <div id={`adContainer`}>
+                    {/*<Ads dataAdSlot='6574183565' /> */}
+                </div>
+            </div>
         </div>
     );
 };
