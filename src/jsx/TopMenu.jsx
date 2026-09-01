@@ -42,7 +42,7 @@ const TopMenu = function(props) {
                     Nomad Idle
                 </div>
                 <div id={`adContainer`}>
-                    {/*<Ads dataAdSlot='6574183565' /> */}
+                    {/*<Ads dataAdSlot='8430218967' /> */}
                 </div>
             </div>
         </div>
